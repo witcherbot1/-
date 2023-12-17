@@ -1,5 +1,5 @@
 const handler = async (m, { conn, command, text, usedPrefix }) => {
-  if (!text) throw `*[❗] Debes mencionar a alguien para el cálculo*`;
+  if (!text) throw `*[❗] يجب عليك ذكر شخص لحساب النسبة*`;
   const percentages = (500).getRandom();
   let emoji = '';
   let description = '';
@@ -7,111 +7,81 @@ const handler = async (m, { conn, command, text, usedPrefix }) => {
     case 'gay2':
       emoji = '🏳️‍🌈';
       if (percentages < 50) {
-        description = `*Los calculos han arrojado que ${text.toUpperCase()} es ${percentages}% Gay. ${emoji}*\n*-❥ Eso es bajo... ¡Tu eres Joto, no Gay! 😄*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% مثلي. ${emoji}*\n*-❥ هذا منخفض... أنت مثلي، ليس مثلك! 😄*`;
       } else if (percentages > 100) {
-        description = `*Los calculos han arrojado que ${text.toUpperCase()} es ${percentages}% Gay. ${emoji}*\n*-❥ ¡Incluso más gay de lo que pensábamos! 💃*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% مثلي. ${emoji}*\n*-❥ حتى أكثر مثلي مما كنا نعتقد! 💃*`;
       } else {
-        description = `*Los calculos han arrojado que ${text.toUpperCase()} es ${percentages}% Gay. ${emoji}*\n*-❥ Lo tuyo, lo tuyo es que eres Gay. ☠*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% مثلي. ${emoji}*\n*-❥ لك، أنت فعلاً مثلي. ☠*`;
       }
       break;
     case 'lesbiana':
       emoji = '🏳️‍🌈';
       if (percentages < 50) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Quizás necesites más películas románticas en tu vida. 🎬*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ ربما تحتاج إلى المزيد من الأفلام الرومانسية في حياتك. 🎬*`;
       } else if (percentages > 100) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ ¡Eso es un amor extremo por las chicas! 👩‍❤️‍👩*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ هذا حب متطرف للفتيات! 👩‍❤️‍👩*`;
       } else {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Mantén el amor floreciendo! 🌸*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ لنبقي الحب متفتحاً! 🌸*`;
       }
       break;
     case 'pajero':
     case 'pajera':
       emoji = '😏💦';
       if (percentages < 50) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Tal vez necesites más hobbies! 🎨*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ ربما تحتاج إلى هوايات أكثر! 🎨*`;
       } else if (percentages > 100) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Eso es una resistencia admirable! 💪*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ هذا مقاومة قابلة للإعجاب! 💪*`;
       } else {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Mantén el buen trabajo (en solitario). 🙌*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ حافظ على العمل الجيد (بمفردك). 🙌*`;
       }
       break;
     case 'puto':
     case 'puta':
       emoji = '🔥🥵';
       if (percentages < 50) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ ¡Más suerte en tu próxima conquista! 💔*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ المزيد من الحظ في محاولتك القادمة! 💔*`;
       } else if (percentages > 100) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ ¡Estás en llamas! 🚒*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ أنت في اللهب! 🚒*`;
       } else {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Mantén ese encanto ardiente! 🔥*`;
+        description = `*الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ احتفظ بهذا السحر المحترق! 🔥*`;
       }
       break;
     case 'manco':
     case 'manca':
       emoji = '💩';
       if (percentages < 50) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ ¡No eres el único en ese club! 😅*`;
-      } else if (percentages > 100) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ ¡Tienes un talento muy especial! 🙈*`;
-      } else {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Mantén esa actitud valiente! 🤙*`;
-      }
-      break;
-    case 'rata':
-      emoji = '🐁';
-      if (percentages < 50) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Nada de malo en disfrutar del queso! 🧀*`;
-      } else if (percentages > 100) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Un auténtico ratón de lujo! 🏰*`;
-      } else {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Come queso con responsabilidad! 🧀*`;
-      }
-      break;
-    case 'prostituto':
-    case 'prostituta':
-      emoji = '🫦👅';
-      if (percentages < 50) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ El mercado está en auge! 💼*`;
-      } else if (percentages > 100) {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Un/a verdadero/a profesional! 💰*`;
-      } else {
-        description = `*Los cálculos han arrojado que ${text.toUpperCase()} es ${percentages}% ${command}. ${emoji}*\n*-❥ Siempre es hora de negocios! 💼*`;
-      }
-      break;
-      default:
-      throw `*[❗] Comando no válido.*`;
-  }
-  const responses = [
-    "El universo ha hablado.",
-    "Los científicos lo confirman.",
-    "¡Sorpresa! 🎉"
-  ];
-  const response = responses[Math.floor(Math.random() * responses.length)];
-  const cal = `━━━━⬣ *CALCULADOR* ⬣━━━━
+description = *الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ السوق في ازدياد! 💼*;
+} else if (percentages > 100) {
+description = *الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ محترف/ة حقيقي/ة! 💰*;
+} else {
+description = *الحسابات أظهرت أن ${text.toUpperCase()} هو ${percentages}% ${command}. ${emoji}*\n*-❥ دائمًا وقت الأعمال! 💼*;
+}
+break;
+default:
+throw *[❗] أمر غير صالح.*;
+}
+const responses = [
+"تكلم الكون.",
+"يؤكد العلماء ذلك.",
+"مفاجأة! 🎉"
+];
+const response = responses[Math.floor(Math.random() * responses.length)];
+const cal = `━━━━⬣ النسيه ⬣━━━━
 
 —◉ ${description}
 
-*"${response}"*
+"${response}"
 
-━━━━⬣ *CALCULADOR* ⬣━━━━`.trim()  
-  async function loading() {
-var hawemod = [
-"《 █▒▒▒▒▒▒▒▒▒▒▒》10%",
-"《 ████▒▒▒▒▒▒▒▒》30%",
-"《 ███████▒▒▒▒▒》50%",
-"《 ██████████▒▒》80%",
-"《 ████████████》100%"
-]
-   let { key } = await conn.sendMessage(m.chat, {text: `*🔄 ¡Calculando Porcentaje! 🔄*`, mentions: conn.parseMention(cal)}, {quoted: m})
- for (let i = 0; i < hawemod.length; i++) {
-   await new Promise(resolve => setTimeout(resolve, 1000)); 
-   await conn.sendMessage(m.chat, {text: hawemod[i], edit: key, mentions: conn.parseMention(cal)}, {quoted: m}); 
-  }
-  await conn.sendMessage(m.chat, {text: cal, edit: key, mentions: conn.parseMention(cal)}, {quoted: m});         
- }
-loading()    
+━━━━⬣ النسيه ⬣━━━━.trim(); async function loading() { var hawemod = [ "《 █▒▒▒▒▒▒▒▒▒▒▒》10%", "《 ████▒▒▒▒▒▒▒▒》30%", "《 ███████▒▒▒▒▒》50%", "《 ██████████▒▒》80%", "《 ████████████》100%" ]; let { key } = await conn.sendMessage(m.chat, {text: 🔄 جاري الحساب! 🔄`, mentions: conn.parseMention(cal)}, {quoted: m});
+for (let i = 0; i < hawemod.length; i++) {
+await new Promise(resolve => setTimeout(resolve, 1000));
+await conn.sendMessage(m.chat, {text: hawemod[i], edit: key, mentions: conn.parseMention(cal)}, {quoted: m});
+}
+await conn.sendMessage(m.chat, {text: cal, edit: key, mentions: conn.parseMention(cal)}, {quoted: m});
+}
+loading();
 };
-handler.help = ['gay2', 'lesbiana', 'pajero', 'pajera', 'puto', 'puta', 'manco', 'manca', 'rata', 'prostituta', 'prostituto'].map((v) => v + ' @tag | nombre');
+handler.help = ['gay2', 'lesbiana', 'pajero', 'pajera', 'puto', 'puta', 'manco', 'manca', 'rata', 'prostituta', 'prostituto'].map((v) => v + ' @tag | الاسم');
 handler.tags = ['calculator'];
 handler.command = /^(gay2|lesbiana|pajero|pajera|puto|puta|manco|manca|rata|prostituta|prostituto)$/i;
 export default handler;
