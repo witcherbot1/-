@@ -7,12 +7,6 @@ import {tiktokdl} from '@bochilteam/scraper';
 const handler = async (m, {conn, text, args, usedPrefix, command}) => {
   if (!text) throw `*[❗اخطار❗] الرجاء إدخال رابط TikTok للحصول على محتوى الفيديو، مثال: "${usedPrefix + command}* https://www.tiktok.com/@ox__zoro__ox/video/7291507684912811270?is_from_webapp=1&sender_device=pc&web_id=7303245995318609414`;
   if (!/(?:https:?\/{2})?(?:w{3}|vm|vt|t)?\.?tiktok.com\/([^\s&]+)/gi.test(text)) throw `*[❗اخطار❗] الرجاء إدخال رابط TikTok صالح للحصول على محتوى الفيديو، مثال: "${usedPrefix + command}* https://www.tiktok.com/@ox__zoro__ox/video/7291507684912811270?is_from_webapp=1&sender_device=pc&web_id=7303245995318609414`;
-const { key } = await conn.sendMessage(m.chat, {text: `⌛ _جاري التحميل..._\n▰▰▰▱▱▱▱▱▱\nيتم استخراج مقطع الفيديو من TikTok 🔰`}, {quoted: fkontak});
-await delay(1000 * 1);
-await conn.sendMessage(m.chat, {text: `⌛ _جاري التحميل..._\n▰▰▰▰▰▱▱▱▱\nيتم استخراج مقطع الفيديو من TikTok 🔰`, edit: key});
-await delay(1000 * 1);
-await conn.sendMessage(m.chat, {text: `⌛ _جاري التحميل..._\n▰▰▰▰▰▰▰▱▱\nيتم استخراج مقطع الفيديو من TikTok 🔰`, edit: key});
-await conn.sendMessage(m.chat, {text: `⌛ _جاري التحميل..._\n▰▰▰▰▰▰▰▰▰\nيتم استخراج مقطع الفيديو من TikTok 🔰`, edit: key});
 const texto = `*[❗] @${m.sender.split`@`[0]} أرسلت طلبًا للحصول على محتوى TikTok. يُرجى الانتظار قليلاً.*`;
   // let buttons = [{ buttonText: { displayText: '♫ 𝙰𝚄𝙳𝙸𝙾 ♫' }, buttonId: `${usedPrefix}tomp3` }]
   try {
