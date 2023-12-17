@@ -13,7 +13,7 @@ const handler = async (m, {conn, command}) => {
     await m.reply(mensaje);
   }
 
-  if (command == 'غزل') {
+  if (command == 'رومانسي') {
     try {
       const cerpe = await cerpen(`cinta romantis`);
       const storytime = await translate(cerpe.cerita, {to: 'es', autoCorrect: true}).catch((_) => null);
@@ -31,7 +31,7 @@ ${storytime.text}`, m);
   }
 };
 handler.tags = ['frases'];
-handler.command = handler.help = ['غزل', 'fraseromantica', 'انصحني'];
+handler.command = handler.help = ['رومانسي', 'fraseromantica', 'انصحني'];
 export default handler;
 
 async function cerpen(category) {
