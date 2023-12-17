@@ -3,7 +3,7 @@ conn.reply(m.chat,`*╮─━━⊱「‏⤦╿ZORO 𝐁𝐎𝐓╿⤥」⊰━*
 }
 handler.help = ['verdad']
 handler.tags = ['fun']
-handler.command = /^لو/i
+handler.command = /^توو/i
 export default handler
 
 function pickRandom(list) {
