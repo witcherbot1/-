@@ -4,7 +4,7 @@ import fs from 'fs';
 import axios from 'axios';
 
 const handler = async (m, { conn, text }) => {
- if (!text) throw `*[❗] Ingrese el nombre de alguna canción de spotify.*`;
+ if (!text) throw `*[❗] يرجى إدخال اسم أغنية Spotify.*`;
   try {
     const res = await fetch(global.API('ApiEmpire', '/api/spotifysearch?text=' + text))
     const data = await res.json()
@@ -15,20 +15,20 @@ const handler = async (m, { conn, text }) => {
     const info = await infos.json()
     const spty = info.spty.resultado
     const img = await (await fetch(`${spty.thumbnail}`)).buffer()  
-    let spotifyi = `*• 💽 Spotify Download •*\n\n`
-         spotifyi += `	◦  *Título:* ${spty.title}\n`
-         spotifyi += `	◦  *Artista:* ${spty.artist}\n`
-         spotifyi += `	◦  *Album:* ${spty.album}\n`                 
-         spotifyi += `	◦  *Publicado:* ${spty.year}\n\n`   
-         spotifyi += `El audio se esta enviando, espere un momento..`
+    let spotifyi = `*• 💽 Spotify تنزيل •*\n\n`
+    spotifyi += `    ◦  *العنوان:* ${spty.title}\n`
+    spotifyi += `    ◦  *الفنان:* ${spty.artist}\n`
+    spotifyi += `    ◦  *الألبوم:* ${spty.album}\n`                 
+    spotifyi += `    ◦  *تاريخ الإصدار:* ${spty.year}\n\n`   
+    spotifyi += `يتم إرسال الصوت، يرجى الانتظار لحظة..`
     await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": linkDL, "sourceUrl": linkDL}}}, {quoted: m});
     await conn.sendMessage(m.chat, {audio: music.data, fileName: `${spty.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
   } catch (error) {
     console.error(error);
-    throw '*[❗] Error, no se encontraron resultados.*';
+    throw '*[❗] حدث خطأ، لا توجد نتائج.*';
   }
 };
-handler.command = /^(spotify|music)$/i;
+handler.command = /^(سبوتي|سبوتيفاي)$/i;
 export default handler;
 
 
