@@ -1,5 +1,5 @@
-import fetch from 'node-fetch';
-
+import axios from 'axios';
+import cheerio from 'cheerio';
 let handler = async(m, { conn, text, usedPrefix, command }) => {
 if (!text) throw `*⚠️ الرجاء إدخال رابط تيك توك يحتوي على صور.* 🐉`;
 if (!(text.includes('http://') || text.includes('https://'))) return m.reply(`الرابط غير صالح، يرجى إدخال رابط صحيح. جرب إضافة http:// أو https://`);
