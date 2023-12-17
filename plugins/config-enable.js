@@ -1,181 +1,161 @@
 const handler = async (m, {conn, usedPrefix, command, args, isOwner, isAdmin, isROwner}) => {
-  const optionsFull = `*Opción:* ✨ | WELCOME
-*Comando:* ${usedPrefix + command} welcome
-*Descripción:* Activa o desactiva la bienvenida en el grupo.
+  const optionsFull = `*الخيار:* ✨ | WELCOME
+*الأمر:* ${usedPrefix + command} welcome
+*الوصف:* تفعيل أو تعطيل الترحيب في المجموعة.
 
 --------------------------------
 
-*Opción:* 🌎 | MODO PUBLICO
-*Comando:* ${usedPrefix + command} public
-*Descripción:* El Bot se vuelve de uso publico y/o privado.
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
+*الخيار:* 🌎 | وضع عام
+*الأمر:* ${usedPrefix + command} public
+*الوصف:* يجعل البوت قابل للاستخدام علنيًا أو خاصًا.
+*ملحوظة:* يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
 --------------------------------
 
-*Opción:* 🥵 | MODO HORNY
-*Comando:* ${usedPrefix + command} modohorny
-*Descripción:* Activa o desactiva los comandos +18 en el grupo.
+*الخيار:* 🥵 | وضع جنسي
+*الأمر:* ${usedPrefix + command} modohorny
+*الوصف:* تفعيل أو تعطيل الأوامر الخاصة بالكبار في المجموعة.
 
 --------------------------------
 
-*Opción:* 🔗 | ANTILINK
-*Comando:* ${usedPrefix + command} antilink
-*Descripción:* Activa o desactiva el anti-enlaces de WhatsApp.
-*Nota:* Se necesita tener activo el restrict.
+*الخيار:* 🔗 | ANTILINK
+*الأمر:* ${usedPrefix + command} antilink
+*الوصف:* تفعيل أو تعطيل ميزة منع الروابط في واتساب.
+*ملحوظة:* يتعين تفعيل القيد.
 
 --------------------------------
 
-*Opción:* 🔗 | ANTILINK 2
-*Comando:* ${usedPrefix + command} antilink2
-*Descripción:* Activa o desactiva el anti-enlaces que inician en HTTPS.
-*Nota:* Se necesita tener activo el restrict.
+*الخيار:* 🔗 | ANTILINK 2
+*الأمر:* ${usedPrefix + command} antilink2
+*الوصف:* تفعيل أو تعطيل ميزة منع الروابط التي تبدأ بـ HTTPS.
+*ملحوظة:* يتعين تفعيل القيد.
 
 --------------------------------
 
-*Opción:* 🔎 | DETECT
-*Comando:* ${usedPrefix + command} detect
-*Descripción:* Activa o desacriva las notificaciones de cambios en el grupo.
+*الخيار:* 🔎 | DETECT
+*الأمر:* ${usedPrefix + command} detect
+*الوصف:* تفعيل أو تعطيل إشعارات التغييرات في المجموعة.
 
 --------------------------------
 
-*Opción:* 🔎 | DETECT 2
-*Comando:* ${usedPrefix + command} detect2
-*Descripción:* Detecta modificaciones en el grupo y mantiene una mejor gestion.
+*الخيار:* 🔎 | DETECT 2
+*الأمر:* ${usedPrefix + command} detect2
+*الوصف:* يكتشف التغييرات في المجموعة ويحسن إدارتها.
 
 --------------------------------
 
-*Opción:* ❗ | RESTRICT
-*Comando:* ${usedPrefix + command} restrict
-*Descripción:* Activa o desactiva las restricciones del Bot, como la de sacar o agregar personas a un grupo.
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
+*الخيار:* ❗ | RESTRICT
+*الأمر:* ${usedPrefix + command} restrict
+*الوصف:* تفعيل أو تعطيل قيود البوت، مثل إخراج أو إضافة أشخاص إلى المجموعة.
+*ملحوظة:* يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
 --------------------------------
 
-*Opción:* ☑️ | AUTOREAD
-*Comando:* ${usedPrefix + command} autoread
-*Descripción:* Marca como leido los mensajes y los estados automáticamente.
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
+*الخيار:* ☑️ | AUTOREAD
+*الأمر:* ${usedPrefix + command} autoread
+*الوصف:* يقوم بتحديد الرسائل والحالات كمقروءة تلقائيًا.
+*ملحوظة:* يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
 --------------------------------
 
-*Opción:* 🔊 | AUDIOS
-*Comando:* ${usedPrefix + command} audios
-*Descripción:* Activa o desactiva los comandos de audios sin prefijos, en el grupo.
+*الخيار:* 🔊 | AUDIOS
+*الأمر:* ${usedPrefix + command} audios
+*الوصف:* تفعيل أو تعطيل أوامر الصوت بدون بادئة في المجموعة.
 
 --------------------------------
 
-*Opción:* 👾 | AUTOSTICKER
-*Comando:* ${usedPrefix + command} autosticker 
-*Descripción:* Todas las imagenes o videos enviados en el grupo se convierten en stickers. 
+*الخيار:* 👾 | AUTOSTICKER
+*الأمر:* ${usedPrefix + command} autosticker 
+*الوصف:* تحويل جميع الصور أو مقاطع الفيديو المرسلة في المجموعة إلى ملصقات.
 
 --------------------------------
 
-*Opción:* 💬 | PCONLY
-*Comando:* ${usedPrefix + command} pconly
-*Descripción:* El Bot solo responderá a los comandos si es un chat privado.
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
+*الخيار:* 💬 | PCONLY
+*الأمر:* ${usedPrefix + command} pconly
+*الوصف:* يقوم البوت بالرد فقط على الأوامر في دردشة خاصة.
+*ملحوظة:* يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
 --------------------------------
 
-*Opción:* 🏢 | GCONLY
-*Comando:* ${usedPrefix + command} gconly
-*Descripción:* El Bot solo respondera a los comandos si es un grupo. 
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
+*الخيار:* 🏢 | GCONLY
+*الأمر:* ${usedPrefix + command} gconly
+*الوصف:* يقوم البوت بالرد فقط على الأوامر إذا كانت في مجموعة.
+*ملحوظة:* يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
 --------------------------------
 
-*Opción:* ❌ | ANTIVIEWONCE 
-*Comando:* ${usedPrefix + command} antiviewonce
-*Descripción:* Las imagenes enviadas para ver solo una vez, son reenviadas normal por el Bot. 
+*الخيار:* ❌ | ANTIVIEWONCE 
+*الأمر:* ${usedPrefix + command} antiviewonce
+*الوصف:* يعيد إرسال الصور المرسلة للعرض مرة واحدة بشكل عادي بواسطة البوت.
 
 --------------------------------
 
-*Opción:* 📵 | ANTILLAMADAS
-*Comando:* ${usedPrefix + command} anticall
-*Descripción:* El Bot bloquerá a las personas que llamen al Bot. 
-*Nota:* Este comando solo podra ser usado por owners del Bot.
+*الخيار:* 📵 | ANTILLAMADAS
+*الأمر:* ${usedPrefix + command} anticall
+*الوصف:* يقوم البوت بحظر الأشخاص الذين يتصلون بالبوت.
+*ملحوظة:* يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
 --------------------------------
 
-*Opción:* 💬 | ANTIPRIVADO
-*Comando:* ${usedPrefix + command} antiprivado
-*Descripción:* El Bot bloquerá a las personas que escriban al privado del Bot. 
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
+*الخيار:* 💬 | ANTIPRIVADO
+*الأمر:* ${usedPrefix + command} antiprivado
+*الوصف:* يقوم البوت بحظر الأشخاص الذين يكتبون إلى البوت بشكل خاص.
+*ملحوظة:* يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
+
 
 --------------------------------
 
 *Opción:* 🤬 | ANTITOXIC
-*Comando:* ${usedPrefix + command} antitoxic
-*Descripción:* Detecta la malas palabras y advierte al participante del grupo, antes de ser eliminado.
-*Nota:* Se necesita tener activo el restrict.
+الأمر: ${usedPrefix + command} antitoxic
+الوصف: يكتشف الكلمات النابية ويحذر المشارك في المجموعة قبل أن يتم طرده.
+ملحوظة: يجب تفعيل القيد.
 
---------------------------------
+الخيار: 🕸️ | ANTITRABAS
+الأمر: ${usedPrefix + command} antitraba
+الوصف: يكتشف النصوص الطويلة التي قد تكون فيروسات وتسبب تأخيرًا في الدردشة ويقوم بحذف المستخدم.
+ملحوظة: يجب تفعيل القيد.
 
-*Opción:* 🕸️ | ANTITRABAS
-*Comando:* ${usedPrefix + command} antitraba
-*Descripción:* El Bot detecta textos largos que podrian ser virus y causar lag en el chat y elimina al usuario.
-*Nota:* Se necesita tener activo el restrict.
+الخيار: 👎 | ANTIARABES
+الأمر: ${usedPrefix + command} antiarabes
+الوصف: إذا انضم رقم عربي إلى المجموعة، يقوم البوت بحذفه تلقائيًا.
+ملحوظة: يجب تفعيل الترحيب والقيد.
 
---------------------------------
+الخيار: 👎 | ANTIARABES 2
+الأمر: ${usedPrefix + command} antiarabes2
+الوصف: إذا كتب رقم عربي في المجموعة، يقوم البوت بحذفه تلقائيًا.
+ملحوظة: يجب تفعيل القيد.
 
-*Opción:* 👎 | ANTIARABES
-*Comando:* ${usedPrefix + command} antiarabes
-*Descripción:* Si un numero árabe se uné al grupo, el Bot lo elimina automaticamente.
-*Nota:* Se necesita tener activo el welcome y el restrict.
+الخيار: 🤖 | MODEJADIBOT
+الأمر: ${usedPrefix + command} modejadibot
+الوصف: تفعيل أو تعطيل استخدام الأمر لرفع البوت (${usedPrefix}serbot / ${usedPrefix}jadibot).
+ملحوظة: يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
---------------------------------
+الخيار: 👑 | MODOADMIN
+الأمر: ${usedPrefix + command} modoadmin
+الوصف: يقوم البوت بالرد فقط على المسؤولين في المجموعة.
 
-*Opción:* 👎 | ANTIARABES 2
-*Comando:* ${usedPrefix + command} antiarabes2
-*Descripción:* Si un numero árabe escribe en el grupo, el Bot lo elimina automaticamente.
-*Nota:* Se necesita tener activo el restrict.
+الخيار: 😃 | SIMSIMI
+الأمر: ${usedPrefix + command} simsimi
+الوصف: يبدأ البوت في الرد على الرسائل باستخدام ذكاء صناعي من SimSimi.
 
---------------------------------
+الخيار: ⏳ | ANTISPAM
+الأمر: ${usedPrefix + command} antispam
+الوصف: يكتشف عندما يقوم مستخدم بعمل سبام للأوامر ويحظره لمدة 5 ثوانٍ ويحذره.
+ملحوظة: يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
-*Opción:* 🤖 | MODEJADIBOT
-*Comando:* ${usedPrefix + command} modejadibot
-*Descripción:* Activa o desactiva el uso del comando para sub bots (${usedPrefix}serbot / ${usedPrefix}jadibot). 
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
+الخيار: 🛡️ | ANTIDELETE
+الأمر: ${usedPrefix + command} antidelete
+الوصف: يكتشف عندما يقوم مستخدم بحذف رسالة ويعيد إرسالها.
 
---------------------------------
+الخيار: 🔊 | AUDIOS_BOT
+الأمر: ${usedPrefix + command} audios_bot
+الوصف: يعطل الأصوات الخاصة بالبوت من قائمة الأصوات لجميع الدردشات الخاصة.
+ملحوظة: يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.
 
-*Opción:* 👑 | MODOADMIN
-*Comando:* ${usedPrefix + command} modoadmin
-*Descripción:* El Bot solo responderá a los admins del grupo.
-
---------------------------------
-
-*Opción:* 😃 | SIMSIMI
-*Comando:* ${usedPrefix + command} simsimi
-*Descripción:* El Bot empezará a responder a los mensajes usando la IA de SimSimi.
-
---------------------------------
-
-*Opción:* ⏳ | ANTISPAM
-*Comando:* ${usedPrefix + command} antispam
-*Descripción:* El Bot detecta cuando un usuario hace spam de comando y lo banea por 5 segundos y lo advierte.
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
-
---------------------------------
-
-*Opción:* 🛡️ | ANTIDELETE
-*Comando:* ${usedPrefix + command} antidelete
-*Descripción:* El Bot detecta cuando un usuario elimina un mensaje y lo reenvía.
-
---------------------------------
-
-*Opción:* 🔊 | AUDIOS_BOT
-*Comando:* ${usedPrefix + command} audios_bot
-*Descripción:* Se desactivan los audios del Bot del menuaudios para todos los chats privados.
-*Nota:* Este comando solo podrá ser usado por owners del Bot.
-
---------------------------------
-
-*Opción:* 🤖 | MODOIA
-*Comando:* ${usedPrefix + command} modoia
-*Descripción:* Se activa el modo "Inteligencia Artificial" con GPT en todos los chats privados.
-*Nota:* Este comando solo podrá ser usado por owners del Bot.`.trim();
-
+الخيار: 🤖 | MODOIA
+الأمر: ${usedPrefix + command} modoia
+الوصف: يفعل وضع "الذكاء الاصطناعي" مع GPT في جميع الدردشات الخاصة.
+ملحوظة: يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.`.trim();
   const isEnable = /true|enable|(turn)?on|1/i.test(command);
   const chat = global.db.data.chats[m.chat];
   const user = global.db.data.users[m.sender];
@@ -466,9 +446,9 @@ const handler = async (m, {conn, usedPrefix, command, args, isOwner, isAdmin, is
       if (!/[01]/.test(command)) return await conn.sendMessage(m.chat, {text: optionsFull}, {quoted: m});
       throw false;
   }
-  conn.sendMessage(m.chat, {text: `🗂️ 𝐎𝐏𝐂𝐈𝐎𝐍: ${type}\n🎚️ 𝐄𝐒𝐓𝐀𝐃𝐎: ${isEnable ? 'ACTIVADO' : 'DESACTIVADO'}\n📣 𝐏𝐀𝐑𝐀: ${isAll ? 'ESTE BOT' : isUser ? '' : 'ESTE CHAT'}`}, {quoted: m});
+  conn.sendMessage(m.chat, {text: `🗂️ الخيار: ${type}\n🎚️ الحالة: ${isEnable ? 'مفعل' : 'معطل'}\n📣 ل: ${isAll ? 'لهذا البوت' : isUser ? '' : 'لهذه المجموعة'}`}, {quoted: m});
 };
 handler.help = ['en', 'dis'].map((v) => v + 'able <option>');
 handler.tags = ['group', 'owner'];
-handler.command = /^((en|dis)able|(tru|fals)e|(turn)?[01])$/i;
+handler.command = /^((تشغ|تعط)يل|(tru|fals)e|(turn)?[01])$/i;
 export default handler;
