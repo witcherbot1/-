@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 const handler = async (m, {conn, usedPrefix, command, text}) => {
-  if (!text) return conn.reply(m.chat, `*الرجاء إرسال اسم المستخدم لـ TikTok* "@"\nمثال\n*${usedPrefix + command} Zoro*`, m);
+  if (!text) return conn.reply(m.chat, `*الرجاء إرسال اسم المستخدم لـ TikTok* "@"\nمثال\n*${usedPrefix + command} ox__zoro__ox*`, m);
   try {
-    const res = await fetch(`https://api.lolhuman.xyz/api/stalktiktok/${text}?apikey=${lolkeysapi}`);
-    const res2 = `https://api.lolhuman.xyz/api/pptiktok/${text}?apikey=${lolkeysapi}`;
+    const res = await fetch(`https://api.lolhuman.xyz/api/stalktiktok/${text}?apikey=GataDios`);
+    const res2 = `https://api.lolhuman.xyz/api/pptiktok/${text}?apikey=GataDios`;
     const json = await res.json();
     if (res.status !== 200) throw await res.text();
     if (!json.status) throw json;
