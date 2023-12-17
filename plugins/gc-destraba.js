@@ -2,7 +2,7 @@ const handler = async (m, {conn}) => {
   m.reply(global.destraba);
   m.reply(global.destraba);
 };
-handler.command = /^(destraba|deztraba|clear)$/i;
+handler.command = /^(destraba|deztraba|تنظيف)$/i;
 export default handler;
 
 global.destraba = `
