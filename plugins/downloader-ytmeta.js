@@ -6,7 +6,7 @@ import NodeID3 from "node-id3";
 import ytdl from "ytdl-core";
 
 const handler = async (m, {conn, command, args, text, usedPrefix}) => {
-  if (!text) return m.reply('*[❗] Ingresa un enlace de YouTube.*')
+  if (!text) return m.reply('*[❗] يرجى إدخال رابط YouTube.*')
   try {
 const extract = (await ytdl.getBasicInfo(text)).videoDetails.title;      
       
@@ -19,11 +19,11 @@ const extract = (await ytdl.getBasicInfo(text)).videoDetails.title;
     genre: s.meta.category || "-",
     comment: {
       language: "spa",
-      text: '🤴🏻 Descarga por BrunoSobrino & TheMystic-Bot-MD 🤖',
+      text: '🤴🏻 تحميل بواسطة Thezoro-Bot-MD 🤖',
     },
     unsynchronisedLyrics: {
       language: "spa",
-      text: '🤴🏻 Descarga por BrunoSobrino & TheMystic-Bot-MD 🤖',
+      text: '🤴🏻 تحميل بواسطة Thezoro-Bot-MD 🤖',
     },
     image: {
       mime: "image/jpeg",
