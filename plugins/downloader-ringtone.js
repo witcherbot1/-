@@ -1,11 +1,11 @@
 import fetch from 'node-fetch';
 const handler = async (m, {conn, groupMetadata, usedPrefix, text, args, command}) => {
-  if (!text) throw `*[❗] 𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝚃𝙴𝚇𝚃𝙾 𝚀𝚄𝙴 𝙳𝙴𝚂𝙴𝙴 𝙱𝚄𝚂𝙲𝙰𝚁, 𝙴𝙹𝙴𝙼𝙿𝙻𝙾: ${usedPrefix + command} Hola*`;
+  if (!text) throw `*[❗] يجب إدخال نص للبحث عن نغمة، مثال: ${usedPrefix + command} ten ten*`;
   const anu = await ringtone(text);
   const result = anu[Math.floor(Math.random() * anu.length)];
   conn.sendMessage(m.chat, {audio: {url: result.audio}, fileName: result.title+'.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
 };
-handler.command = ['ringtone'];
+handler.command = ['نغمه'];
 export default handler;
 async function ringtone(title) {
   return new Promise((resolve, reject) => {
