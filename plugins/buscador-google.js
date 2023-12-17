@@ -1,22 +1,26 @@
-import {googleIt} from '@bochilteam/scraper';
+import { googleIt } from '@bochilteam/scraper';
 import google from 'google-it';
 import axios from 'axios';
+
 let handler = async (m, { conn, command, args, usedPrefix }) => {
   const fetch = (await import('node-fetch')).default;
   const text = args.join` `;
-  if (!text) return conn.reply(m.chat, '*[❗𝐈𝐍𝐅𝐎❗] 𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝚃𝙴𝚇𝚃𝙾 𝙾 𝚃𝙴𝙼𝙰 𝚀𝚄𝙴 𝙳𝙴𝚂𝙴𝙴 𝙱𝚄𝚂𝙲𝙰𝚁*', m);
-const url = 'https://google.com/search?q=' + encodeURIComponent(text);
-google({'query': text}).then(res => {
-let teks = `*RESULTADOS DE : _${text}_*\n\n${url}\n\n`
-for (let g of res) {
-teks += `_*${g.title}*_\n_${g.link}_\n_${g.snippet}_\n\n`
-} 
-const ss = `https://image.thum.io/get/fullpage/${url}`
-conn.sendFile(m.chat, ss, 'error.png', teks, m)
-//m.reply(teks)
-})
-} 
-handler.help = ['google', 'googlef'].map((v) => v + ' <pencarian>');
+  if (!text) return conn.reply(m.chat, '*[❗𝐈𝐍𝐅𝐎❗] أدخل نصًا للبحث، مثال: ' + usedPrefix + command + ' TheMystic-Bot-MD*', m);
+
+  const url = 'https://google.com/search?q=' + encodeURIComponent(text);
+  
+  google({ 'query': text }).then(res => {
+    let teks = `*نتائج البحث عن: _${text}_*\n\n${url}\n\n`;
+    for (let g of res) {
+      teks += `_*${g.title}*_\n_${g.link}_\n_${g.snippet}_\n\n`;
+    }
+    
+    const ss = `https://image.thum.io/get/fullpage/${url}`;
+    conn.sendFile(m.chat, ss, 'error.png', teks, m);
+  });
+};
+
+handler.help = ['google', 'googlef'].map((v) => v + ' <البحث>');
 handler.tags = ['internet'];
 handler.command = /^googlef?$/i;
 export default handler;
