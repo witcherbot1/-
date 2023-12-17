@@ -4,28 +4,28 @@ import ytdl from 'ytdl-core';
 import axios from 'axios';
 import {youtubedl, youtubedlv2} from '@bochilteam/scraper';
 const handler = async (m, {conn, command, args, text, usedPrefix}) => {
-  if (!text) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝙽𝙾𝙼𝙱𝚁𝙴 𝙳𝙴 𝙻𝙰 𝙲𝙰𝙽𝙲𝙸𝙾𝙽 𝙵𝙰𝙻𝚃𝙰𝙽𝚃𝙴, 𝙿𝙾𝚁 𝙵𝙰𝚅𝙾𝚁 𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙼𝙰𝚂 𝙴𝙻 𝙽𝙾𝙼𝙱𝚁𝙴/𝚃𝙸𝚃𝚄𝙻𝙾 𝙳𝙴 𝚄𝙽𝙰 𝙲𝙰𝙽𝙲𝙸𝙾𝙽*\n\n*—◉ 𝙴𝙹𝙴𝙼𝙿𝙻𝙾:*\n*${usedPrefix + command} Good Feeling - Flo Rida* `;
+  if (!text) throw `*[❗اشعار❗] يجب إدخال اسم أو عنوان الفيديو الذي ترغب في تشغيله من YouTube، مثال: ${usedPrefix + command} rewrite the stars - Edit zoro 4K*`;
   try {
     const yt_play = await search(args.join(' '));
     let additionalText = '';
-    if (command === 'play3' || command == 'playdoc') {
+    if (command === 'اغنيه3' || command == 'playdoc') {
       additionalText = 'audio 🔊';
-    } else if (command === 'play4' || command == 'playdoc2') {
+    } else if (command === 'فيديو3' || command == 'playdoc2') {
       additionalText = 'video 🎥';
     }
-    const texto1 = `*◉——⌈🔊 YOUTUBE DOC 🔊⌋——◉*\n
-❏ 📌 *Titulo:* ${yt_play[0].title}
-❏ 📆 *Publicado:* ${yt_play[0].ago}
-❏ ⌚ *Duracion:* ${secondString(yt_play[0].duration.seconds)}
-❏ 👀 *Vistas:* ${`${MilesNumber(yt_play[0].views)}`}
-❏ 👤 *Autor:* ${yt_play[0].author.name}
-❏ ⏯️ *Canal:* ${yt_play[0].author.url}
-❏ 🆔 *ID:* ${yt_play[0].videoId}
-❏ 🪬 *Tipo:* ${yt_play[0].type}
-❏ 🔗 *Link:* ${yt_play[0].url}\n
-❏ *_Enviando ${additionalText}, aguarde un momento．．．_*`.trim();
+    const texto1 = `*◉——⌈🔊 يويتيوب 🔊⌋——◉*\n
+❏ 📌 *العنوان:* ${yt_play[0].title}
+❏ 📆 *تم النشر:* ${yt_play[0].ago}
+❏ ⌚ *المدة:* ${secondString(yt_play[0].duration.seconds)}
+❏ 👀 *المشاهدات:* ${`${MilesNumber(yt_play[0].views)}`}
+❏ 👤 *المؤلف:* ${yt_play[0].author.name}
+❏ ⏯️ *القناة:* ${yt_play[0].author.url}
+❏ 🆔 *المعرف:* ${yt_play[0].videoId}
+❏ 🪬 *النوع:* ${yt_play[0].type}
+❏ 🔗 *الرابط:* ${yt_play[0].url}\n
+❏ *_جاري إرسال ${additionalText}، يرجى الانتظار لحظة..._**`.trim();
     conn.sendMessage(m.chat, {image: {url: yt_play[0].thumbnail}, caption: texto1}, {quoted: m});
-    if (command == 'play3' || command == 'playdoc') {
+    if (command == 'اغنيه3' || command == 'اغنيه3') {
       try {
         const q = '128kbps';
         const v = yt_play[0].url;
@@ -48,21 +48,21 @@ const handler = async (m, {conn, command, args, text, usedPrefix}) => {
             const ress = await ytdl.chooseFormat(infoo.formats, {filter: 'audioonly'});
             conn.sendMessage(m.chat, {audio: {url: ress.url}, fileName: __res[0].title + '.mp3', mimetype: 'audio/mp4'}, {quoted: m});
           } catch {
-            await conn.reply(m.chat, '*[❗] 𝙴𝚁𝚁𝙾𝚁 𝙽𝙾 𝙵𝚄𝙴 𝙿𝙾𝚂𝙸𝙱𝙻𝙴 𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝚁 𝙴𝙻 𝙰𝚄𝙳𝙸𝙾*', m);
+            await conn.reply(m.chat, '*[❗] حدث خطأ، لا يمكن العثور على مصدر الصوت.*', m);
           }
         }
       }
     }
-    if (command == 'play4' || command == 'playdoc2') {
+    if (command == 'فيديو3' || command == 'فيديو3') {
       try {
-        const qu = '360';
+        const qu = '480';
         const q = qu + 'p';
         const v = yt_play[0].url;
         const yt = await youtubedl(v).catch(async (_) => await youtubedlv2(v));
         const dl_url = await yt.video[q].download();
         const ttl = await yt.title;
         const size = await yt.video[q].fileSizeH;
-        await await conn.sendMessage(m.chat, {document: {url: dl_url}, fileName: `${ttl}.mp4`, mimetype: 'video/mp4', caption: `▢ 𝚃𝙸𝚃𝚄𝙻𝙾: ${ttl}\n▢ 𝙿𝙴𝚂𝙾 𝙳𝙴𝙻 𝚅𝙸𝙳𝙴𝙾: ${size}`, thumbnail: await fetch(yt.thumbnail)}, {quoted: m});
+        await await conn.sendMessage(m.chat, {document: {url: dl_url}, fileName: `${ttl}.mp4`, mimetype: 'video/mp4', caption: `▢ العنوان: ${ttl}\n▢ حجم الملف: ${size}`, thumbnail: await fetch(yt.thumbnail) }, { quoted: m });
       } catch {
         try {
           const mediaa = await ytMp4(yt_play[0].url);
@@ -77,18 +77,18 @@ const handler = async (m, {conn, command, args, text, usedPrefix}) => {
             const n4 = lolh.result.thumbnail;
             await conn.sendMessage(m.chat, {document: {url: n2}, fileName: `${n}.mp4`, mimetype: 'video/mp4', caption: `▢ 𝚃𝙸𝚃𝚄𝙻𝙾: ${n}\n▢ 𝙿𝙴𝚂𝙾 𝙳𝙴𝙻 𝚅𝙸𝙳𝙴𝙾: ${n3}`, thumbnail: await fetch(n4)}, {quoted: m});
           } catch {
-            await conn.reply(m.chat, '*[❗] 𝙴𝚁𝚁𝙾𝚁 𝙽𝙾 𝙵𝚄𝙴 𝙿𝙾𝚂𝙸𝙱𝙻𝙴 𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝚁 𝙴𝙻 𝚅𝙸𝙳𝙴𝙾*', m);
+            await conn.reply(m.chat, '*[❗] حدث خطأ في البحث عن ملف فيديو*', m);
           }
         }
       }
     }
   } catch {
-    throw '*[❗𝐈𝐍𝐅𝐎❗] 𝙴𝚁𝚁𝙾𝚁, 𝙿𝙾𝚁 𝙵𝙰𝚅𝙾𝚁 𝚅𝚄𝙴𝙻𝚅𝙰 𝙰 𝙸𝙽𝚃𝙴𝙽𝚃𝙰𝚁𝙻𝙾*';
+    throw '*[❗اشعار❗] حدث خطأ، يرجى التحقق من اسم الأغنية والمحاوله مره اخري*';
   }
 };
 handler.help = ['play3', 'play4'].map((v) => v + ' < busqueda >');
 handler.tags = ['downloader'];
-handler.command = /^(playdoc|playdoc2|play3|play4)$/i;
+handler.command = /^(فيديو3|اغنيه3|فيديو3|اغنيه3)$/i;
 export default handler;
 
 async function search(query, options = {}) {
