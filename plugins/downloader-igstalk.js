@@ -2,19 +2,19 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 const handler = async (m, {conn, args, usedPrefix, command}) => {
-  if (!args[0]) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙽𝙾𝙼𝙱𝚁𝙴 𝙳𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾 𝙳𝙴 𝚄𝙽 𝚄𝚂𝚄𝙰𝚁𝙸𝙾 𝙳𝙴 𝙸𝙽𝚂𝚃𝙰𝙶𝚁𝙰𝙼, 𝙴𝙹𝙴𝙼𝙿𝙻𝙾: ${usedPrefix + command} luisitocomunica*`;
+  if (!args[0]) throw `*[❗اشعار❗] يرجى إرسال اسم مستخدم إنستجرام. مثال: ${usedPrefix + command} yosef_zoro_3mk*`;
   const res = await igstalk(args[0].replace(/^@/, ''));
   const res2 = await fetch(`https://api.lolhuman.xyz/api/stalkig/${args[0].replace(/^@/, '')}?apikey=${lolkeysapi}`);
   const res3 = await res2.json();
   const json = JSON.parse(JSON.stringify(res));
   const iggs = `
-▢ *Username:* ${json.username}
-▢ *Nickname:* ${json.fullname}
-▢ *Followers:* ${json.followers}
-▢ *Following:* ${json.following}
-▢ *Posting:* ${json.post}
-▢ *Link:* https://instagram.com/${json.username.replace(/^@/, '')}
-▢ *Bio:* ${json.bio}`.trim();
+▢ *اسم المستخدم:* ${json.username}
+▢ *الاسم:* ${json.fullname}
+▢ *المتابعون:* ${json.followers}
+▢ *المتابعين:* ${json.following}
+▢ *المنشورات:* ${json.post}
+▢ *الرابط:* https://instagram.com/${json.username.replace(/^@/, '')}
+▢ *النبذة:* ${json.bio}`.trim();
   const aa = `${res3.result.photo_profile || res.profile}`;
   await conn.sendFile(m.chat, aa, 'error.jpg', iggs, m);
 };
