@@ -16,7 +16,7 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
   } catch (e) {
     m.reply(e + '');
     text = args.join(' ');
-    if (!text) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝙸𝙽𝚂𝙴𝚁𝚃𝙴 𝙴𝙻 𝚃𝙴𝚇𝚃𝙾 𝚀𝚄𝙴 𝚀𝚄𝙸𝙴𝚁𝙰 𝙲𝙾𝙽𝚅𝙴𝚁𝚃𝙸𝚁 𝙰 𝙽𝙾𝚃𝙰 𝙳𝙴 𝚅𝙾𝚉, 𝙴𝙹𝙴𝙼𝙿𝙻𝙾: ${usedPrefix + command} es Hola Mundo*`;
+    if (!text) throw `*[❗اشعار❗] يرجى إدخال النص الذي تريد تحويله إلى كلام وأيضًا تحديد لغة التحويل، مثال: ${usedPrefix + command} ar مرحبًا بكم*`;
     res = await tts(text, defaultLang);
   } finally {
     if (res) conn.sendFile(m.chat, res, 'tts.opus', null, m, true);
@@ -24,7 +24,7 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
 };
 handler.help = ['tts <lang> <teks>'];
 handler.tags = ['tools'];
-handler.command = /^g?tts$/i;
+handler.command = /^g?tts|انطق$/i;
 export default handler;
 
 function tts(text, lang = 'es') {
