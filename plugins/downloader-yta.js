@@ -5,7 +5,7 @@ import ytdl from 'ytdl-core';
 import axios from 'axios'
 import {bestFormat, getUrlDl} from '../lib/y2dl.js';
 const handler = async (m, {text, conn, args, usedPrefix, command}) => {
-  if (!args[0]) throw '*[❗] Uso incorrecto del comando, ingrese un enlace / link de YouTube.*';  
+  if (!args[0]) throw '*[❗] استخدام غير صحيح للأمر، يرجى إدخال رابط يوتيوب.*';  
   let enviando;
   if (enviando) return  
       enviando = true      
@@ -21,17 +21,17 @@ const handler = async (m, {text, conn, args, usedPrefix, command}) => {
           if (index < matchingItem.urls.length) {
             youtubeLink = matchingItem.urls[index];
           } else {
-            throw `*[❗] No se encontro un enlace para ese numero, por favor ingrese un numero entre el 1 y el ${matchingItem.urls.length}*`;
+            throw `*[❗] لم يتم العثور على رابط لهذا الرقم، يرجى إدخال رقم بين 1 و ${matchingItem.urls.length}.*`;
           }
         } else {
-          throw `*[❗] Para poder hacer uso del comando de esta forma (${usedPrefix + command} <numero>), por favor realiza la busqueda de videos con el comando ${usedPrefix}playlist <texto>*`;
+          throw `*[❗] لاستخدام هذا الأمر بهذه الطريقة (${usedPrefix + command} <number>), يرجى القيام ببحث عن الفيديوهات باستخدام الأمر ${usedPrefix}playlist <text>*`;
         }
       } else {
-        throw `*[❗] Para poder hacer uso del comando de esta forma (${usedPrefix + command} <numero>), por favor realiza la busqueda de videos con el comando ${usedPrefix}playlist <texto>*`;
+        throw `*[❗] لاستخدام هذا الأمر بهذه الطريقة (${usedPrefix + command} <number>), يرجى القيام ببحث عن الفيديوهات باستخدام الأمر ${usedPrefix}playlist <text>*`;
       }
     }
   }
-  const { key } = await conn.sendMessage(m.chat, {text: `*_⏳Sᴇ ᴇsᴛᴀ ᴘʀᴏᴄᴇsᴀɴᴅᴏ Sᴜ ᴀᴜᴅɪᴏ...⏳_*\n\n*◉ Sɪ Sᴜ ᴀᴜᴅɪᴏ ɴᴏ ᴇs ᴇɴᴠɪᴀᴅᴏ, ᴘʀᴜᴇʙᴇ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ #playdoc ᴏ #play.2 ᴏ #ytmp4doc ◉*`}, {quoted: m});
+  const { key } = await conn.sendMessage(m.chat, {text: `*_⏳جاري معالجة الصوت...⏳_*\n\n*◉ إذا لم يتم إرسال الصوت، جرب مع الأمر #playdoc أو #play.2 أو #ytmp4doc ◉*`}, {quoted: m});
   try {
     const formats = await bestFormat(youtubeLink, 'audio');
     const dl_url = await getUrlDl(formats.url);
@@ -43,12 +43,12 @@ const handler = async (m, {text, conn, args, usedPrefix, command}) => {
     const fileSizeInMB = fileSizeInKB / 1024;
     const roundedFileSizeInMB = fileSizeInMB.toFixed(2);
    if (fileSizeInMB > 50) {
-    await conn.sendMessage(m.chat, {document: buff, caption: `*▢ Titulo:* ${ttl_1}\n*▢ Peso Del Audio:* ${roundedFileSizeInMB} MB`, fileName: ttl_1 + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
-    await conn.sendMessage(m.chat, {text: `*[ ✔ ] Audio descargado y enviado exitosamente.*\n\n*—◉ Se envío en formato de documento debido a que el audio pesa ${roundedFileSizeInMB} MB y supera el limite establecido por WhatsApp.*\n*◉ Titulo:* ${ttl_1}`, edit: key}, {quoted: m});
+    await conn.sendMessage(m.chat, {document: buff, caption: `*▢ العنوان:* ${ttl_1}\n*▢ حجم الصوت:* ${roundedFileSizeInMB} MB`, fileName: ttl_1 + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
+    await conn.sendMessage(m.chat, {text: `*[ ✔ ] تم تنزيل الصوت وإرساله بنجاح.*\n\n*—◉ تم إرساله في شكل مستند لأن حجم الصوت يزيد عن ${roundedFileSizeInMB} MB ويتجاوز الحد الذي يحدده واتساب.*\n*◉ العنوان:* ${ttl_1}`, edit: key}, {quoted: m});
     enviando = false
    } else {
-    await conn.sendMessage(m.chat, {audio: buff, caption: `*▢ Titulo:* ${ttl_1}\n*▢ Peso Del Audio:* ${roundedFileSizeInMB} MB`, fileName: ttl_1 + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
-    await conn.sendMessage(m.chat, {text: `*[ ✔ ] Audio descargado y enviado exitosamente.*`, edit: key}, {quoted: m});
+    await conn.sendMessage(m.chat, {audio: buff, caption: `*▢ العنوان:* ${ttl_1}\n*▢ حجم الصوت:* ${roundedFileSizeInMB} MB`, fileName: ttl_1 + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
+    await conn.sendMessage(m.chat, {text: `*[ ✔ ] تم تنزيل الصوت وإرساله بنجاح.*`, edit: key}, {quoted: m});
     enviando = false   
    }    
   } catch {
@@ -61,14 +61,14 @@ const handler = async (m, {text, conn, args, usedPrefix, command}) => {
     const ttl = await yt.title;
     const size = await yt.audio[q].fileSizeH;
     await conn.sendFile(m.chat, dl_url, ttl + '.mp3', null, m, false, {mimetype: 'audio/mpeg'});
-    await conn.sendMessage(m.chat, {text: '*[ ✔ ] Audio descargado exitosamente.*', edit: key}, {quoted: m});
+    await conn.sendMessage(m.chat, {text: '*[ ✔ ] تم تنزيل الصوت بنجاح.*', edit: key}, {quoted: m});
   } catch {
     try {
       const lolhuman = await fetch(`https://api.lolhuman.xyz/api/ytaudio2?apikey=${lolkeysapi}&url=${youtubeLink}`);
       const lolh = await lolhuman.json();
       const n = lolh.result.title || 'error';
       await conn.sendMessage(m.chat, {audio: {url: lolh.result.link}, fileName: `${n}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
-      await conn.sendMessage(m.chat, {text: '*[ ✔ ] Audio descargado exitosamente.*', edit: key}, {quoted: m});
+      await conn.sendMessage(m.chat, {text: '*[ ✔ ] تم تنزيل الصوت بنجاح.*', edit: key}, {quoted: m});
     } catch {
       try {
         const searchh = await yts(youtubeLink);
@@ -76,15 +76,15 @@ const handler = async (m, {text, conn, args, usedPrefix, command}) => {
         const infoo = await ytdl.getInfo('https://youtu.be/' + __res[0].videoId);
         const ress = await ytdl.chooseFormat(infoo.formats, {filter: 'audioonly'});
         conn.sendMessage(m.chat, {audio: {url: ress.url}, fileName: __res[0].title + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
-        await conn.sendMessage(m.chat, {text: '*[ ✔ ] Audio descargado exitosamente.*', edit: key}, {quoted: m});
+        await conn.sendMessage(m.chat, {text: '*[ ✔ ] تم تنزيل الصوت بنجاح.*', edit: key}, {quoted: m});
       } catch {
-        await conn.sendMessage(m.chat, {text: `*[ ❌ ] El audio no pudo ser descargado ni enviado, vuelva a intentarlo.*`, edit: key}, {quoted: m});
-        throw '*[❗] Error, no fue posible descargar el audio.*';
+        await conn.sendMessage(m.chat, {text: `*[ ❌ ] لا يمكن تنزيل الصوت أو إرساله، يرجى المحاولة مرة أخرى.*`, edit: key}, {quoted: m});
+        throw '**[❗] حدث خطأ، لا يمكن تنزيل الصوت.*';
       }
     }
   }
 }};
-handler.command = /^(audio|fgmp3|dlmp3|getaud|yt(a|mp3))$/i;
+handler.command = /^(صوت3|fgmp3|dlmp3|getaud|yt(a|mp3))$/i;
 export default handler
 
 const getBuffer = async (url, options) => {
