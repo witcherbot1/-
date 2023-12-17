@@ -3,15 +3,15 @@ import {sizeFormatter} from 'human-readable';
 const formatSize = sizeFormatter({
   std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B`});
 const handler = async (m, {conn, args}) => {
-  if (!args[0]) throw '*[ ℹ️ ] Ingrese un enlace de Google Drive.*\n\n*[ ℹ️ ] Ejemplo:* _https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view _';
+  if (!args[0]) throw '*[ ℹ️ ]  خطأ، الرجاء إرسال رابط الملف من Google Drive. مثال:* _https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view _';
   try {
     GDriveDl(args[0]).then(async (res) => {
-      conn.reply(m.chat, '*[ ℹ️ ] Se está enviando el archivo. espere...\n\n[ ℹ️ ] Si no se envía, podría ser porque supera el límite de tamaño.*', m);
+      conn.reply(m.chat, '*[ ℹ️ ] تم تنزيل الملف بنجاح، يرجى الانتظار لحظة...\n\nالوقت المقدر للتنزيل يعتمد على حجم الملف وجودة الاتصال.*', m);
       if (!res) throw res;
       conn.sendFile(m.chat, res.downloadUrl, res.fileName, '', m, null, {mimetype: res.mimetype, asDocument: true});
     });
   } catch (e) {
-    m.reply('*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*');
+    m.reply('*[ ℹ️ ] خطأ، الرجاء التحقق من صحة الرابط والمحاولة مرة أخرى.*');
     console.log(e);
   }
 };
@@ -19,9 +19,9 @@ handler.command = /^(gdrive)$/i;
 export default handler;
 async function GDriveDl(url) {
   let id;
-  if (!(url && url.match(/drive\.google/i))) throw 'Invalid URL';
+  if (!(url && url.match(/drive\.google/i))) throw 'رابط غير صالح';
   id = (url.match(/\/?id=(.+)/i) || url.match(/\/d\/(.*?)\//))[1];
-  if (!id) throw 'ID Not Found';
+  if (!id) throw 'لم يتم العثور على معرف الملف';
   const res = await fetch(`https://drive.google.com/uc?id=${id}&authuser=0&export=download`, {
     method: 'post',
     headers: {
@@ -34,7 +34,7 @@ async function GDriveDl(url) {
       'x-drive-first-party': 'DriveWebUi',
       'x-json-requested': 'true'}});
   const {fileName, sizeBytes, downloadUrl} = JSON.parse((await res.text()).slice(4));
-  if (!downloadUrl) throw 'Link Download Limit!';
+  if (!downloadUrl) throw 'تم الوصول إلى حد تنزيل الرابط!';
   const data = await fetch(downloadUrl);
   if (data.status !== 200) throw data.statusText;
   return {downloadUrl, fileName, fileSize: formatSize(sizeBytes), mimetype: data.headers.get('content-type')};
