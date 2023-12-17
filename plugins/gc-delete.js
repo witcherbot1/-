@@ -1,7 +1,7 @@
 /* Creditos a https://github.com/FG98F */
 
 const handler = async (m, {conn, usedPrefix, command}) => {
-  if (!m.quoted) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙰 𝙰𝙻 𝙼𝙴𝙽𝚂𝙰𝙹𝙴 𝚀𝚄𝙴 𝙳𝙴𝚂𝙴𝙰 𝚀𝚄𝙴 𝚂𝙴𝙰 𝙴𝙻𝙸𝙼𝙸𝙽𝙰𝙳𝙾*`;
+  if (!m.quoted) throw `*[❗تنبيه❗] يجب الرد على الرسالة التي ترغب في حذفها*`;
   try {
     const delet = m.message.extendedTextMessage.contextInfo.participant;
     const bang = m.message.extendedTextMessage.contextInfo.stanzaId;
@@ -12,7 +12,7 @@ const handler = async (m, {conn, usedPrefix, command}) => {
 };
 handler.help = ['del', 'delete'];
 handler.tags = ['group'];
-handler.command = /^del(ete)?$/i;
+handler.command = /^حذف?$/i;
 handler.group = true;
 handler.admin = true;
 handler.botAdmin = true;
