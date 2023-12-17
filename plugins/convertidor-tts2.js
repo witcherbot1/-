@@ -19,12 +19,12 @@ const handler = async (m, { conn, usedPrefix, command, text, args }) => {
 
   if (!efecto) {
     let voiceList = await getVoiceList();
-    let responseText = `*[❗] No haz ingresado un efecto, por favor ingresa un efecto de voz.*\n\n*—◉ Elige uno de los siguientes efectos:*\n`;
+    let responseText = `*[❗] لم تقم بإدخال تأثير، يرجى إدخال تأثير صوتي.*\n\n*—◉ اختر أحد الآثار التالية:*\n`;
 
     for (let i = 0, count = 0; count < 100 && i < voiceList.resultado.length; i++) {
       const entry = voiceList.resultado[i];
       if (entry.ID.length <= 20) {
-        responseText += `*◉ ${usedPrefix + command} ${entry.ID} tu_texto_aquí*\n`;
+        responseText += `*◉ ${usedPrefix + command} ${entry.ID} نصك_هنا*\n`;
         count++;
       }
     }
@@ -41,15 +41,15 @@ const handler = async (m, { conn, usedPrefix, command, text, args }) => {
     }
   }
 
-  if (!efectoValido) return conn.sendMessage(m.chat, { text: `*[❗] El efecto proporcionado no existe en la lista, utiliza ${usedPrefix + command} para conocer la lista de efectos.*` }, { quoted: m });
+  if (!efectoValido) return conn.sendMessage(m.chat, { text: `*[❗] الأثر المقدم غير موجود في القائمة، استخدم ${usedPrefix + command} للحصول على قائمة الأثر.*` }, { quoted: m });
 
-  if (!texto) return conn.sendMessage(m.chat, {text: `*[❗] Ingresa el texto que quieras convertir a audio.*\n\n*—◉ Ejemplo:*\n*◉ ${usedPrefix + command} ${efecto} Hola, este es un ejemplo de uso del comando.*`}, {quoted: m});
+  if (!texto) return conn.sendMessage(m.chat, {text: `*[❗] يرجى إدخال النص الذي تريد تحويله إلى صوت.*\n\n*—◉ مثال:*\n*◉ ${usedPrefix + command} ${efecto} مرحبًا، هذا مثال على استخدام الأمر.*`}, {quoted: m});
 
   let masivo = await makeTTSRequest(texto, efecto);
   conn.sendMessage(m.chat, {audio: {url: masivo.resultado}, fileName: 'error.mp3', mimetype: 'audio/mpeg', ptt: true}, {quoted: m});
 };
 
-handler.command = /^(g?tts2)$/i;
+handler.command = /^(g?tts2|انطق2)$/i;
 export default handler;
 
 const secretKey = 'fe2ee40099494579af0ecf871b5af266';
@@ -79,10 +79,10 @@ async function getVoiceList() {
       name: entry.name,
       lenguaje: entry.language  
     }));
-    return { resultado: simplifiedList ? simplifiedList : '[❗] Error, no se obtuvo respuesta de la API.' };
+    return { resultado: simplifiedList ? simplifiedList : '[❗] خطأ، لم يتم الحصول على إجابة من الAPI.' };
   } catch (error) {
     console.error('Error:', error);
-    return { resultado: '[❗] Error, no se obtuvo respuesta de la API.' };
+    return { resultado: '[❗] خطأ، لم يتم الحصول على إجابة من الAPI.' };
     throw error;
   }
 }
@@ -101,9 +101,9 @@ async function makeTTSRequest(texto, efecto) {
     const eventData = events.find(event => event.includes('"stage":"complete"'));
     const urlMatch = eventData.match(/"url":"([^"]+)"/);
     const url = urlMatch ? urlMatch[1] : null;
-    return { resultado: url ? url : '[❗] URL no encontrada en la respuesta.' };
+    return { resultado: url ? url : '[❗] لم يتم العثور على عنوان URL في الإجابة.' };
   } catch (error) {
     console.error('Error:', error);
-    return { resultado: '[❗] Error, no se obtuvo respuesta de la API.' };
+    return { resultado: '[❗] خطأ، لم يتم الحصول على إجابة من الAPI.' };
   }
 }
