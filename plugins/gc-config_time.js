@@ -6,9 +6,9 @@ const handler = async (m, {conn, isAdmin, isOwner, args, usedPrefix, command}) =
     throw false;
   }
   const isClose = {
-	  'open': 'not_announcement',
+	  'فتح': 'not_announcement',
 	  'buka': 'not_announcement',
-    'on': 'not_announcement',
+    'غلق': 'not_announcement',
 	  '1': 'not_announcement',
 	  'close': 'announcement',
 	  'tutup': 'announcement',
@@ -17,30 +17,30 @@ const handler = async (m, {conn, isAdmin, isOwner, args, usedPrefix, command}) =
   }[(args[0] || '')];
   if (isClose === undefined) {
 	  const caption = `
-*• Ejemplo:*
-*${usedPrefix + command} open 1*
-*${usedPrefix + command} close 1*
+*• مثال:*
+*${usedPrefix + command} فتح 1*
+*${usedPrefix + command} غلق 1*
 📌 *_Ejemplo de uso:_* *${usedPrefix + command} close 1* 
-*_🌿 Para que el grupo este cerrado una hora._*
+*_🌿 لإغلاق المجموعة لمدة ساعة_*
 `;
     m.reply(caption);
 	  throw false;
   }
   const timeoutset = 86400000 * args[1] / 24;
   await conn.groupSettingUpdate(m.chat, isClose).then(async (_)=> {
-	  m.reply(`⚠️ *_Grupo ${isClose == 'announcement' ? 'cerrado' : 'abierto'} ${args[1] ? `durante *${clockString(timeoutset)}_*` : ''}`);
+	  m.reply(`⚠️ *_تم إغلاق المجموعة ${isClose == 'announcement' ? 'تم تفعيل الإعلان' : 'تم تعطيل الإعلان'} ${args[1] ? `لمدة *${clockString(timeoutset)}_*` : ''}`);
   });
   if (args[1]) {
 	 setTimeout(async () => {
       await conn.groupSettingUpdate(m.chat, `${isClose == 'announcement' ? 'not_announcement' : 'announcement'}`).then(async (_)=>{
-		    conn.reply(m.chat, `${isClose == 'not_announcement' ? '*El grupo ha sido cerrado, ¡ahora solo los administradores pueden enviar mensajes!*' : '*El grupo se ha abierto, ¡ahora todos los miembros pueden enviar mensajes!*'}!`);
+		    conn.reply(m.chat, `${isClose == 'not_announcement' ? '*تم فتح المجموعة، الآن يمكن لجميع الأعضاء إرسال الرسائل!*' : '*تم إغلاق المجموعة، الآن يمكن للمشرفين فقط إرسال الرسائل!*'}!`);
 	    });
     }, timeoutset);
   }
 };
 handler.help = ['grouptime *<open/close>* *<número>*'];
 handler.tags = ['group'];
-handler.command = /^(grouptime|gctime)$/i;
+handler.command = /^(وقت-جروب|gctime)$/i;
 
 handler.botAdmin = true;
 handler.group = true;
