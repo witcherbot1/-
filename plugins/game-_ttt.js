@@ -26,10 +26,10 @@ export async function before(m) {
     }
     if (!isSurrender && 1 > (ok = room.game.turn(m.sender === room.game.playerO, parseInt(m.text) - 1))) {
       m.reply({
-        '-3': 'El juego ha terminado',
-        '-2': 'Inválido',
-        '-1': 'Posición inválida',
-        '0': 'Posición inválida',
+        '-3': 'انتهت اللعبة',
+        '-2': 'غير صالح',
+        '-1': 'موقع غير صالح',
+        '0': 'موقع غير صالح',
       }[ok]);
       return !0;
     }
@@ -59,7 +59,7 @@ export async function before(m) {
     }
     const winner = isSurrender ? room.game.currentTurn : room.game.winner;
     const str = `
-🎮 𝐓𝐑𝐄𝐒 𝐄𝐍 𝐑𝐀𝐘𝐀 🎮
+🎮 لعبه اكس او 🎮
 
 ❎ = @${room.game.playerX.split('@')[0]}
 ⭕ = @${room.game.playerO.split('@')[0]}
@@ -68,7 +68,7 @@ export async function before(m) {
         ${arr.slice(3, 6).join('')}
         ${arr.slice(6).join('')}
 
-${isWin ? `@${(isSurrender ? room.game.currentTurn : room.game.winner).split('@')[0]} 𝙶𝙰𝙽𝙰𝚂𝚃𝙴 🥳, 𝚃𝙴 𝙻𝙻𝙴𝚅𝙰𝚂 +4999 𝚎𝚡𝚙` : isTie ? '𝙴𝙻 𝙹𝚄𝙴𝙶𝙾 𝚃𝙴𝚁𝙼𝙸𝙽𝙾 𝙴𝙽 𝙴𝙼𝙿𝙰𝚃𝙴 😐' : `𝚃𝚄𝚁𝙽𝙾 𝙳𝙴 @${room.game.currentTurn.split('@')[0]}`}
+${isWin ? `@${(isSurrender ? room.game.currentTurn : room.game.winner).split('@')[0]} "🎈لقد فزت ⚡  ، لقد حصلت على +4999 خبرة`: isTie؟ 'انتهت اللعبة بالتعادل 😐': 'الدور @${room.game.currentTurn.split('@')[0]}`}
 `.trim();
     const users = global.db.data.users;
     if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat) {
