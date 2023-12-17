@@ -1,9 +1,11 @@
 import gplay from "google-play-scraper";
 
 let handler = async (m, { conn, text }) => {
-  if (!text) throw "*[❗] 𝙸𝙽𝙶𝚁𝙴𝙴𝚂𝙴 𝙴𝙻 𝙽𝙾𝙼𝙱𝚁𝙴 𝙳𝙴 𝙻𝙰 𝙰𝙿𝙺 𝚀𝚄𝙴 𝚀𝚄𝙸𝙴𝚁𝙰 𝙱𝚄𝚂𝙲𝙰𝚁*";
+  if (!text) throw "*[❗] يجب إدخال اسم التطبيق الذي تريد البحث عنه*";
   let res = await gplay.search({ term: text });
-  if (!res.length) throw `*[❗] 𝙸𝙽𝙶𝚁𝙴𝙴𝚂𝙴 𝙴𝙻 𝙽𝙾𝙼𝙱𝚁𝙴 𝙳𝙴 𝙻𝙰 𝙰𝙿𝙺 𝚀𝚄𝙴 𝚀𝚄𝙸𝙴𝚁𝙰 𝙱𝚄𝚂𝙲𝙰𝚁*`;
+  if (!res.length) throw `*[❗] لم يتم العثور على أي تطبيق يتطابق مع البحث*`;
+
+  // تحضير بيانات إعلان الرد الخارجي
   let opt = {
     contextInfo: {
       externalAdReply: {
@@ -14,18 +16,21 @@ let handler = async (m, { conn, text }) => {
       },
     },
   };
-  await console.log(res);
+
+  // تحضير نص الرد
   res = res.map(
     (v) =>
-      `*🔍 Resultado:* ${v.title}
-       *✍️ Desarrollador:* ${v.developer}
-       *💸 Precio:* ${v.priceText}
-       *📈 Puntuacion:* ${v.scoreText}
-        *⛓️ Link:* ${v.url}`
+      `*🔍 النتيجة:* ${v.title}
+       *✍️ المطور:* ${v.developer}
+       *💸 السعر:* ${v.priceText}
+       *📈 التقييم:* ${v.scoreText}
+        *⛓️ الرابط:* ${v.url}`
   ).join`\n\n`;
+
+  // إرسال الرد
   m.reply(res, null, opt);
 };
-handler.help = ['playstore <aplicacion>'];
+handler.help = ['playstore <اسم التطبيق>'];
 handler.tags = ['internet'];
-handler.command = /^(playstore)$/i;
+handler.command = /^(تطبيق)$/i;
 export default handler;
