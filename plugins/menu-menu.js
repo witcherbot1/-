@@ -21,33 +21,31 @@ const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, is
     const taguser = '@' + m.sender.split('@s.whatsapp.net')[0];
     const doc = ['pdf', 'zip', 'vnd.openxmlformats-officedocument.presentationml.presentation', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'vnd.openxmlformats-officedocument.wordprocessingml.document'];
     const document = doc[Math.floor(Math.random() * doc.length)];
-    const str = ` *🤖 The Mystic Bot* 🤖
+    const str = ` *🤖 The Zoro Bot* 🤖
 
- *👋 Hola, ${taguser}*
+ *👋 اهلا يحب, ${taguser}*
 
- *🧑‍💻 Prop.:* Bruno Sobrino
- *📱 WA:* +5219992095479
- *🤖 Bot 1:* +5219991402134
- *🤖 Bot 2:* +5219993404349
- *🏦 PayPal:* paypal.me/TheShadowBrokers133
+ *🧑‍💻 المالك.:* Yosef (Zoro)
+ *📱 wa:* +201032389641
+ *🏦 PayPal:* paypal.me/Yosef160
 
 
- *📆 Fecha:* ${date}
- *⏳ Uptime:* ${uptime}
- *🧑 Usuarios regs:* ${rtotalreg}
- *👥 Usuarios totales:* ${rtotal}
- *🤖 Tipo de bot:* ${(conn.user.jid == global.conn.user.jid ? '' : `Sub-bot de:\n+${global.conn.user.jid.split`@`[0]}`) || 'No es sub-bot'}
+ *📆 التاريخ:* ${date}
+ *⏳ وقت التشغيل:* ${uptime}
+ *🧑 المستخدمين المسجلين:* ${rtotalreg}
+ *👥 إجمالي المستخدمين:* ${rtotal}
+ *🤖 نوع البوت:* ${(conn.user.jid == global.conn.user.jid ? '' : `Sub-bot de:\n+${global.conn.user.jid.split`@`[0]}`) || 'No es sub-bot'}
 
 
- *< INFO. DEL USUARIO />* 👤
+ *< معلومات المستخدم />* ⚡
 
- *📈 Nivel:* ${level}
- *🧰 Experiencia:* ${exp}
- *⚓ Rango:* ${role}
- *💎 Diamantes:* ${limit}
- *🪙 MysticCoins:* ${money}
- *🎟️ Tokens:* ${joincount}
- *🎫 Premium:* ${user.premiumTime > 0 ? '✅' : (isPrems ? '✅' : '❌') || ''}
+ *📈 المستوى:* ${level}
+ *🧰 الخبرة:* ${exp}
+ *⚓ الرتبة:* ${role}
+ *💎 الماس:* ${limit}
+ *🪙 زورو كوينز:* ${money}
+ *🎟️ الرموز:* ${joincount}
+ *🎫 مميز:* ${user.premiumTime > 0 ? '✅' : (isPrems ? '✅' : '❌') || ''}
 
 
  _*< LISTA DE COMANDOS />*_ 📄
@@ -515,7 +513,7 @@ ${readMore}
       conn.sendMessage(m.chat, {image: pp, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: fkontak2});
     }
   } catch {
-    conn.reply(m.chat, '*[ ℹ️ ] Este menu tiene un error interno, por lo cual no fue posible enviarlo.*', m);
+    conn.reply(m.chat, '*[ ℹ️ ] هذه القائمة بها خطأ داخلي ولهذا لم يكن من الممكن إرسالها.*', m);
   }
 };
 handler.command = /^(menu|menú|memu|memú|help|info|comandos|allmenu|2help|menu1.2|ayuda|commands|commandos|cmd)$/i;
