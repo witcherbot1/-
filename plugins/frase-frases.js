@@ -1,23 +1,23 @@
 import translate from '@vitalets/google-translate-api';
 import fetch from 'node-fetch';
 const handler = async (m, {conn, command}) => {
-  if (command === 'consejo') {
+  if (command === 'انصحني') {
     const consejo = consejos[Math.floor(Math.random() * consejos.length)];
     const mensaje = `╭─◆────◈⚘◈─────◆─╮\n\n⠀⠀🌟 *نصيحة اليوم* 🌟\n\n❥ ${consejo}\n\n╰─◆────◈⚘◈─────◆─╯`;
     await m.reply(mensaje);
   }
 
-  if (command === 'انصحني') {
+  if (command === 'رومانسي') {
     const frase_romantica = frasesromanticas[Math.floor(Math.random() * frasesromanticas.length)];
     const mensaje = `╭─◆────◈⚘◈─────◆─╮\n\n⠀⠀💖 *جملة رومانسية* 💖\n\n❥ ${frase_romantica}\n\n╰─◆────◈⚘◈─────◆─╯`;
     await m.reply(mensaje);
   }
 
-  if (command == 'رومانسي') {
+  if (command == 'رومانسيه') {
     try {
       const cerpe = await cerpen(`cinta romantis`);
-      const storytime = await translate(cerpe.cerita, {to: 'es', autoCorrect: true}).catch((_) => null);
-      const titletime = await translate(cerpe.title, {to: 'es', autoCorrect: true}).catch((_) => null);
+      const storytime = await translate(cerpe.cerita, {to: 'ar', autoCorrect: true}).catch((_) => null);
+      const titletime = await translate(cerpe.title, {to: 'ar', autoCorrect: true}).catch((_) => null);
       conn.reply(m.chat, `᭥🫐᭢ العنوان: ${titletime.text}
 ᭥🍃᭢ الكاتب: ${cerpe.author}
 ────────────────
@@ -31,7 +31,7 @@ ${storytime.text}`, m);
   }
 };
 handler.tags = ['frases'];
-handler.command = handler.help = ['رومانسي', 'fraseromantica', 'انصحني'];
+handler.command = handler.help = ['رومانسي', 'رومانسيه', 'انصحني'];
 export default handler;
 
 async function cerpen(category) {
