@@ -5,13 +5,13 @@ import path from 'path';
 
 const handler = async (m, { conn, usedPrefix }) => {
   if (global.conn.user.jid !== conn.user.jid) {
-    return conn.sendMessage(m.chat, {text: '*[❗] Utiliza este comando directamente en el número principal del Bot.*'}, {quoted: m});
+    return conn.sendMessage(m.chat, {text: '*[❗] استخدم هذا الأمر مباشرةً على رقم الهاتف الرئيسي للبوت.*'}, {quoted: m});
   }
-  await conn.sendMessage(m.chat, {text: '*[❗] Iniciando proceso de eliminación de todos los archivos de sesión, excepto el archivo creds.json...*'}, {quoted: m});
+  await conn.sendMessage(m.chat, {text: '*[❗] بدء عملية حذف جميع ملفات الجلسة، باستثناء ملف creds.json...*'}, {quoted: m});
   const sessionPath = './MysticSession/';
   try {
     if (!existsSync(sessionPath)) {
-      return await conn.sendMessage(m.chat, {text: '*[❗] La carpeta MysticSession no existe o está vacía.*'}, {quoted: m});
+      return await conn.sendMessage(m.chat, {text: '*[❗]مجلد غير موجود.*'}, {quoted: m});
     }
     const files = await fs.readdir(sessionPath);
     let filesDeleted = 0;
@@ -22,18 +22,18 @@ const handler = async (m, { conn, usedPrefix }) => {
       }
     }
     if (filesDeleted === 0) {
-      await conn.sendMessage(m.chat, {text: '*[❗] No se encontró ningún archivo para eliminar en la carpeta MysticSession.*'}, {quoted: m});
+      await conn.sendMessage(m.chat, {text: '*[❗] لم يتم العثور على أي ملف لحذفه في مجلد.*'}, {quoted: m});
     } else {
-      await conn.sendMessage(m.chat, {text: `*[❗] Se eliminaron ${filesDeleted} archivos de sesión, excepto el archivo creds.json.*`}, {quoted: m});
+      await conn.sendMessage(m.chat, {text: `*[❗] تم حذف ${filesDeleted} ملفات الجلسة، باستثناء ملف creds.json.*`}, {quoted: m});
     }
   } catch (err) {
-    console.error('Error al leer la carpeta o los archivos de sesión:', err);
-    await conn.sendMessage(m.chat, {text: '*[❗] Ocurrió un error al eliminar los archivos de sesión.*'}, {quoted: m});
+    console.error('حدث خطأ أثناء قراءة المجلد أو ملفات الجلسة:', err);
+    await conn.sendMessage(m.chat, {text: '*[❗] حدث خطأ أثناء حذف ملفات الجلسة.*'}, {quoted: m});
   }
-  await conn.sendMessage(m.chat, {text: `*👋 ¡Hola! Ahora me ves?*\n\n*[❗] Si el Bot no le responde a sus comandos por favor haga un pequeño spam*\n\n*—◉ Ejemplo:*\n${usedPrefix}s\n${usedPrefix}s\n${usedPrefix}s`}, {quoted: m});
+  await conn.sendMessage(m.chat, {text: `*مرحبًا! هل تراني الآن؟*\n\n*[❗] إذا لم يستجب الروبوت لأوامرك، أرسل له رسائل عشوائيًا قليلاً.*\n\n*—◉ مثال:*\n${usedPrefix}s\n${usedPrefix}s\n${usedPrefix}s`}, {quoted: m});
 };
 handler.help = ['del_reg_in_session_owner'];
 handler.tags = ['owner'];
-handler.command = /^(del_reg_in_session_owner|dsowner|clearallsession)$/i;
+handler.command = /^(صلح-مشفر|dsowner|clearallsession)$/i;
 handler.rowner = true
 export default handler;
