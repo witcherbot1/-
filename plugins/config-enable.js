@@ -156,7 +156,7 @@ const handler = async (m, {conn, usedPrefix, command, args, isOwner, isAdmin, is
 الأمر: ${usedPrefix + command} modoia
 الوصف: يفعل وضع "الذكاء الاصطناعي" مع GPT في جميع الدردشات الخاصة.
 ملحوظة: يمكن استخدام هذا الأمر فقط بواسطة مالكي البوت.`.trim();
-  const isEnable = /true|enable|(turn)?on|1/i.test(command);
+  const isEnable = /true|تشغيل|(turn)?on|1/i.test(command);
   const chat = global.db.data.chats[m.chat];
   const user = global.db.data.users[m.sender];
   const bot = global.db.data.settings[conn.user.jid] || {};
