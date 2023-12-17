@@ -1,13 +1,13 @@
 import {pinterest} from '@bochilteam/scraper';
 const handler = async (m, {conn, text, usedPrefix, command}) => {
-  if (!text) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝙴𝙹𝙴𝙼𝙿𝙻𝙾 𝙳𝙴 𝚄𝚂𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 ${usedPrefix + command} Minecraft*`;
+  if (!text) throw `*[❗اشعار❗] يرجى إدخال كلمة مفتاحية للبحث على ${usedPrefix + command} Minecraft*`;
   const json = await pinterest(text);
   conn.sendFile(m.chat, json.getRandom(), 'error.jpg', `
-*𝚁𝙴𝚂𝚄𝙻𝚃𝙰𝙳𝙾𝚂 𝙳𝙴 𝙻𝙰 𝙱𝚄𝚂𝚀𝚄𝙴𝙳𝙰*
+*نتائج البحث في بينتيريست 𝑍𝑂𝑅𝑂⚡3𝑀𝐾*
 ${text}
 `.trim(), m);
 };
 handler.help = ['pinterest <keyword>'];
 handler.tags = ['internet'];
-handler.command = /^(pinterest)$/i;
+handler.command = /^(بينت)$/i;
 export default handler;
