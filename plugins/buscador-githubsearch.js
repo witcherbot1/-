@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 const handler = async (m, {conn, text, usedPrefix, command}) => {
-  if (!text) throw `*[❗] Ingresa un texto para buscar, ejemplo: ${usedPrefix + command} TheMystic-Bot-MD*`;
+  if (!text) throw `*[❗] أدخل نصًا للبحث، مثال: ${usedPrefix + command} TheGata-Bot-MD*`;
   const res = await fetch(global.API('https://api.github.com', '/search/repositories', {
     q: text,
   }));
@@ -9,13 +9,13 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
   //const imagen = await conn.getFile(json.items[0].owner.avatar_url).data
   const str = json.items.map((repo, index) => {
   return `
-*${1 + index}. ${repo.full_name}${repo.fork ? ' (fork)' : ''}*
-🔗 *Url:* ${repo.html_url}
-📅 *Creado el:* ${formatDate(repo.created_at)}
-🔄 *Actualizado el:* ${formatDate(repo.updated_at)}
-📥 *Clone:* $ git clone ${repo.clone_url}
+*${1 + index}. ${repo.full_name}${repo.fork ? ' (نسخة)' : ''}*
+🔗 *الرابط:* ${repo.html_url}
+📅 *تم الإنشاء في:* ${formatDate(repo.created_at)}
+🔄 *تم التحديث في:* ${formatDate(repo.updated_at)}
+📥 *نسخ:* $ git clone ${repo.clone_url}
 👁 ${repo.watchers} ◉ 🍴 ${repo.forks} ◉ ⭐ ${repo.stargazers_count} ◉ ❓ 
-${repo.description ? `📝 *Descripción:*\n${repo.description}` : ''}
+${repo.description ? `📝 *الوصف:*\n${repo.description}` : ''}
 `.trim()}).join('\n\n◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦\n\n');
   conn.sendMessage(m.chat, {text: str.trim()}, {quoted: m})
 //conn.sendMessage(m.chat, {text: str.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, mentionedJid: [m.sender], "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": imagen, "mediaUrl": `https://www.atom.bio/theshadowbrokers-team`, "sourceUrl": `https://www.atom.bio/theshadowbrokers-team`}}}, {quoted: m});  
