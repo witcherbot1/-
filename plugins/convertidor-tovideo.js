@@ -1,9 +1,9 @@
 import {webp2mp4} from '../lib/webp2mp4.js';
 import {ffmpeg} from '../lib/converter.js';
 const handler = async (m, {conn, usedPrefix, command}) => {
-  if (!m.quoted) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙰 𝙰 𝚄𝙽 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝚀𝚄𝙴 𝙳𝙴𝚂𝙴𝙴 𝙲𝙾𝙽𝚅𝙴𝚁𝚃𝙸𝚁 𝙴𝙽 𝚅𝙸𝙳𝙴𝙾 𝙲𝙾𝙽 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 ${usedPrefix + command}*`;
+  if (!m.quoted) throw `*[❗اشعار❗] يجب الرد على صورة أو صوت لتحويلها إلى فيديو ${usedPrefix + command}*`;
   const mime = m.quoted.mimetype || '';
-  if (!/webp/.test(mime)) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙰 𝙰 𝚄𝙽 𝚂𝚃𝙸𝙲𝙺𝙴𝚁 𝚀𝚄𝙴 𝙳𝙴𝚂𝙴𝙴 𝙲𝙾𝙽𝚅𝙴𝚁𝚃𝙸𝚁 𝙴𝙽 𝚅𝙸𝙳𝙴𝙾 𝙲𝙾𝙽 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 ${usedPrefix + command}*`;
+  if (!/webp/.test(mime)) throw `*[❗اشعار❗] يجب الرد على صورة webp أو ملف صوتي لتحويلها إلى فيديو ${usedPrefix + command}*`;
   const media = await m.quoted.download();
   let out = Buffer.alloc(0);
   if (/webp/.test(mime)) {
@@ -17,9 +17,9 @@ const handler = async (m, {conn, usedPrefix, command}) => {
       '-shortest',
     ], 'mp3', 'mp4');
   }
-  await conn.sendFile(m.chat, out, 'error.mp4', '*DONE*', m, 0, {thumbnail: out});
+  await conn.sendFile(m.chat, out, 'error.mp4', '*اتفضل ✅*', m, 0, {thumbnail: out});
 };
 handler.help = ['tovideo'];
 handler.tags = ['sticker'];
-handler.command = ['tovideo', 'tomp4', 'mp4', 'togif'];
+handler.command = ['لفيديو', 'tomp4', 'mp4', 'togif'];
 export default handler;
