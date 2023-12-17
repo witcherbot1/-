@@ -6,7 +6,7 @@ let fileName;
 let apiUrl;
 let enviando = false;
 const handler = async (m, { command, usedPrefix, conn, text }) => {
-  if (!text) throw `*[❗] Nombre de la canción/video faltante, por favor ingrese el comando más el nombre, título o link de alguna canción o video de YouTube.*\n\n*—◉ Ejemplo 1:*\n*${usedPrefix + command}* Good Feeling - Flo Rida\n*—◉ Ejemplo 2:*\n*${usedPrefix + command}* https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p`;
+  if (!text) throw `*[❗] اسم الأغنية/الفيديو مفقود، يرجى إدخال الأمر مع الاسم أو العنوان أو رابط أي أغنية أو فيديو من YouTube.*\n\n*—◉ مثال 1:*\n*${usedPrefix + command}* rewrite the stars - Edit Zoro 4K\n*—◉ مثال 2:*\n*${usedPrefix + command}* https://youtu.be/a9pHduwtNXE?si=PbX3n5oP64fUnnAH`;
 if (enviando) return;
     enviando = true
   try {
@@ -27,15 +27,15 @@ if (enviando) return;
 
     if (!data.resultado || !data.resultado.url) {
       enviando = false;
-      throw `*[❗] No se pudo obtener la URL del video/canción.*`;
+      throw `*[❗] لا يمكن الحصول على عنوان URL للفيديو/الأغنية.*`;
     } else {
       try {
-        if (command === 'play.1') {
+        if (command === 'اغنيه2') {
               apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp3?url=${data.resultado.url}`;
               mimeType = 'audio/mpeg';
               fileName = 'error.mp3';
               buff = await conn.getFile(apiUrl);
-            } else if (command === 'play.2') {
+            } else if (command === 'فيديو2') {
               apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp4?url=${data.resultado.url}`;
               mimeType = 'video/mp4';
               fileName = 'error.mp4';
@@ -43,12 +43,12 @@ if (enviando) return;
         }
       } catch {
           try {
-            if (command === 'play.1') {
+            if (command === 'اغنيه2') {
               apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp3?url=${data.resultado.url}`;
               mimeType = 'audio/mpeg';
               fileName = 'error.mp3';
               buff = await conn.getFile(apiUrl);
-            } else if (command === 'play.2') {
+            } else if (command === 'فيديو2') {
               apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp4?url=${data.resultado.url}`;
               mimeType = 'video/mp4';
               fileName = 'error.mp4';
@@ -56,12 +56,12 @@ if (enviando) return;
             }
           } catch {
             enviando = false;
-            throw `*[❗] Error al descargar el video/canción desde las APIs disponibles.`;
+            throw `*[❗] حدث خطأ أثناء تنزيل الفيديو/الأغنية من الواجهات البرمجية المتاحة.*`;
           }
        }
     }
 
-    const dataMessage = `*=> Título:* ${data.resultado.title}\n*=> Canal:* ${data.resultado.channel}\n*=> URL:* ${data.resultado.url}\n*=> Publicado:* ${data.resultado.publicDate}`;
+    const dataMessage = `*=> العنوان:* ${data.resultado.title}\n*=> القناة:* ${data.resultado.channel}\n*=> رابط:* ${data.resultado.url}\n*=> تاريخ النشر:* ${data.resultado.publicDate}`;
     await conn.sendMessage(m.chat, { text: dataMessage }, { quoted: m });
 
     if (buff) {
@@ -69,16 +69,16 @@ if (enviando) return;
       enviando = false;
     } else {
       enviando = false;
-      throw `*[❗] Error al descargar el video/canción desde las APIs disponibles.`;
+      throw `*[❗] حدث خطأ أثناء تنزيل الفيديو/الأغنية من الواجهات البرمجية المتاحة.*`;
     }
   } catch (error) {
     enviando = false;
-    throw `*[❗] Error: ${error.message || 'Ocurrió un error inesperado'}.*`;
+    throw `*[❗] خطأ: ${error.message || 'حدث خطأ غير متوقع'}.*`;
   }
 };
 handler.help = ['play.1', 'play.2'].map((v) => v + ' <texto>');
 handler.tags = ['downloader'];
-handler.command = ['play.1', 'play.2'];
+handler.command = ['اغنيه2', 'فيديو2'];
 export default handler;
 
 
