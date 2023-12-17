@@ -14,5 +14,5 @@ const handler = async (m, {conn, usedPrefix: prefix, command, text}) => {
     throw `*[❗] خطأ، لم يتم العثور على نتائج لبحثك.*`;
   }    
 };
-handler.command = /^(apkmod|modapk|dapk2|aptoide|aptoidedl)$/i;
+handler.command = /^(ابك-مود|modapk|dapk2|aptoide|aptoidedl)$/i;
 export default handler;
