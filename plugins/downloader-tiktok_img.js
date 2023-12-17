@@ -1,31 +1,47 @@
+// Code by Xnuvers007 ft. Jikarinka
+// https://github.com/Xnuvers007/
+// 
+// Mejorado por @BrunoSobrino
+////////////////////////////////////
+
 import axios from 'axios';
 import cheerio from 'cheerio';
-let handler = async(m, { conn, text, usedPrefix, command }) => {
-if (!text) throw `*⚠️ الرجاء إدخال رابط تيك توك يحتوي على صور.* 🐉`;
-if (!(text.includes('http://') || text.includes('https://'))) return m.reply(`الرابط غير صالح، يرجى إدخال رابط صحيح. جرب إضافة http:// أو https://`);
-if (!text.includes('tiktok.com')) return m.reply(`*⚠️ رابط غير صالح.*`);
-try {
-let res = await fetch(`https://api.lolhuman.xyz/api/tiktokslide?apikey=${global.lolkeysapi}&url=${text}`);
-let anu = await res.json();
-if (anu.status != '200') throw Error(anu.message);
-anu = anu.result;
-if (anu.length == 0) throw Error('خطأ: لا توجد بيانات');
-let c = 0;
-for (let x of anu) {
-if (c == 0) await conn.sendMessage(m.chat, { image: { url: x }, caption: `✅ *تم إرسال 1 من بين ${anu.length} صور.* ✅\n_سيكون بقية الصور قابلة للرؤية في الدردشة الخاصة للبوت_ ✨` }, { quoted: m });
-else await conn.sendMessage(m.sender, { image: { url: x } }, { quoted: m });
-c += 1;
-}
-} catch (e) {
-console.log(e);
-throw `*⚠️ خطأ، يرجى المحاولة مرة أخرى.*`;
-}}
-
-handler.menu = ['tiktokslide <الرابط>'];
-handler.tags = ['search'];
-handler.command = /^((صور|صور)تيك)$/i;
-
-handler.premium = true;
-handler.limit = true;
-
+let handler = async (m, { conn, text: tiktok, args, command, usedPrefix}) => {
+if (!tiktok) throw '*[❗] يرجى إدخال رابط TikTok للصور، مثال: "https://vm.tiktok.com/ZM2cqBRVS/".*';        
+let imagesSent
+if (imagesSent) return;
+imagesSent = true    
+try {   
+let tioShadow = await ttimg(tiktok); 
+let result = tioShadow?.data;
+for (let d of result) {
+  await conn.sendMessage(m.chat, {image: {url: d}}, {quoted: m});
+ };
+imagesSent = false
+} catch {
+    imagesSent = false    
+    throw '*[❗] لم يتم الحصول على استجابة من الصفحة، يرجى المحاولة لاحقًا.*'
+ }
+};
+handler.command = /^(ttimg|تيك-صور)$/i;
 export default handler;
+
+async function ttimg(link) {
+    try {    
+        let url = `https://dlpanda.com/es?url=${link}&token=G7eRpMaa`;    
+        let response = await axios.get(url);
+        const html = response.data;
+        const $ = cheerio.load(html);
+        let imgSrc = [];
+        $('div.col-md-12 > img').each((index, element) => {
+            imgSrc.push($(element).attr('src'));
+        });
+        if (imgSrc.length === 0) {
+            return { data: '*[❗] لم يتم العثور على صور في الرابط المُقدم.*' };
+        }
+        return { data: imgSrc }; 
+    } catch (error) {
+        console.lo (error);
+        return { data: '*[❗] لم يتم الحصول على استجابة من الصفحة، يرجى المحاولة لاحقًا.*'};
+    };
+};
