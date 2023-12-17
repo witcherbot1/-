@@ -9,14 +9,14 @@ let handler = async (m) => {
   }
   let media = await q.download()
   let isTele = /image\/(png|jpe?g|gif)/.test(mime)
+  m.react(rwait)
   let link = await (isTele ? uploadImage : uploadImage)(media);
   let lr = (`https://api.popcat.xyz/wanted?image=${link}`)
   conn.sendFile(m.chat, lr, 'wanted.png', `*📌 تفضل طلبك*`, m)
-  
+  m.react(done)
 }
-
 handler.help = ['wanted']
 handler.tags = ['meme']
 handler.command = ['مطلوب','المطلوب']
 
-export default handler;
+export default handler
