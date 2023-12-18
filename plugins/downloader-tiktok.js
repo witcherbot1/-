@@ -3,16 +3,16 @@ import cheerio from 'cheerio';
 
 var handler = async (m, { conn, args }) => {
   if (!args[0]) {
-    throw 'وين رابط الفديو عمو q(≧▽≦q)';
+    throw '❔ فين رابط الفيد';
   }
 
   try {
-    await conn.reply(m.chat, 'انتظر لحظة يا اخ/ت جاري تنزيل الفديو o(*￣▽￣*)ブ', m);
+    await conn.reply(m.chat, '⏳ جاري تحميل الفيد', m);
 
     const tiktokData = await downloadTikTok(args[0]);
 
     if (!tiktokData) {
-      throw 'فشل التنزيل (_　_)。゜zｚＺ';
+      throw 'خطأ في التنزيل';
     }
 
     const videoURL = tiktokData.video.noWatermark;
@@ -21,14 +21,14 @@ var handler = async (m, { conn, args }) => {
 
     const ppTiktok = tiktokData.author.avatar;
 
-    const infonya_gan =`العنوان: ${tiktokData.title}\nتاريخ الرفع: ${tiktokData.created_at}\n\الحالة:\n=====================\nاللايكات = ${tiktokData.stats.likeCount}\nالكومنتات = ${tiktokData.stats.commentCount}\nالشير = ${tiktokData.stats.shareCount}\nالمشاهدات = ${tiktokData.stats.playCount}\nالحفظ = ${tiktokData.stats.saveCount}\n=====================\n\nحساب: ${tiktokData.author.name} (${tiktokData.author.unique_id} - https://www.tiktok.com/@${tiktokData.author.unique_id}) \nالبايو: ${tiktokData.author.signature}\nالاغنية: ${tiktokData.music.play_url}\nالجودة: ${tiktokData.video.ratio}\nصورة البروفايل: ${ppTiktok}`;
+    const infonya_gan =`✅ اتفضل يحب`;
 
     if (videoURL || videoURLWatermark) {
-      await conn.sendFile(m.chat, ppTiktok, 'profile.png', 'جبتك صوره البروفايل o(*￣▽￣*)ブ', m);
-      await conn.sendFile(m.chat, videoURL, 'tiktok.mp4', `اتفضل الفديو\n\n${infonya_gan}`, m);
+      await conn.sendFile(m.chat, ppTiktok, 'profile.png', 'صوره البروفايل', m);
+      await conn.sendFile(m.chat, videoURL, 'tiktok.mp4', `اتفضل الفديو يحب\n\n${infonya_gan}`, m);
       setTimeout(async () => {
         await conn.sendFile(m.chat, videoURLWatermark, 'tiktokwm.mp4', `*الفديو بالعلامة المائية*\n\n${infonya_gan}`, m);
-        conn.reply(m.chat, "•⩊• هيناا عمممتكك ૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა\nما تنسي تشكر بابي شادو ₍^ >ヮ<^₎", m); 
+        m.react(done); 
       }, 5000);
 
 
