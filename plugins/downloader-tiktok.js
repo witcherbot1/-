@@ -24,10 +24,8 @@ var handler = async (m, { conn, args }) => {
     const infonya_gan =`✅ اتفضل يحب`;
 
     if (videoURL || videoURLWatermark) {
-      await conn.sendFile(m.chat, ppTiktok, 'profile.png', 'صوره البروفايل', m);
       await conn.sendFile(m.chat, videoURL, 'tiktok.mp4', `اتفضل الفديو يحب\n\n${infonya_gan}`, m);
       setTimeout(async () => {
-        await conn.sendFile(m.chat, videoURLWatermark, 'tiktokwm.mp4', `*الفديو بالعلامة المائية*\n\n${infonya_gan}`, m);
         m.react(done); 
       }, 5000);
 
