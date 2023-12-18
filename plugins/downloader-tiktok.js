@@ -6,7 +6,7 @@ let generateWAMessageFromContent = (await import(global.baileys)).default
 import { tiktokdl } from '@bochilteam/scraper'
 let handler = async (m, { conn, text, args, usedPrefix, command}) => {
 let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
-if (!text) return conn.reply(m.chat, `*عاوز تحميل ايه يحب ؟🐉*\n*ضيف رابط الفديو*\n*مثال:*\n*${usedPrefix + command} https://www.tiktok.com/@ox__zoro__ox?_t=8ggRMe37f9y&_r=1*`, fkontak,  m)
+if (!text) return conn.reply(m.chat, `*عاوز تحميل ايه يحب ؟🐉*\n*ضيف رابك الفديو يحب*\n*مثال:*\n*${usedPrefix + command} https://www.tiktok.com/@ox__zoro__ox?_t=8ggRMe37f9y&_r=1*`, fkontak,  m)
 if (!/(?:https:?\/{2})?(?:w{3}|vm|vt|t)?\.?tiktok.com\/([^\s&]+)/gi.test(text)) return conn.reply(m.chat, `*رابط TikTok غير صحيح*`, fkontak,  m)  
 const { key } = await conn.sendMessage(m.chat, {text: `⌛ _جاري التحميل..._\n▰▰▰▱▱▱▱▱▱\nيتم استخراج مقطع الفيديو من TikTok 🔰`}, {quoted: fkontak});
 await delay(1000 * 1);
