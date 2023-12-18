@@ -53,6 +53,7 @@ TCP: الكون:42 -> الكون:49
 
     m.reply(speed);
     m.reply(cosmicInfo, null, { mentions: conn.parseMention(cosmicInfo) });
+    m.react('☠');
 };
 
 handler.help = ['اختراق-كوني <الاسم>'];
