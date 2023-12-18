@@ -3,11 +3,11 @@ import cheerio from 'cheerio';
 
 var handler = async (m, { conn, args }) => {
   if (!args[0]) {
-    throw '❔ فين رابط الفيد';
+    throw 'فين رابط الفيد❔ ';
   }
 
   try {
-    await conn.reply(m.chat, '⏳ جاري تحميل الفيد', m);
+m.react(rwait);
 
     const tiktokData = await downloadTikTok(args[0]);
 
@@ -24,7 +24,7 @@ var handler = async (m, { conn, args }) => {
     const infonya_gan =`✅ اتفضل يحب`;
 
     if (videoURL || videoURLWatermark) {
-      await conn.sendFile(m.chat, videoURL, 'tiktok.mp4', `اتفضل الفديو يحب\n\n${infonya_gan}`, m);
+      await conn.sendFile(m.chat, videoURL, 'tiktok.mp4', `𝑍𝑂𝑅𝑂⚡3𝑀𝐾\n\n${infonya_gan}`, m);
       setTimeout(async () => {
         m.react(done); 
       }, 5000);
@@ -38,8 +38,8 @@ var handler = async (m, { conn, args }) => {
   }
 };
 
-handler.help = ['S H A D O W'].map((v) => v + ' <url>');
-handler.tags = ['S H A D O W'];
+handler.help = ['Z O R O'].map((v) => v + ' <url>');
+handler.tags = ['Z O R O'];
 handler.command = /^(تيكتوك|تيك)$/i;
 
 export default handler;
@@ -58,7 +58,7 @@ async function downloadTikTok(url) {
 
 async function tiktokdl(url) {
   if (!/تيكتوك/.test(url)) {
-    throw 'Invalid TikTok URL!';
+    throw 'عنوان URL لـ TikTok غير صالح!';
   }
 
   const gettoken = await axios.get('https://tikdown.org/id');
