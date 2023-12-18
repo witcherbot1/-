@@ -1,3 +1,16 @@
+/* -------------------------------------------------------*/
+/* [❗]                      [❗]                      [❗] */
+/*                                                       */
+/*       |- [ ⚠ ] - CREDITOS DEL CODIGO - [ ⚠ ] -|      */
+/*     —◉ DESAROLLADO POR OTOSAKA:                       */
+/*     ◉ Otosaka (https://github.com/6otosaka9)          */
+/*     ◉ Número: wa.me/51993966345                       */
+/*                                                       */
+/*     —◉ FT:                                            */
+/*     ◉ BrunoSobrino (https://github.com/BrunoSobrino)  */
+/*                                                       */
+/* [❗]                      [❗]                      [❗] */
+/* -------------------------------------------------------*/
 import fetch from 'node-fetch';
 import axios from 'axios';
 import translate from '@vitalets/google-translate-api';
@@ -6,11 +19,10 @@ const configuration = new Configuration({organization: global.openai_org_id, api
 const openaiii = new OpenAIApi(configuration);
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
-  if (!text) throw `مرحبا اصبح زورو يدعم ChatGPT عندك اسئلة او استفسار اي شي قول\n\n❏ على سبيل المثال\n❏ ${usedPrefix + command} افضل فيلم\n❏ ${usedPrefix + command} عايز نصيحه\n❏ ${usedPrefix + command} قول نصيحه`;
+  if (!text) throw `*[❗] يرجى إدخال نص لتنفيذ الأمر*\n\n*—◉ قائمة الأمر*\n*◉ ${usedPrefix + command} تفكير حول مسلسل ميرلينا 2022 على نيتفليكس*\n*◉ ${usedPrefix + command} كود JS للعبة حجر ورقه مقص*`;
   try {
         conn.sendPresenceUpdate('composing', m.chat);
-        //let sistema1 = await fetch(`https://raw.githubusercontent.com/Skidy89/chat-gpt-jailbreak/main/Text.txt`).then(v => v.text());
-        let sistema1 = `سوف تعمل بمثابة WhatsApp Bot الذي أنشأه زورو  .`;
+        let sistema1 = await fetch(`https://raw.githubusercontent.com/Skidy89/chat-gpt-jailbreak/main/Text.txt`).then(v => v.text());
         async function getOpenAIChatCompletion(texto) {
         const openaiAPIKey = global.openai_key;
         let chgptdb = global.chatgpt.data.users[m.sender];
@@ -35,7 +47,7 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
     } catch {
       try {
         conn.sendPresenceUpdate('composing', m.chat);
-        const syms1 = `سوف تعمل بمثابة WhatsApp Bot الذي أنشأه زورو.`;
+        const syms1 = await fetch(`https://raw.githubusercontent.com/Skidy89/chat-gpt-jailbreak/main/Text.txt`).then(v => v.text());
         const fgapi1 = await fetch(`https://api-fgmods.ddns.net/api/info/openai?text=${text}&symsg=${syms1}&apikey=XlwAnX8d`);
         const fgjson1 = await fgapi1.json();
         if (fgjson1.result == 'error' || fgjson1.result == '' || !fgjson1.result) return XD; // causar error undefined para lanzar msg de error
@@ -67,13 +79,13 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
         const tioress22 = await fetch(`https://api.lolhuman.xyz/api/openai?apikey=${lolkeysapi}&text=${text}&user=${m.sender}`);
         const hasill22 = await tioress22.json();
         if (hasill22.result == 'error' || hasill22.result == '' || !hasill22.result) return XD; // causar error undefined para usar otra api
-        const hasill22_result = await translate(`${hasill22.result}`, {to: 'ar', autoCorrect: true});
+        const hasill22_result = await translate(`${hasill22.result}`, {to: 'es', autoCorrect: true});
         m.reply(`${hasill22_result.text}`.trim());
     } catch {
       try {
         conn.sendPresenceUpdate('composing', m.chat);
         const searchString2 = ' Indonesia ';
-        const replacementString2 = ' español ';
+        const replacementString2 = ' Arabic ';
         const rres = await fetch(`https://api.ibeng.tech/api/others/chatgpt?q=Hola&apikey=eMlBNRzUXv`);
         const jjson = await rres.json();
         const hahaha = await translate(`${jjson.data}`, {to: 'ar', autoCorrect: true});
@@ -91,18 +103,18 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
     } catch {
       try {
         conn.sendPresenceUpdate('composing', m.chat);
-        const akuariapi1 = await fetch(`https://api.akuari.my.id/ai/gbard?chat=${text}`);
+        const akuariapi1 = await fetch(`https://api.azz.biz.id/api/bard?q=${text}&key=global`);
         const akuariapijson1 = await akuariapi1.json();
         if (akuariapijson1.respon == 'error' || akuariapijson1.respon == '' || !akuariapijson1.respon) return XD; // causar error undefined para usar otra api
         const akuariapiresult1 = await translate(`${akuariapijson1.respon}`, {to: 'ar', autoCorrect: true});
         m.reply(`${akuariapiresult1.text}`.trim());
     } catch {
-        throw `*[❗] خطأ*`;
+        throw `*[❗] خطأ، يرجى إدخال نص صحيح*`;
      }}
     }}
    }}
   }}
  }}
 };
-handler.command = /^(gpt|بوت)$/i;
+handler.command = /^(زورو|ia|robot|openai2|chatgpt2|ia2|robot2|ZoroBot)$/i;
 export default handler;
