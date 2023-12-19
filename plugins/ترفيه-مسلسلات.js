@@ -9,12 +9,13 @@ let handler = async(m, {
 		image: {
 			url: url
 		},
-		caption: "[⚡] اقتراحي عشان عيونك "
+		caption: "اتفضل يحب شوف دا✨
+			𝑍𝑂𝑅𝑂⚡3𝑀𝐾"
 	}, {
 		quoted: m
 	});
 }
-handler.command = /^(مسلسلات)$/i
+handler.command = /^(مسلسل)$/i
 handler.tags = ['S H A D O W']
 handler.help = ['صور مسلسلات عشوائيه']
 export default handler
