@@ -35,6 +35,18 @@ global.owner = [
 
 global.suittag = ['201032389641'];
 global.prems = ['201032389641'];
+// Sticker WM
+global.botname = '𝑍𝑂𝑅𝑂⚡𝐵𝑂𝑇'
+global.premium = 'true'
+global.menuvid = 'https://telegra.ph/file/91ba954ced01bf270477a.mp4'
+global.igfg = 'https://solo.to/yosef.zoro' 
+global.dygp = 'https://solo.to/yosef.zoro'
+global.fgsc = 'https://solo.to/yosef.zoro' 
+global.fgyt = 'https://youtube.com/@The-ZoroBot-MD?si=DncZQM6sKC0F6MhG'
+global.fgpyp = 'https://youtube.com/@The-ZoroBot-MD?si=DncZQM6sKC0F6MhG'
+global.fglog = 'https://solo.to/yosef.zoro' 
+global.thumb = fs.readFileSync('./Menu2.jpg')
+
 
 global.packname = '𝐵𝑌:𝑍𝑂𝑅𝑂⚡𝐵𝑂𝑇';
 global.author = '𝐵𝑌:𝑌𝛩𝑺𝐸𝐹⚡3𝑀𝐾';
