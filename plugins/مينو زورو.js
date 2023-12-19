@@ -240,11 +240,10 @@ await conn.sendFile(m.chat, imagen5, 'menu.jpg', menu, fkontak, false, { mention
 return 
 }}}} 
 
-} catch (e) {
-await m.reply(lenguajeGB['smsMalError3']() + '\n*' + lenguajeGB.smsMensError1() + '*\n*' + usedPrefix + `${lenguajeGB.lenguaje() == 'es' ? 'reporte' : 'report'}` + '* ' + `${lenguajeGB.smsMensError2()} ` + usedPrefix + command)
-console.log(`❗❗ ${lenguajeGB['smsMensError2']()} ${usedPrefix + command} ❗❗`)
-console.log(e)}}
-
+} catch {
+    conn.reply(m.chat, '*[ ℹ️ ] هذه القائمة بها خطأ داخلي ولهذا لم يكن من الممكن إرسالها.*', m);
+  }
+};
 handler.command = /^(مينيو|اوامر|الاوامر|الأوامر|أوامر|\?)$/i
 export default handler
 
