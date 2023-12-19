@@ -35,6 +35,7 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
     }
   }
   const { key } = await m.reply(`*_⏳جاري معالجة الفيديو...⏳_*\n\n*◉ إذا لم يتم إرسال الفيديو، جرب أحد الأوامر التالية: #فيديو، #فيديو2، #فيديو3 ◉*`);
+  m.react(rwait)
   try {
     const formats = await bestFormat(youtubeLink, 'video');
     const buff = await getBuffer(formats.url);
@@ -56,7 +57,7 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
  } catch (ee) {
     console.log(ee)
   try {
-    const qu = args[1] || '360';
+    const qu = args[1] || '480';
     const q = qu + 'p';
     const v = youtubeLink;
     const yt = await youtubedl(v).catch(async (_) => await youtubedlv2(v));
@@ -70,7 +71,8 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
     console.log(ee2)
     try {
       const mediaa = await ytMp4(youtubeLink);
-      await conn.sendMessage(m.chat, {video: {url: mediaa.result}, fileName: `error.mp4`, caption: `_𝐓𝐡𝐞 𝐌𝐲𝐬𝐭𝐢𝐜 - 𝐁𝐨𝐭_`, thumbnail: mediaa.thumb, mimetype: 'video/mp4'}, {quoted: m});
+      await conn.sendMessage(m.chat, {video: {url: mediaa.result}, fileName: `error.mp4`, caption: `اتفضل يحب✅
+      𝑍𝑂𝑅𝑂⚡3𝑀𝐾`, thumbnail: mediaa.thumb, mimetype: 'video/mp4'}, {quoted: m});
       await conn.sendMessage(m.chat, {text: '*[ ✔ ] تم تنزيل الفيديو بنجاح.*', edit: key}, {quoted: m});
       enviando = false
     } catch {
@@ -87,7 +89,8 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
       } catch {
         await conn.sendMessage(m.chat, {text: `*[ ❌ ] لا يمكن تنزيل الفيديو أو إرساله، يرجى المحاولة مرة أخرى.*`, edit: key}, {quoted: m});
         throw '*[❗] خطأ، لا يمكن تنزيل الفيديو.*';
-      }
+        m.react(done)
+      } 
     }
   }
 }};
