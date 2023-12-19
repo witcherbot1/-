@@ -20,6 +20,6 @@ let handler = async (m, { conn }) => {
 }
 handler.help = ['dado']
 handler.tags = ['game']
-handler.command = ['2ايديت', 'edit'] 
+handler.command = ['2ايديت', 'ايديت2'] 
 
 export default handler
