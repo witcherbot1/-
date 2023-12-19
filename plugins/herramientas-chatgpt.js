@@ -116,5 +116,5 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
   }}
  }}
 };
-handler.command = /^(زورو|بتبوت|ia|robot|openai2|chatgpt2|ia2|robot2|Mystic|MysticBot)$/i;
+handler.command = /^(زورو|gpt|ia|robot|openai2|chatgpt2|ia2|robot2|Zoro|ZoroBot)$/i;
 export default handler;
