@@ -10,7 +10,7 @@ const handler = async (m, {conn, args}) => {
 };
 handler.help = ['linkgroup'];
 handler.tags = ['group'];
-handler.command = /^لينك?$/i;
+handler.command = /^لينك$/i;
 handler.group = true;
 handler.botAdmin = true;
 export default handler;
