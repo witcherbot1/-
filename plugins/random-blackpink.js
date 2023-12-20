@@ -20,5 +20,5 @@ const handler = async (m, {
 };
 handler.help = ['blackpink'];
 handler.tags = ['internet'];
-handler.command = /^(blackpink)$/i;
+handler.command = /^(بلاك-بينك)$/i;
 export default handler;
