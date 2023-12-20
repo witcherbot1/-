@@ -2,17 +2,31 @@ import * as baileys from '@whiskeysockets/baileys';
 
 const handler = async (m, {conn, text}) => {
   const [, code] = text.match(/chat\.whatsapp\.com\/(?:invite\/)?([0-9A-Za-z]{20,24})/i) || [];
-  if (!code) throw '*[❗] Ingrese el link de un grupo de WhatsApp.*';
+  if (!code) throw '*[❗]  أدخل رابط المجموعة.*';
   const res = await conn.query({tag: 'iq', attrs: {type: 'get', xmlns: 'w:g2', to: '@g.us'}, content: [{tag: 'invite', attrs: {code}}]});
   const data = extractGroupMetadata(res);
-  const txt = `*⫹⫺ ID:* ${data.id}\n*⫹⫺ Nombre:* ${data.subject}\n*⫹⫺ Fecha de creación:* ${data.creation}\n*⫹⫺ Creador:* ${data.owner}\n*⫹⫺ Descripción:*\n${data.desc}`;
+  const txt = `
+*┏━━━━━━━━━━━━━━━┓*
+*┃☂️ ⫹⫺ المعرف:* ${data.id}
+*┃🧪 ⫹⫺ الاسم:* ${data.subject}
+*┃📅 ⫹⫺ التاريخ:* ${data.creation}
+*┃👑 ⫹⫺ المالك:* ${data.owner}
+*┃✨ ⫹⫺ الوصف:* ${data.desc}
+*┗━━━━━━━━━━━━━━━┛*`;
   
   const pp = await conn.profilePictureUrl(data.id, 'image').catch(console.error);
   if (pp) return conn.sendMessage(m.chat, {image: {url: pp}, caption: txt}, {quoted: m});
-  const groupinfo = `*⫹⫺ ID:* ${data.id}\n*⫹⫺ Nombre:* ${data.subject}\n*⫹⫺ Fecha de creación:* ${data.creation}\n*⫹⫺ Creador:* ${data.owner}\n*⫹⫺ Descripción:*\n${data.desc}`;
+  const groupinfo = `
+*┏━━━━━━━━━━━━━━━┓*
+*┃☂️ ⫹⫺ المعرف:* ${data.id}
+*┃🧪 ⫹⫺ الاسم:* ${data.subject}
+*┃📅 ⫹⫺ التاريخ:* ${data.creation}
+*┃👑 ⫹⫺ المالك:* ${data.owner}
+*┃✨ ⫹⫺ الوصف:* ${data.desc}
+*┗━━━━━━━━━━━━━━━┛*`;
   await conn.reply(m.chat, groupinfo, m);
 };
-handler.command = /^(inspect)$/i;
+handler.command = /^(فحص)$/i;
 export default handler;
 
 const extractGroupMetadata = (result) => {
