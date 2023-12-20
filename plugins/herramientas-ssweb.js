@@ -1,6 +1,6 @@
 import fetch from 'node-fetch' 
 const handler = async (m, {conn, text, args}) => {   
-if (!args[0]) return conn.reply(m.chat, "*[ 🔎 ] Envie el comando más la url completa del sitio web.*", m);  
+if (!args[0]) return conn.reply(m.chat, "*[ 🔎 ] أرسل الأمر بالإضافة إلى عنوان URL الكامل للموقع.*", m);  
    try {
      const ss = await (await fetch(`https://image.thum.io/get/fullpage/${args[0]}`)).buffer();
         conn.sendFile(m.chat, ss, '', '', m);
@@ -21,5 +21,5 @@ if (!args[0]) return conn.reply(m.chat, "*[ 🔎 ] Envie el comando más la url 
 }; 
 handler.help = ["ss", "ssf"].map((v) => v + " <url>");   
 handler.tags = ["internet"];   
-handler.command = /^ss(web)?f?$/i;   
+handler.command = /^فحص$/i;   
 export default handler
