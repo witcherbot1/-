@@ -14,6 +14,6 @@ _©The Mystic - Bot_
 };
 handler.help = ['cat'];
 handler.tags = ['random'];
-handler.command = /^cat$/i;
+handler.command = /^قط$/i;
 handler.fail = null;
 export default handler;
