@@ -5,7 +5,7 @@ const handler = async (m, {conn, text}) => {
 };
 handler.help = ['style'].map((v) => v + ' <text>');
 handler.tags = ['tools'];
-handler.command = /^(style(text)?)$/i;
+handler.command = /^(زخرفه|زخرفة?)$/i;
 handler.exp = 0;
 export default handler;
 
