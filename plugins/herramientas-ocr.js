@@ -9,7 +9,7 @@ const handler = async (m, {conn}) => {
     if (res.status !== 200) throw res.statusText;
     const json = await res.json();
     m.reply(json?.ParsedResults?.[0]?.ParsedText);
-  } else throw '*[❗] ERROR, POR FAVOR VUELVE A INTENTARLO, NO OLVIDE RESPONDER A UNA IMAGEN*';
+  } else throw '*[❗] خطأ، يرجى المحاولة مرة أخرى، ولا تنسى الرد على صورة.*';
 };
-handler.command = /^ocr|totexto$/i;
+handler.command = /^شوف|دور$/i;
 export default handler;
