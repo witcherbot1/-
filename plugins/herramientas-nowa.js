@@ -4,8 +4,8 @@
 -----------------------------------------------------------------------------------------*/
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   const regex = /x/g;
-  if (!text) throw '⚠️ Falto el número.';
-  if (!text.match(regex)) throw `*Ejemplo de uso: ${usedPrefix + command} 521999340434x*`;
+  if (!text) throw '⚠️ فين الرقم يحب.';
+  if (!text.match(regex)) throw `*مثال للاستخدام: ${usedPrefix + command} 2011449841xx*`;
   const random = text.match(regex).length; const total = Math.pow(10, random); const array = [];
   for (let i = 0; i < total; i++) {
     const list = [...i.toString().padStart(random, '0')];
@@ -17,12 +17,12 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
       array.push({exists: false, jid: result});
     }
   }
-  const txt = 'Registrados\n\n' + array.filter((v) => v.exists).map((v) => `• Nro: wa.me/${v.jid.split('@')[0]}\n*• Bio:* ${v.status || 'Sin descripcion'}\n*• Fecha:* ${formatDate(v.setAt)}`).join('\n\n') + '\n\n*No registrados*\n\n' + array.filter((v) => !v.exists).map((v) => v.jid.split('@')[0]).join('\n');
+  const txt = 'المسجلين\n\n' + array.filter((v) => v.exists).map((v) => `• رقم: wa.me/${v.jid.split('@')[0]}\n*• الحالة:* ${v.status || 'بدون وصف'}\n*• التاريخ:* ${formatDate(v.setAt)}`).join('\n\n') + '\n\n*غير مسجلين*\n\n' + array.filter((v) => !v.exists).map((v) => v.jid.split('@')[0]).join('\n');
   m.reply(txt);
 };
-handler.command = /^nowa$/i;
+handler.command = /^خمن-ارقام$/i;
 export default handler;
 function formatDate(n, locale = 'id') {
   const d = new Date(n);
-  return d.toLocaleDateString(locale, {timeZone: 'Asia/Jakarta'});
+  return d.toLocaleDateString(locale, {timeZone: 'Africa/Egypt'});
 }
