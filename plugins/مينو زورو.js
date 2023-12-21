@@ -20,7 +20,7 @@ let handler = async (m, { conn, usedPrefix, command}) => {
     let uptime = clockString(_uptime)
 let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`
-let pp = await conn.profilePictureUrl(who, 'image').catch(_ => './src/avatar_contact.png')
+//let pp = await conn.profilePictureUrl(who, 'image').catch(_ => './src/avatar_contact.png')
 let user = global.db.data.users[who]
 let { name, exp, diamond, lastclaim, registered, regTime, age, level, role, warn } = global.db.data.users[who]
 let { min, xp, max } = xpRange(user.level, global.multiplier)
@@ -32,7 +32,8 @@ let rtotalreg = Object.values(global.db.data.users).filter(user => user.register
 let more = String.fromCharCode(8206)
 let readMore = more.repeat(850) 
 let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
-let str = `
+global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remoteJid: 'status@broadcast' }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
+    const str = `
 ┏─────────────────⬣
 ┆ 𝑯𝒂𝒊, ${name}
 ┗┬──────────────┈ ⳹
