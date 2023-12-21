@@ -21,5 +21,5 @@ if (!args[0]) return conn.reply(m.chat, "*[ 🔎 ] أرسل الأمر بالإ�
 }; 
 handler.help = ["ss", "ssf"].map((v) => v + " <url>");   
 handler.tags = ["internet"];   
-handler.command = /^فحص$/i;   
+handler.command = /^تأكد$/i;   
 export default handler
