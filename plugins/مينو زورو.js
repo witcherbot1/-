@@ -1,49 +1,26 @@
-import fetch from 'node-fetch';
-const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
-  if (usedPrefix == 'a' || usedPrefix == 'A') return;
-  try {
-    // let vn = './media/menu.mp3'
-    const d = new Date(new Date + 3600000);
-    const locale = 'es';
-    const week = d.toLocaleDateString(locale, {weekday: 'long'});
-    const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});
-    const _uptime = process.uptime() * 1000;
-    const uptime = clockString(_uptime);
-    const user = global.db.data.users[m.sender];
-    const {money, joincount} = global.db.data.users[m.sender];
-    const {exp, limit, level, role} = global.db.data.users[m.sender];
-    const rtotalreg = Object.values(global.db.data.users).filter((user) => user.registered == true).length;
-    const rtotal = Object.entries(global.db.data.users).length || '0'
-    const more = String.fromCharCode(8206);
-    const readMore = more.repeat(850);
-    const taguser = '@' + m.sender.split('@s.whatsapp.net')[0];
-    const doc = ['pdf', 'zip', 'vnd.openxmlformats-officedocument.presentationml.presentation', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'vnd.openxmlformats-officedocument.wordprocessingml.document'];
-    const document = doc[Math.floor(Math.random() * doc.length)];
-    const str = ` *🤖 The Zoro Bot* 🤖
+import fs, { promises } from 'fs'
+import fetch from 'node-fetch'
+let handler = async (m, { conn, usedPrefix, command }) => {
+try {
+let d = new Date(new Date + 3600000)
+let locale = 'ar'
+let week = d.toLocaleDateString(locale, { weekday: 'long' })
+let date = d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
+let _uptime = process.uptime() * 1000
+let uptime = clockString(_uptime)
+let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length 
+let more = String.fromCharCode(8206)
+let readMore = more.repeat(850)   
+let taguser = conn.getName(m.sender)
+let user = global.db.data.users[m.sender]
+let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
 
- *👋 اهلا يحب, ${taguser}*
-
- *🧑‍💻 المالك.:* Yosef (Zoro)
- *📱 wa:* +201032389641
- *🏦 PayPal:* paypal.me/Yosef160
-
-
- *📆 التاريخ:* ${date}
- *⏳ وقت التشغيل:* ${uptime}
- *🧑 المستخدمين المسجلين:* ${rtotalreg}
- *👥 إجمالي المستخدمين:* ${rtotal}
- *🤖 نوع البوت:* ${(conn.user.jid == global.conn.user.jid ? '' : `Sub-bot de:\n+${global.conn.user.jid.split`@`[0]}`) || 'No es sub-bot'}
-
-
- *< معلومات المستخدم />* ⚡
-
- *📈 المستوى:* ${level}
- *🧰 الخبرة:* ${exp}
- *⚓ الرتبة:* ${role}
- *💎 الماس:* ${limit}
- *🪙 زورو كوينز:* ${money}
- *🎟️ الرموز:* ${joincount}
- *🎫 مميز:* ${user.premiumTime > 0 ? '✅' : (isPrems ? '✅' : '❌') || ''}
+let menu = `*◈ ${user.registered === true ? user.name : `🐉 ${usedPrefix}${lenguajeGB.lenguaje() == 'es' ? '*البوت الخاص بي - زورو*' : 'اهلا وسهلا فيك'}`} ◈*
+*╭━〔 معلومات البوت 〕━⬣*
+┃🐉✬⃝ @${m.sender.split("@")[0]}*
+┃🐉✬⃝* ${packname}${conn.user.jid == global.conn.user.jid ? '' : `\n*˚₊·˚₊· ͟͟͞͞➳❥* 𝙕𝙊𝙍𝙊-𝘽𝙊𝙏 ⇢ *@${global.conn.user.jid.split`@`[0]}*`}
+┃🐉✬⃝لـاتـنـســی قـبــل كــل امــر ﹙.﹚*
+╰━━━━━━━━━━━━⬣
 ┏━━━━━━━━━━━━━━━━┓
 ┃ *< إعدادات البوت >*
 ┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
@@ -263,7 +240,11 @@ await conn.sendFile(m.chat, imagen5, 'menu.jpg', menu, fkontak, false, { mention
 return 
 }}}} 
 
-} catch {
+} catch (e) {
+await m.reply(lenguajeGB['smsMalError3']() + '\n*' + lenguajeGB.smsMensError1() + '*\n*' + usedPrefix + `${lenguajeGB.lenguaje() == 'ar' ? 'reporte' : 'report'}` + '* ' + `${lenguajeGB.smsMensError2()} ` + usedPrefix + command)
+console.log(`❗❗ ${lenguajeGB['smsMensError2']()} ${usedPrefix + command} ❗❗`)
+console.log(e)}}
+catch {
     conn.reply(m.chat, '*[ ℹ️ ] هذه القائمة بها خطأ داخلي ولهذا لم يكن من الممكن إرسالها.*', m);
   }
 };
