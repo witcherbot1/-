@@ -1,56 +1,45 @@
-const handler = async (m, {conn, text, command, usedPrefix}) => {
-  if (m.mentionedJid.includes(conn.user.jid)) return;
-  const pp = './src/warn.jpg';
-  let who;
-  if (m.isGroup) {
-    who = m.mentionedJid[0] ?
-      m.mentionedJid[0] :
-      m.quoted ?
-      m.quoted.sender :
-      text;
-  } else who = m.chat;
-  const user = global.db.data.users[who];
-  const bot = global.db.data.settings[conn.user.jid] || {};
-  const dReason = 'بدون سبب';
-  const msgtext = text || dReason;
-  const sdms = msgtext.replace(/@\d+-?\d* /g, '');
-  const warntext = `*[❗] تحذير العضو في المجموعة الخاصة بالمسؤولين*\n\n*—◉ الاستخدام:*\n*${
-    usedPrefix + command
-  } @${global.suittag}*`;
-  if (!who) {
-    throw m.reply(warntext, m.chat, {mentions: conn.parseMention(warntext)});
-  }
-  user.warn += 1;
-  await m.reply(
-      `${
-      user.warn == 1 ? `*@${who.split`@`[0]}*` : `*@${who.split`@`[0]}*`
-      } تم إعطاء تحذير للعضو في المجموعة!\nالسبب: ${sdms}\n*تحذيرات ${
-        user.warn
-      }/3*`,
-      null,
-      {mentions: [who]},
-  );
-  if (user.warn >= 3) {
-    if (!bot.restrict) {
-      return m.reply(
-          '*[❗اشعار❗] المستخدم وصل إلى حد التحذير (#قائمة_المحظورين) تواصل مع المطور لرفع الحظر*',
-      );
-    }
-    user.warn = 0;
-    await m.reply(
-        `لقد حذرتك عدة مرات!!\n*@${
-          who.split`@`[0]
-        }*لقد تجاوزت تم حظر العضو لتجاوزه *3* 👽`,
-        null,
-        {mentions: [who]},
-    );
-    await conn.groupParticipantsUpdate(m.chat, [who], 'remove');
-  }
-  return !1;
-};
 
-handler.command = /^(تحذير|حذر|تحذير)$/i;
-handler.group = true;
-handler.admin = true;
-handler.botAdmin = true;
-export default handler;
+let war = global.maxwarn
+let handler = async (m, { conn, text, args, groupMetadata, usedPrefix, command }) => {      
+        let who
+        if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
+        else who = m.chat
+        if (!who) throw `✳️ قم بوسم أو منشن شخص ما\n\n📌 مثال : ${usedPrefix + command} @user`
+        if (!(who in global.db.data.users)) throw `✳️ المستخدم غير موجود في قاعدة بياناتي`
+        let name = conn.getName(m.sender)
+        let warn = global.db.data.users[who].warn
+        if (warn < war) {
+            global.db.data.users[who].warn += 1
+            m.reply(`
+⚠️ *تحذير للمستخدم* ⚠️
+
+▢ *الأدمن:* ${name}
+▢ *المستخدم:* @${who.split`@`[0]}
+▢ *عدد التحذيرات:* ${warn + 1}/${war}
+▢ *السبب:* ${text}`, null, { mentions: [who] }) 
+            m.reply(`
+⚠️ *تحذير* ⚠️
+لقد تلقيت تحذيرًا من أدمن
+
+▢ *عدد التحذيرات:* ${warn + 1}/${war} 
+إذا حصلت على *${war}* تحذيرات ستتم إزالتك تلقائيًا من المجموعة`, who)
+        } else if (warn == war) {
+            global.db.data.users[who].warn = 0
+            m.reply(`⛔ تجاوز المستخدم عدد التحذيرات المسموح به *${war}* وسيتم إزالته`)
+            await time(3000)
+            await conn.groupParticipantsUpdate(m.chat, [who], 'remove')
+            m.reply(`🚯 لقد تم إزالتك من المجموعة *${groupMetadata.subject}* لأنك تلقيت *${war}* تحذيرات`, who)
+        }
+}
+handler.help = ['warn @user']
+handler.tags = ['group']
+handler.command = ['انذار'] 
+handler.group = true
+handler.admin = true
+handler.botAdmin = true
+
+export default handler
+
+const time = async (ms) => {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
