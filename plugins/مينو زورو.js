@@ -7,13 +7,13 @@ const { levelling } = '../lib/levelling.js'
 import moment from 'moment-timezone'
 import { promises } from 'fs'
 import { join } from 'path'
-const time = moment.tz('Asia/Jakarta').format('HH')
-let wib = moment.tz('Asia/Jakarta').format('HH:mm:ss')
+const time = moment.tz('Africa/Egypt').format('HH')
+let wib = moment.tz('Africa/Egypt').format('HH:mm:ss')
 //import db from '../lib/database.js'
 
 let handler = async (m, { conn, usedPrefix, command}) => {
     let d = new Date(new Date + 3600000)
-    let locale = 'en'
+    let locale = 'ar'
     let week = d.toLocaleDateString(locale, { weekday: 'long' })
     let date = d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
     let _uptime = process.uptime() * 1000
