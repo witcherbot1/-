@@ -37,7 +37,7 @@ let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 global.fcontact = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
     const str = `
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
-*🐉✬⃝╿↵ مرحــبـا ⌊${taguser}*
+*🐉✬⃝╿↵ مرحــبـا ⌊@${m.sender.split("@")[0]}*
 ── • ◈ • ──
 *🐉✬⃝╿حط قبل كل امر : ⌊ . ⌉*
 *🐉✬⃝╿مـطـوري : +201032389641*
@@ -204,7 +204,7 @@ function clockString(ms) {
     return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')}
     
     function ucapan() {
-      const time = moment.tz('Asia/Kolkata').format('HH')
+      const time = moment.tz('Africa/Egypt').format('HH')
       let res = "صباح الفل ☀️"
       if (time >= 4) {
         res = "صباح الخير 🌄"
