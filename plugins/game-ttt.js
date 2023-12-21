@@ -88,5 +88,5 @@ conn.sendMessage(m.chat, { image: { url: imgplay }, caption: `🎮 اكس او
 𝙄𝙁 𝙔𝙊𝙐 𝙒𝘼𝙉𝙏 𝙏𝙊 𝙇𝙀𝘼𝙑𝙀 𝙏𝙃𝙀 𝙍𝙊𝙊𝙈 𝙐𝙎𝙀 𝙏𝙃𝙀 𝘾𝙊𝙈𝙈𝘼𝙉𝘿 *${usedPrefix}delttt*`, wm, imgplay, [['😎 𝙐𝙉𝙄𝙍𝙈𝙀 𝘼𝙇 𝙅𝙐𝙀𝙂𝙊 | 𝙅𝙊𝙄𝙉 𝙂𝘼𝙈𝙀', `${usedPrefix + command} ${text}`]], fkontak, m, { mentions: conn.parseMention(text) })*/
 conn.game[room.id] = room
 }}
-handler.command = /^(tictactoe|ttc|ttt|اكس او)$/i
+handler.command = /^(tictactoe|اكس-او|ttt|اكس_او)$/i
 export default handler
