@@ -31,6 +31,7 @@ function handler(m, { groupMetadata }) {
   let j;
   do j = ps[Fl(R() * ps.length)];
   while (j === a || j === b || j === c || j === d || j === e || j === f || j === g || j === h || j === i);
+  m.react('👄')
 
   m.reply(
     `*✨🌚 نتائج الزواج*
