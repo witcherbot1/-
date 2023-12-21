@@ -2,8 +2,11 @@ import fetch from 'node-fetch';
 const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
   try {
+    const pp = imagen4;
+    // let vn = './media/menu.mp3'
+    const img = './Menu2.jpg';
     const d = new Date(new Date + 3600000);
-    const locale = 'es';
+    const locale = 'ar';
     const week = d.toLocaleDateString(locale, {weekday: 'long'});
     const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});
     const _uptime = process.uptime() * 1000;
@@ -172,8 +175,6 @@ const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, is
   ▢ _${usedPrefix}gdrive *<url>*_
   ▢ _${usedPrefix}tiktok *<url>*_
   ▢ _${usedPrefix}tiktokimg *<url>*_
-  ▢ _${usedPrefix}xnxxdl *<url>*_
-  ▢ _${usedPrefix}xvideosdl *<url>*_
   ▢ _${usedPrefix}twitter *<url>*_
   ▢ _${usedPrefix}fb *<url>*_
   ▢ _${usedPrefix}ytshort *<url>*_
@@ -210,7 +211,6 @@ const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, is
   ▢ _${usedPrefix}modapk *<txt>*_
   ▢ _${usedPrefix}stickersearch *<txt>*_
   ▢ _${usedPrefix}stickersearch2 *<txt>*_
-  ▢ _${usedPrefix}xnxxsearch *<txt>*_
   ▢ _${usedPrefix}animeinfo *<txt>*_
   ▢ _${usedPrefix}google *<txt>*_
   ▢ _${usedPrefix}letra *<txt>*_
@@ -499,19 +499,15 @@ ${readMore}
   ▢ _${usedPrefix}viewimage
 
  Modificado por: *dftzippo*
- © 2023 - *The Mystic Bot*`
-  const vi = ['https://telegra.ph/file/91ba954ced01bf270477a.mp4',
-'https://telegra.ph/file/91ba954ced01bf270477a.mp4',
-'https://telegra.ph/file/91ba954ced01bf270477a.mp4']
-.trim();
+ © 2023 - *The Mystic Bot*`.trim();
     if (m.isGroup) {
       // await conn.sendFile(m.chat, vn, 'menu.mp3', null, m, true, { type: 'audioMessage', ptt: true})
       const fkontak2 = {'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
-      conn.sendMessage(m.chat, {video: { url: vi.getRandom() }, mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: m});
+      conn.sendMessage(m.chat, {image: pp, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: m});
     } else {
       // await conn.sendFile(m.chat, vn, 'menu.mp3', null, m, true, { type: 'audioMessage', ptt: true})
       const fkontak2 = {'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
-      conn.sendMessage(m.chat, {video: { url: vi.getRandom() }, mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: fkontak2});
+      conn.sendMessage(m.chat, {image: pp, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: fkontak2});
     }
   } catch {
     conn.reply(m.chat, '*[ ℹ️ ] هذه القائمة بها خطأ داخلي ولهذا لم يكن من الممكن إرسالها.*', m);
