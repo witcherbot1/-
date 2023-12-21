@@ -1,67 +1,49 @@
-import { createHash } from 'crypto'
-import PhoneNumber from 'awesome-phonenumber'
-import { canLevelUp, xpRange } from '../lib/levelling.js'
-import fetch from 'node-fetch'
-import fs from 'fs'
-const { levelling } = '../lib/levelling.js'
-import moment from 'moment-timezone'
-import { promises } from 'fs'
-import { join } from 'path'
-const time = moment.tz('Asia/Kolkata').format('HH')
-let wib = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-//import db from '../lib/database.js'
+import fetch from 'node-fetch';
+const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
+  if (usedPrefix == 'a' || usedPrefix == 'A') return;
+  try {
+    // let vn = './media/menu.mp3'
+    const d = new Date(new Date + 3600000);
+    const locale = 'es';
+    const week = d.toLocaleDateString(locale, {weekday: 'long'});
+    const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});
+    const _uptime = process.uptime() * 1000;
+    const uptime = clockString(_uptime);
+    const user = global.db.data.users[m.sender];
+    const {money, joincount} = global.db.data.users[m.sender];
+    const {exp, limit, level, role} = global.db.data.users[m.sender];
+    const rtotalreg = Object.values(global.db.data.users).filter((user) => user.registered == true).length;
+    const rtotal = Object.entries(global.db.data.users).length || '0'
+    const more = String.fromCharCode(8206);
+    const readMore = more.repeat(850);
+    const taguser = '@' + m.sender.split('@s.whatsapp.net')[0];
+    const doc = ['pdf', 'zip', 'vnd.openxmlformats-officedocument.presentationml.presentation', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    const document = doc[Math.floor(Math.random() * doc.length)];
+    const str = ` *🤖 The Zoro Bot* 🤖
 
-let handler = async (m, { conn, usedPrefix, command}) => {
-    let d = new Date(new Date + 3600000)
-    let locale = 'en'
-    let week = d.toLocaleDateString(locale, { weekday: 'long' })
-    let date = d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
-    let _uptime = process.uptime() * 1000
-    let uptime = clockString(_uptime)
-let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-if (!(who in global.db.data.users)) throw `✳️ لم يتم العثور على المستخدم في قاعدة البيانات`
-let user = global.db.data.users[who]
-let { name, exp, diamond, lastclaim, registered, regTime, age, level, role, warn } = global.db.data.users[who]
-let { min, xp, max } = xpRange(user.level, global.multiplier)
-let username = conn.getName(who)
-let math = max - xp
-let prem = global.prems.includes(who.split`@`[0])
-let sn = createHash('md5').update(who).digest('hex')
-let totaluser = Object.values(global.db.data.users).length 
-let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length 
-let more = String.fromCharCode(8206)
-let readMore = more.repeat(850) 
-let greeting = ucapan()
-let quote = quotes[Math.floor(Math.random() * quotes.length)];
+ *👋 اهلا يحب, ${taguser}*
 
-let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
-let str = `
-🚀 *_استعد ${name}، ${greeting}! سنخوض مغامرة!_* 🚀
+ *🧑‍💻 المالك.:* Yosef (Zoro)
+ *📱 wa:* +201032389641
+ *🏦 PayPal:* paypal.me/Yosef160
 
-📜 *_اقتباس اليوم: ${quote}_* 📜
 
-┏━💼 _معلومات المستخدم:_ 💼━┓
-┃ 👾  *تاق المستخدم:* ${taguser} 
-┃ 🎩  *الاسم:* ${name} 
-┃ 🦸  *رئيس ذكاء:* ${author} 
-┃ 💎  *الألماس:* ${diamond} 
-┃ 🏆  *الرتبة:* ${role}
-┃ 🎮  *الخبرة:* ${exp} 
-┗━━━━━━━━━━━┛
+ *📆 التاريخ:* ${date}
+ *⏳ وقت التشغيل:* ${uptime}
+ *🧑 المستخدمين المسجلين:* ${rtotalreg}
+ *👥 إجمالي المستخدمين:* ${rtotal}
+ *🤖 نوع البوت:* ${(conn.user.jid == global.conn.user.jid ? '' : `Sub-bot de:\n+${global.conn.user.jid.split`@`[0]}`) || 'No es sub-bot'}
 
-┏━━⏰ _الصلصة اليومية!_ ⏰━┓
-┃ 📆  *تاريخ اليوم:* ${date} 
-┃ ⏲️  *الوقت الحالي:* ${wib} 
-┗━━━━━━━━━━━━━┛
 
-┏━━🤖 _حالة البوت:_🤖━━┓
-┃ 🤡  *اسم البوت:* ${botname} 
-┃ 💻  *المنصة:* لينكس 
-┃ 📣  *البادئة:* ${usedPrefix} 
-┃ 🕓  *وقت التشغيل:* ${uptime}
-┃ 💌  *قاعدة البيانات:* ${rtotalreg} من ${totaluser} 
-┃ 📚  *إجمالي المستخدمين:* ${totaluser} 
-┗━━━━━━━━━━━━━┛
+ *< معلومات المستخدم />* ⚡
+
+ *📈 المستوى:* ${level}
+ *🧰 الخبرة:* ${exp}
+ *⚓ الرتبة:* ${role}
+ *💎 الماس:* ${limit}
+ *🪙 زورو كوينز:* ${money}
+ *🎟️ الرموز:* ${joincount}
+ *🎫 مميز:* ${user.premiumTime > 0 ? '✅' : (isPrems ? '✅' : '❌') || ''}
 ┏━━━━━━━━━━━━━━━━┓
 ┃ *< إعدادات البوت >*
 ┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
