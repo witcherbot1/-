@@ -1,56 +1,119 @@
-import TicTacToe from '../lib/tictactoe.js';
-const handler = async (m, {conn, usedPrefix, command, text}) => {
-  conn.game = conn.game ? conn.game : {};
-  if (Object.values(conn.game).find((room) => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) throw '*[❗] يوجد لديك لعبة اكس او قائمة حالياً*';
-  if (!text) throw `*[❗] يُرجى تحديد اسم الغرفة للعبة اكس او*\n\n*—◉ مثال:*\n${usedPrefix + command} اسم-الغرفة`;
-  let room = Object.values(conn.game).find((room) => room.state === 'WAITING' && (text ? room.name === text : true));
-  if (room) {
-    await m.reply('*[🕹️] يوجد لديك لعبة اكس او في انتظار لاعب آخر، انتظر حتى ينضم لك لاعب*');
-    room.o = m.chat;
-    room.game.playerO = m.sender;
-    room.state = 'PLAYING';
-    const arr = room.game.render().map((v) => {
-      return {
-        X: '❎',
-        O: '⭕',
-        1: '1️⃣',
-        2: '2️⃣',
-        3: '3️⃣',
-        4: '4️⃣',
-        5: '5️⃣',
-        6: '6️⃣',
-        7: '7️⃣',
-        8: '8️⃣',
-        9: '9️⃣',
-      }[v];
-    });
-    const str = `
-*🎮 لعبه اكس او 🎮*
+import { format } from 'util'
+let debugMode = !1
+//let winScore = 4999
+//let playScore = 99
+export async function before(m) {
+const fkontak = {
+	"key": {
+    "participants":"0@s.whatsapp.net",
+		"remoteJid": "status@broadcast",
+		"fromMe": false,
+		"id": "Halo"
+	},
+	"message": {
+		"contactMessage": {
+			"vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
+		}
+	},
+	"participant": "0@s.whatsapp.net"
+}
 
+let ok
+let isWin = !1
+let isTie = !1
+let isSurrender = !1
+this.game = this.game ? this.game : {}
+let room = Object.values(this.game).find(room => room.id && room.game && room.state && room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender) && room.state == 'PLAYING')
+if (room) {
+if (!/^([1-9]|(me)?nyerah|\rendirse\|rendirse|RENDIRSE|SALIR|salir|Salir|out|OUT|Out|surr?ender)$/i.test(m.text)) 
+return !0
+isSurrender = !/^[1-9]$/.test(m.text)
+if (m.sender !== room.game.currentTurn) { 
+if (!isSurrender)
+return !0 }
+if (debugMode)
+m.reply('[DEBUG]\n' + require('util').format({
+isSurrender,
+text: m.text }))
+if (!isSurrender && 1 > (ok = room.game.turn(m.sender === room.game.playerO, parseInt(m.text) - 1))) {
+m.reply({
+'-3': 'اللعبة انتهت',
+'-2': 'غير صالح',
+'-1': 'موقع غير صالح',
+0: 'موقع غير صالح',
+}[ok])
+return !0 }
+if (m.sender === room.game.winner)
+isWin = true
+else if (room.game.board === 511)
+isTie = true
+let arr = room.game.render().map(v => {
+return {
+X: '❎',
+O: '⭕',
+1: '1️⃣',
+2: '2️⃣',
+3: '3️⃣',
+4: '4️⃣',
+5: '5️⃣',
+6: '6️⃣',
+7: '7️⃣',
+8: '8️⃣',
+9: '9️⃣',
+}[v]})
+if (isSurrender) {
+        
+room.game._currentTurn = m.sender === room.game.playerX
+isWin = true }
+        
+let dia = Math.floor(Math.random() * 2)
+let tok = Math.floor(Math.random() * 2)
+let gata = Math.floor(Math.random() * 10)
+let expp = Math.floor(Math.random() * 10)
+
+let dia2 = Math.floor(Math.random() * 15)
+let tok2 = Math.floor(Math.random() * 10)
+let gata2 = Math.floor(Math.random() * 1500)
+let expp2 = Math.floor(Math.random() * 2500)  
+
+let winner = isSurrender ? room.game.currentTurn : room.game.winner
+let str = `
+🎮 اكس او 🎮
+*┈┈┈┈┈┈┈┈┈*
 ❎ = @${room.game.playerX.split('@')[0]}
 ⭕ = @${room.game.playerO.split('@')[0]}
-
-        ${arr.slice(0, 3).join('')}
-        ${arr.slice(3, 6).join('')}
-        ${arr.slice(6).join('')}
-
-دور @${room.game.currentTurn.split('@')[0]}
-`.trim();
-    if (room.x !== room.o) await conn.sendMessage(room.x, {text: str, mentions: this.parseMention(str)}, {quoted: m});
-    await conn.sendMessage(room.o, {text: str, mentions: conn.parseMention(str)}, {quoted: m});
-  } else {
-    room = {
-      id: 'tictactoe-' + (+new Date),
-      x: m.chat,
-      o: '',
-      game: new TicTacToe(m.sender, 'o'),
-      state: 'WAITING'};
-    if (text) room.name = text;
-    const imgplay = `https://cope-cdnmed.agilecontent.com/resources/jpg/8/9/1590140413198.jpg`;
-    conn.reply(m.chat, `*🕹 *ااكس او* 🎮*\n\n*◉ انشاء لعبة اكس او*\n*◉ استعمال: ${usedPrefix + command} اسم-الغرفة* ${text})`, m);
-    // conn.sendButton(m.chat, `*🕹 𝐓𝐑𝐄𝐒 𝐄𝐍 𝐑𝐀𝐘𝐀 🎮*\n\n*◉ 𝙴𝚂𝙿𝙴𝚁𝙰𝙽𝙳𝙾 𝙰𝙻 𝚂𝙴𝙶𝚄𝙽𝙳𝙾 𝙹𝚄𝙶𝙰𝙳𝙾𝚁*\n*◉ 𝙿𝙰𝚁𝙰 𝙱𝙾𝚁𝚁𝙰𝚁 𝙾 𝚂𝙰𝙻𝙸𝚁𝚂𝙴 𝙳𝙴 𝙻𝙰 𝙿𝙰𝚁𝚃𝙸𝙳𝙰 𝚄𝚂𝙴𝙽 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 ${usedPrefix}delttt*`, wm, imgplay, [['𝚄𝙽𝙸𝚁𝚂𝙴 𝙰 𝙻𝙰 𝙿𝙰𝚁𝚃𝙸𝙳𝙰', `${usedPrefix + command} ${text}`]], m, { mentions: conn.parseMention(text) })
-    conn.game[room.id] = room;
-  }
-};
-handler.command = /^(اكس-او|ttc|اكس_او|xo)$/i;
-export default handler;
+*┈┈┈┈┈┈┈┈┈*
+     ${arr.slice(0, 3).join('')}
+     ${arr.slice(3, 6).join('')}
+     ${arr.slice(6).join('')}
+*┈┈┈┈┈┈┈┈┈*
+${isWin ? `@${(isSurrender ? room.game.currentTurn : room.game.winner).split('@')[0]} 😎🏆 *فزت!!*\n*بفوزك تحصل على*\n\n💎 *${dia2} ألماس*\n🪙 *${tok2} رموز*\n🐈 *${gata2} عملة*\n⚡ *${expp2} خبرة*` : isTie ? `*تعادل!!* 🐧\n*بانتهاء اللعبة بتعادل يحصل الاثنان على*\n\n💎 *${dia} ألماس*\n☯️ *${tok} رموز*\n🪙 *${dorrat} عملة*\n⚡ *${expp} دور* 🪄` : `*خبرة* @${room.game.currentTurn.split('@')[0]}`}
+`.trim()
+let users = global.db.data.users
+if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat)
+room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
+if (room.x !== room.o)
+await this.sendMessage(room.x, { text: str, mentions: this.parseMention(str)}, { quoted: fkontak, m })
+await this.sendMessage(room.o, { text: str, mentions: this.parseMention(str)}, { quoted: fkontak, m })
+        
+if (isTie || isWin) {
+users[room.game.playerX].limit += dia //empate
+users[room.game.playerX].joincount += tok
+users[room.game.playerX].money += gata
+users[room.game.playerX].exp += expp
+        
+users[room.game.playerO].limit += dia //empate
+users[room.game.playerO].joincount += tok
+users[room.game.playerO].money += gata
+users[room.game.playerO].exp += expp 
+        
+if (isWin)
+users[winner].limit += dia2 //Ganador
+users[winner].joincount += tok2
+users[winner].money += gata2
+users[winner].exp += expp2
+        
+if (debugMode)
+m.reply('[DEBUG]\n' + format(room))
+delete this.game[room.id]}}
+return !0 }
