@@ -2,12 +2,12 @@ import TicTacToe from '../lib/tictactoe.js'
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
     conn.game = conn.game ? conn.game : {}
-    if (Object.values(conn.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) throw `✳️ You are still in the game to restart the session write : *${usedPrefix}delttt*`
-    if (!text) throw `✳️ Put a number in the room`
+    if (Object.values(conn.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) throw `✳️ أنت لا تزال في اللعبة. لإعادة تشغيل االلعبه، اكتب : *${usedPrefix}امسح*`
+    if (!text) throw `✳️ قم بوضع رقم الغرفة`
     let room = Object.values(conn.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
     // m.reply('[WIP Feature]')
     if (room) {
-        m.reply('✅ mate found')
+        m.reply('✅ تم العثور على شريك')
         room.o = m.chat
         room.game.playerO = m.sender
         room.state = 'PLAYING'
@@ -27,16 +27,17 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
             }[v]
         })
         let str = `
-Waiting for @${room.game.currentTurn.split('@')[0]} as first player
+في انتظار @${room.game.currentTurn.split('@')[0]} كلاعب أول
         
 ${arr.slice(0, 3).join('')}
 ${arr.slice(3, 6).join('')}
 ${arr.slice(6).join('')}
 
-▢ *Room ID* ${room.id}
+▢ *رقم الغرفة* ${room.id}
 
-▢ *Rules*
-‣ Make 3 rows of symbols vertically, horizontally or diagonally to win ‣ Type *surrender* to exit the game and be declared defeated
+▢ *القواعد*
+‣ قم بعمل 3 صفوف من الرموز رأسيًا أو أفقيًا أو قطريًا للفوز
+‣ اكتب *استسلم* للخروج من اللعبة والاعتراف بالهزيمة
 `.trim()
         if (room.x !== room.o) await conn.reply(room.x, str, m, {
             mentions: conn.parseMention(str)
@@ -54,10 +55,10 @@ ${arr.slice(6).join('')}
         }
         if (text) room.name = text
         
-     conn.reply(m.chat, `⏳ *expecting partner*\nType the following command to accept
+     conn.reply(m.chat, `⏳ *في انتظار الشريك*\nقم بكتابة الأمر التالي للقبول
 ▢ *${usedPrefix + command} ${text}*
 
-🎁 Reward:  *4999 XP*`, m, {
+🎁 الجائزة:  *4999 نقطة خبرة*`, m, {
             mentions: conn.parseMention(text)
         })
         
@@ -68,6 +69,6 @@ ${arr.slice(6).join('')}
 
 handler.help = ['tictactoe <tag number>']
 handler.tags = ['game']
-handler.command = ['tictactoe', 'ttc', 'ttt', 'xo']
+handler.command = ['اكس-او', 'اكس-او', 'ttt', 'xo']
 
 export default handler
