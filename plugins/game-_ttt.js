@@ -1,119 +1,73 @@
-import { format } from 'util'
-let debugMode = !1
-//let winScore = 4999
-//let playScore = 99
-export async function before(m) {
-const fkontak = {
-	"key": {
-    "participants":"0@s.whatsapp.net",
-		"remoteJid": "status@broadcast",
-		"fromMe": false,
-		"id": "Halo"
-	},
-	"message": {
-		"contactMessage": {
-			"vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
-		}
-	},
-	"participant": "0@s.whatsapp.net"
+import TicTacToe from '../lib/tictactoe.js'
+
+let handler = async (m, { conn, usedPrefix, command, text }) => {
+    conn.game = conn.game ? conn.game : {}
+    if (Object.values(conn.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) throw `✳️ You are still in the game to restart the session write : *${usedPrefix}delttt*`
+    if (!text) throw `✳️ Put a number in the room`
+    let room = Object.values(conn.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
+    // m.reply('[WIP Feature]')
+    if (room) {
+        m.reply('✅ mate found')
+        room.o = m.chat
+        room.game.playerO = m.sender
+        room.state = 'PLAYING'
+        let arr = room.game.render().map(v => {
+            return {
+                X: '❎',
+                O: '⭕',
+                1: '1️⃣',
+                2: '2️⃣',
+                3: '3️⃣',
+                4: '4️⃣',
+                5: '5️⃣',
+                6: '6️⃣',
+                7: '7️⃣',
+                8: '8️⃣',
+                9: '9️⃣',
+            }[v]
+        })
+        let str = `
+Waiting for @${room.game.currentTurn.split('@')[0]} as first player
+        
+${arr.slice(0, 3).join('')}
+${arr.slice(3, 6).join('')}
+${arr.slice(6).join('')}
+
+▢ *Room ID* ${room.id}
+
+▢ *Rules*
+‣ Make 3 rows of symbols vertically, horizontally or diagonally to win ‣ Type *surrender* to exit the game and be declared defeated
+`.trim()
+        if (room.x !== room.o) await conn.reply(room.x, str, m, {
+            mentions: conn.parseMention(str)
+        })
+        await conn.reply(room.o, str, m, {
+            mentions: conn.parseMention(str)
+        })
+    } else {
+        room = {
+            id: 'tictactoe-' + (+new Date),
+            x: m.chat,
+            o: '',
+            game: new TicTacToe(m.sender, 'o'),
+            state: 'WAITING'
+        }
+        if (text) room.name = text
+        
+     conn.reply(m.chat, `⏳ *expecting partner*\nType the following command to accept
+▢ *${usedPrefix + command} ${text}*
+
+🎁 Reward:  *4999 XP*`, m, {
+            mentions: conn.parseMention(text)
+        })
+        
+   conn.game[room.id] = room
+    }
+    
 }
 
-let ok
-let isWin = !1
-let isTie = !1
-let isSurrender = !1
-this.game = this.game ? this.game : {}
-let room = Object.values(this.game).find(room => room.id && room.game && room.state && room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender) && room.state == 'PLAYING')
-if (room) {
-if (!/^([1-9]|(me)?nyerah|\rendirse\|rendirse|RENDIRSE|SALIR|salir|Salir|out|OUT|Out|surr?ender)$/i.test(m.text)) 
-return !0
-isSurrender = !/^[1-9]$/.test(m.text)
-if (m.sender !== room.game.currentTurn) { 
-if (!isSurrender)
-return !0 }
-if (debugMode)
-m.reply('[DEBUG]\n' + require('util').format({
-isSurrender,
-text: m.text }))
-if (!isSurrender && 1 > (ok = room.game.turn(m.sender === room.game.playerO, parseInt(m.text) - 1))) {
-m.reply({
-'-3': 'اللعبة انتهت',
-'-2': 'غير صالح',
-'-1': 'موقع غير صالح',
-0: 'موقع غير صالح',
-}[ok])
-return !0 }
-if (m.sender === room.game.winner)
-isWin = true
-else if (room.game.board === 511)
-isTie = true
-let arr = room.game.render().map(v => {
-return {
-X: '❎',
-O: '⭕',
-1: '1️⃣',
-2: '2️⃣',
-3: '3️⃣',
-4: '4️⃣',
-5: '5️⃣',
-6: '6️⃣',
-7: '7️⃣',
-8: '8️⃣',
-9: '9️⃣',
-}[v]})
-if (isSurrender) {
-        
-room.game._currentTurn = m.sender === room.game.playerX
-isWin = true }
-        
-let dia = Math.floor(Math.random() * 2)
-let tok = Math.floor(Math.random() * 2)
-let gata = Math.floor(Math.random() * 10)
-let expp = Math.floor(Math.random() * 10)
+handler.help = ['tictactoe <tag number>']
+handler.tags = ['game']
+handler.command = ['tictactoe', 'ttc', 'ttt', 'xo']
 
-let dia2 = Math.floor(Math.random() * 15)
-let tok2 = Math.floor(Math.random() * 10)
-let gata2 = Math.floor(Math.random() * 1500)
-let expp2 = Math.floor(Math.random() * 2500)  
-
-let winner = isSurrender ? room.game.currentTurn : room.game.winner
-let str = `
-🫂 اكس او:
-*┈┈┈┈┈┈┈┈┈*
-❎ = @${room.game.playerX.split('@')[0]}
-⭕ = @${room.game.playerO.split('@')[0]}
-*┈┈┈┈┈┈┈┈┈*
-     ${arr.slice(0, 3).join('')}
-     ${arr.slice(3, 6).join('')}
-     ${arr.slice(6).join('')}
-*┈┈┈┈┈┈┈┈┈*
-${isWin ? `@${(isSurrender ? room.game.currentTurn : room.game.winner).split('@')[0]} 😎🏆 *فزت!!*\n*بفوزك تحصل على*\n\n💎 *${dia2} ألماس*\n🪙 *${tok2} رموز*\n🐈 *${gata2} عملة*\n⚡ *${expp2} خبرة*` : isTie ? `*تعادل!!* 🐧\n*بانتهاء اللعبة بتعادل يحصل الاثنان على*\n\n💎 *${dia} ألماس*\n☯️ *${tok} رموز*\n🪙 *${dorrat} عملة*\n⚡ *${expp} دور* 🪄` : `*خبرة* @${room.game.currentTurn.split('@')[0]}`}
-`.trim()
-let users = global.db.data.users
-if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat)
-room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
-if (room.x !== room.o)
-await this.sendMessage(room.x, { text: str, mentions: this.parseMention(str)}, { quoted: fkontak, m })
-await this.sendMessage(room.o, { text: str, mentions: this.parseMention(str)}, { quoted: fkontak, m })
-        
-if (isTie || isWin) {
-users[room.game.playerX].limit += dia //empate
-users[room.game.playerX].joincount += tok
-users[room.game.playerX].money += gata
-users[room.game.playerX].exp += expp
-        
-users[room.game.playerO].limit += dia //empate
-users[room.game.playerO].joincount += tok
-users[room.game.playerO].money += gata
-users[room.game.playerO].exp += expp 
-        
-if (isWin)
-users[winner].limit += dia2 //Ganador
-users[winner].joincount += tok2
-users[winner].money += gata2
-users[winner].exp += expp2
-        
-if (debugMode)
-m.reply('[DEBUG]\n' + format(room))
-delete this.game[room.id]}}
-return !0 }
+export default handler
