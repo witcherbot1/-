@@ -36,9 +36,9 @@ global.owner = [
 global.suittag = ['201032389641'];
 global.prems = ['201032389641'];
 // Sticker WM
-global.botname = '𝑍𝑂𝑅𝑂⚡𝐵𝑂𝑇'
+global.botname = '𝒁𝑶𝑹𝑶'
 global.premium = 'true'
-global.menuvid = 'https://i.imgur.com/wmewMId.mp4'
+global.menuvid = 'https://i.imgur.com/uiwALih.mp4'
 global.igfg = 'https://solo.to/yosef.zoro' 
 global.dygp = 'https://solo.to/yosef.zoro'
 global.fgsc = 'https://solo.to/yosef.zoro' 
