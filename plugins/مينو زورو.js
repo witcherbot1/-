@@ -33,19 +33,18 @@ let sn = createHash('md5').update(who).digest('hex')
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length 
 let more = String.fromCharCode(8206)
 let readMore = more.repeat(850) 
-let taguser = '@' + m.sender.split('@s.whatsapp.net')[0];
+let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remoteJid: 'status@broadcast' }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
     const str = `
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
-*🐉✬⃝╿↵ مرحــبـا ⌊@${taguser}⌉*
-┃🐉✬⃝ *@${global.conn.user.jid.split`@`[0]}*`}
+*🐉✬⃝╿↵ مرحــبـا ⌊${taguser}⌉*
 ── • ◈ • ──
 *🐉✬⃝╿حط قبل كل امر : ⌊ . ⌉*
 *🐉✬⃝╿مـطـوري : +201032389641*
 *🐉✬⃝╿ باي بال:* paypal.me/Yosef160
 *🐉✬⃝╿الـبــوت لـجــروبـات بـس*
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
-┏━💼 مـعلـومـات المستخدم:💼━┓
+┏━💼 مـعلـومـات المستخدم:_ 💼━┓
 ┃ 🎩  *الاسـم:* ${name} 
 ┃ 💎  *الألـماس:* ${diamond} 
 ┃ 🏆  *الـرتبة:* ${role}
@@ -205,7 +204,7 @@ function clockString(ms) {
     return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')}
     
     function ucapan() {
-      const time = moment.tz('Africa/Egypt').format('HH')
+      const time = moment.tz('Asia/Kolkata').format('HH')
       let res = "صباح الفل ☀️"
       if (time >= 4) {
         res = "صباح الخير 🌄"
