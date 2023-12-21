@@ -37,14 +37,16 @@ let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 global.fcontact = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
     const str = `
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
-*🐉✬⃝╿↵ مرحــبـا ⌊@${m.sender.split("@")[0]}*
+*🐉✬⃝╿↵ مرحــبـا ⌊${taguser}⌉*
+🐉✬⃝ @${m.sender.split("@")[0]}*
+┃🐉✬⃝*@${global.conn.user.jid.split`@`[0]}*`}
 ── • ◈ • ──
 *🐉✬⃝╿حط قبل كل امر : ⌊ . ⌉*
 *🐉✬⃝╿مـطـوري : +201032389641*
 *🐉✬⃝╿ باي بال:* paypal.me/Yosef160
 *🐉✬⃝╿الـبــوت لـجــروبـات بـس*
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
-┏━💼 مـعلـومـات المستخدم:_ 💼━┓
+┏━💼 مـعلـومـات المستخدم:💼━┓
 ┃ 🎩  *الاسـم:* ${name} 
 ┃ 💎  *الألـماس:* ${diamond} 
 ┃ 🏆  *الـرتبة:* ${role}
