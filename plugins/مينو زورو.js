@@ -1,4 +1,6 @@
 import { createHash } from 'crypto'
+const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
+  if (usedPrefix == 'a' || usedPrefix == 'A') return;
 import PhoneNumber from 'awesome-phonenumber'
 import { canLevelUp, xpRange } from '../lib/levelling.js'
 import fetch from 'node-fetch'
