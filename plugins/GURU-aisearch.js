@@ -1,52 +1,27 @@
-import fetch from 'node-fetch';
-import displayLoadingScreen from '../lib/loading.js'
+import fetch from 'node-fetch'
+import uploader from '../lib/uploadImage.js'
 
-const endpoint = 'https://v2-guru-indratensei.cloud.okteto.net/perplexity?query=';
+var handler = async (m, { conn, text, command, usedPrefix }) => {
 
-let handler = async (m, { text, conn, usedPrefix, command }) => {
-  try {
-    if (!text && !(m.quoted && m.quoted.text)) {
-      throw `الرجاء تقديم بعض النص أو الاقتباس من رسالة للحصول على رد.`;
-    }
+let q = m.quoted ? m.quoted : m
+let mime = (q.msg || q).mimetype || q.mediaType || ''
+if (/image/g.test(mime) && !/webp/g.test(mime)) {
+let buffer = await q.download()
 
-    if (!text && m.quoted && m.quoted.text) {
-      text = m.quoted.text;
-    } else if (text && m.quoted && m.quoted.text) {
-      text = `${text} ${m.quoted.text}`;
-      if (m.quoted.text.includes('.aisearch')) {
-        text = text.replace('.aisearch', ''); // 
-      }
-    }
-    await displayLoadingScreen(conn, m.chat)
-    conn.sendPresenceUpdate('composing', m.chat);
-    let emsg = await conn.sendMessage(m.chat, {text: 'بفكر...'})
-    const prompt = encodeURIComponent(text);
+await m.reply(wait)
 
-    const response = await fetch(endpoint + prompt);
+let media = await (uploader)(buffer)
+let json = await (await fetch(`https://aemt.me/bardimg?url=${media}&text=${text}`)).json()
 
-    if (!response.ok) {
-      throw `تلقيت استجابة خطأ من الخادم: ${response.status} - ${response.statusText}`;
-    }
+conn.sendMessage(m.chat, { text: json.result }, { quoted: m })
 
-    const data = await response.json();
-    const result = data.response.trim(); 
-    await conn.relayMessage(m.chat, {
-        protocolMessage: {
-          key: emsg.key,
-          type: 14,
-          editedMessage: {
-            conversation: result 
-          }
-        }
-      }, {})
-  } catch (error) {
-    console.error('خطأ:', error);
-    m.reply(`حدث خطأ أثناء معالجة طلبك. الرجاء المحاولة مرة أخرى في وقت لاحق.`);
-  }
-};
-handler.help = ['aisearch']
-handler.tags = ['AI']
-handler.command = ['سيرش', 'ai2']; 
+} else throw `*الرجاء الرد علي صوره\n\n*مثال*\n${usedPrefix + command} اخبرني بالمعلومات`
+  
+}
+handler.help = ['bardimg']
+handler.tags = ['herramientas']
+handler.command = /^(شوف|bardimage)$/i
 
+handler.limit = true
 
-export default handler;
+export default handler
