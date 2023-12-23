@@ -18,7 +18,7 @@ let json = res[Math.floor(Math.random() * res.length)]
 let caption = `
 تخمين الشخصيه من الصوت
 ❐↞┇الـوقـت⏳↞ *${(timeout / 1000).toFixed(2)} ┇
-❐↞┇*✍اكتب ${usedPrefix}تلميح للحصول على تلميح*
+❐↞┇✍اكتب ${usedPrefix}تلميح* للحصول على تلميح*
 ❐↞┇الـجـائـزة💰↞ ${poin} نقاط┇
 ❐↞┇أجب على هذه الرسالة بالإجابات!┇
 『𝙕𝙊𝙍𝙊-𝘽𝙊𝙏』`.trim()
