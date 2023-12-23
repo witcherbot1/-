@@ -513,7 +513,7 @@ ${readMore}
     conn.reply(m.chat, '*[ ℹ️ ] هذه القائمة بها خطأ داخلي ولهذا لم يكن من الممكن إرسالها.*', m);
   }
 };
-handler.command = /^(menu|menú|memu|memú|help|info|comandos|allmenu|2help|menu1.2|ayuda|commands|commandos|cmd)$/i;
+handler.command = /^(help)$/i;
 handler.exp = 50;
 handler.fail = null;
 export default handler;
