@@ -3,8 +3,8 @@ import cheerio from "cheerio";
 import FormData from "form-data";
 const split = '|';
 const handler = async (m, {conn, args: [effect], text: txt, usedPrefix, command, name}) => {
-  if (!effect) throw '*[❗𝐈𝐍𝐅𝐎❗] ¿𝙲𝙾𝙼𝙾 𝚄𝚂𝙰𝚁 𝙴𝚂𝚃𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾?*\n—◉ _#logo (efecto) (texto)_\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾:*\n—◉ _#logo 3d-deep-sea-metal Mystic_\n\n*[❗] 𝙲𝚄𝙰𝙽𝙳𝙾 𝙻𝙴𝚂 𝙳𝙸𝙶𝙰 𝚀𝚄𝙴 𝙷𝙰𝙲𝙴 𝙵𝙰𝙻𝚃𝙰 𝚄𝙽 𝚃𝙴𝚇𝚃𝙾 𝙴𝙻 𝚄𝚂𝙾 𝚂𝙴𝚁𝙸𝙰:*\n—◉ _#logo (efecto) (texto1|texto2)_\n*𝙴𝙹𝙴𝙼𝙿𝙻𝙾:*\n—◉ _#logo Wolf-Logo-Galaxy Mystic|Bot_\n\n*<𝑳𝑰𝑺𝑻𝑨 𝑫𝑬 𝑬𝑭𝑬𝑪𝑻𝑶𝑺/>*\n\n° ඬ⃟📝 #logo ' + effects.map((v) => v.title).join('\n° ඬ⃟📝 #logo ');
-  if (!effects.find((v) => (new RegExp(v.title, 'gi')).test(effect))) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝙴𝙻 𝙴𝙵𝙴𝙲𝚃𝙾 ${effect} 𝙽𝙾 𝙴𝚂𝚃𝙰 𝙴𝙽 𝙻𝙰 𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝙴𝙵𝙴𝙲𝚃𝙾𝚂*`;  
+  if (!effect) throw '*[❗] ¿هل نسيت تحديد التأثير?*\n—◉ _#لوغو (التأثير) (النص)_\n*مثال:*\n—◉ _#لوغو 3d-deep-sea-metal Zoro_\n\n*[❗] يمكنك استخدام أحد التأثيرات التالية:*\n—◉ _#لوغو (التأثير) (نص1|نص2)_\n*مثال:*\n—◉ _#لوغو Wolf-Logo-Galaxy Zoro|Bot_\n\n*<قائمة بالتأثيرات المتاحة/>*\n\n° ඬ⃟📝 #لوغو ' + effects.map((v) => v.title).join('\n° ඬ⃟📝 #لوغو ');
+  if (!effects.find((v) => (new RegExp(v.title, 'gi')).test(effect))) throw `*[❗] التأثير ${effect} غير متاح في قائمة التأثيرات*`;  
   let text = txt.replace(new RegExp(effect, 'gi'), '').trimStart();
   if (text.includes(split)) {
     text = text.split(split).map((t) => t.trim());
@@ -12,13 +12,13 @@ const handler = async (m, {conn, args: [effect], text: txt, usedPrefix, command,
     text = [text.trim()];
   }
   const effectoSelect = effects.find((effectz) => new RegExp(effectz?.title, 'i').test(effect));
-  const res = await maker(effectoSelect?.url, [...text]).catch(_ => { throw '*[❗] Falta el texto al que se realizara el logo*' })
-   if (typeof res == 'number') throw res == -1 ? `*[❗𝐈𝐍𝐅𝐎❗] 𝙴𝙻 𝙴𝙵𝙴𝙲𝚃𝙾 ${effect} 𝙽𝙾 𝙴𝚂𝚃𝙰 𝙴𝙽 𝙻𝙰 𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝙴𝙵𝙴𝙲𝚃𝙾𝚂*` : `*[❗𝐈𝐍𝐅𝐎❗] 𝙴𝙻 𝚄𝚂𝙾 𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙴𝚂 ${usedPrefix + command} ${effect} ${new Array(res).fill('texto').map((v, i) => v + (i ? i + 1 : '')).join('|')}*`;
-  await conn.sendMessage(m.chat, {image: {url: res.image}, caption: `*𝚃𝙾𝙼𝙰 𝚃𝚄 𝙸𝙼𝙰𝙶𝙴𝙽 𝙿𝙴𝚁𝚂𝙾𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙰!!*\n*𝙴𝙵𝙴𝙲𝚃𝙾: ${effect}*`}, {quoted: m});  
+  const res = await maker(effectoSelect?.url, [...text]).catch(_ => { throw '*[❗] يرجى إضافة النص الذي سيتم إنشاء اللوغو عليه*' })
+   if (typeof res == 'number') throw res == -1 ? `*[❗] التأثير ${effect} غير متاح في قائمة التأثيرات*` : `*[❗] عدد غير صالح من النصوص، يرجى استخدام الأمر بشكل صحيح ${usedPrefix + command} ${effect} ${new Array(res).fill('texto').map((v, i) => v + (i ? i + 1 : '')).join('|')}*`;
+  await conn.sendMessage(m.chat, {image: {url: res.image}, caption: `*تم إنشاء الشعار بنجاح✅!!*\n*🌟التأثير ${effect}*`}, {quoted: m});  
 };
 handler.help = ['logos'];
 handler.tags = ['nulis'];
-handler.command = /^(logo|logos|logos2)$/i;
+handler.command = /^(لوغو|logos|لوجو)$/i;
 export default handler;
 
 var effects = [
