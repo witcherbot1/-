@@ -30,7 +30,7 @@ ${storytime.text}`, m);
     }
   }
 };
-handler.tags = ['frases'];
+handler.tags = ['Z O R O'];
 handler.command = handler.help = ['رومانسي', 'رومانسيه', 'انصحني'];
 export default handler;
 
