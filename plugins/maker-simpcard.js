@@ -6,5 +6,5 @@ const handler = async (m, {conn}) => {
 };
 handler.help = ['simpcard'];
 handler.tags = ['maker'];
-handler.command = /^(كارت-سيمب)$/i;
+handler.command = /^(سيمب)$/i;
 export default handler;
