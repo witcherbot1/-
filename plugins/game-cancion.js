@@ -9,7 +9,7 @@ if (id in conn.tebaklagu) {
 conn.reply(m.chat, 'هناك لا تزال أغانٍ بدون إجابة في هذه الدردشة.', conn.tebaklagu[id][0])
 throw false
 } //5LTV57azwaid7dXfz5fzJu
-let res = await fetchJson(`https://gist.githubusercontent.com/YosefZoro1/0e699de1fdc7adb619e5f82f3c591655/raw/711faf64f0179dc14d6edb8d60825f0b4f2ab073/game4.json`)
+let res = await fetchJson(`https://raw.githubusercontent.com/mohamedkun15/TheMystic-Bot-MD/master/src/JSON/Soundanime.json`)
 let json = res[Math.floor(Math.random() * res.length)]    
 //let res = await fetch(global.API('xteam', '/game/tebaklagu/', { id: '0ISD8mk5kiv1YC5884lISM' }, 'APIKEY'))
 //if (res !== 200) throw 'Error'
