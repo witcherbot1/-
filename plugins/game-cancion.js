@@ -6,7 +6,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 conn.tebaklagu = conn.tebaklagu ? conn.tebaklagu : {}
 let id = m.chat
 if (id in conn.tebaklagu) {
-conn.reply(m.chat, 'هناك لا تزال أغانٍ بدون إجابة في هذه الدردشة.', conn.tebaklagu[id][0])
+conn.reply(m.chat, '❗ لا تزال هناك اسئله بدون إجابة.', conn.tebaklagu[id][0])
 throw false
 } //5LTV57azwaid7dXfz5fzJu
 let res = await fetchJson(`https://raw.githubusercontent.com/mohamedkun15/TheMystic-Bot-MD/master/src/JSON/Soundanime.json`)
@@ -16,7 +16,7 @@ let json = res[Math.floor(Math.random() * res.length)]
 //let result = await res.json()
 //let json = result.result
 let caption = `
-*خمن الشخصيه من الصوت*
+*⚡تخمن الشخصيه من الصوت*
 ❐↞┇الـوقـت⏳↞ *${(timeout / 1000).toFixed(2)} ┇
 ❐↞┇*✍اكتب ${usedPrefix}تلميح للحصول على تلميح*
 ❐↞┇الـجـائـزة💰↞ ${poin} نقاط┇
@@ -26,7 +26,7 @@ conn.tebaklagu[id] = [
 await m.reply(caption),
 json, poin,
 setTimeout(() => {
-if (conn.tebaklagu[id]) conn.reply(m.chat, `انتهى الوقت!\nالإجابة هي ${json.jawaban}`, conn.tebaklagu[id][0])
+if (conn.tebaklagu[id]) conn.reply(m.chat, `❮ ⌛┇انتهي الوقت┇⌛❯\n❐↞┇الاجـابـة✅↞ ${json.jawaban}*┇`, conn.tebaklagu[id][0])
 delete conn.tebaklagu[id]
 }, timeout)
 ]
