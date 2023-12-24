@@ -23,12 +23,9 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
     conn.sendPresenceUpdate('composing', m.chat);
    let res = await gpt.ChatGpt(text, syms)
 
-    const Zoro1 = `https://api.amosayomide05.cf/gpt/?question=${text}&string_id=${m.sender}`;
-    
-    try {
-      let response = await fetch(Zoro1);
-      let data = await response.json();
-      let result = data.result;
+   let ia2 = await fetch(`https://api.amosayomide05.cf/gpt/?question=${text}&string_id=${m.sender}`) //fetch(`https://api.ibeng.tech/api/info/openai?text=${text}&apikey=tamvan`)
+let resu2 = await ia2.json()
+m.reply(resu2.response.trim())
 
       if (!result) {
         
@@ -49,14 +46,9 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
       console.error('خطأ من الAPI الأول:', error);
 
   
-      const model = 'llama';
-      const senderNumber = m.sender.replace(/[^0-9]/g, ''); 
-      const session = `GURU_BOT_${senderNumber}`;
-      const Zoro2 = `https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`;
-      
-      let response = await fetch(Zoro2);
-      let data = await response.json();
-      let result = data.completion;
+     let tioress = await fetch(`https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`)
+let hasill = await tioress.json()
+m.reply(`${hasill.result}`.trim())
 
       await conn.relayMessage(m.chat, {
         protocolMessage: {
