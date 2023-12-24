@@ -6,7 +6,7 @@ if (!text) throw `قول اي حاجه!`
 
 try {
 
-await m.reply(wait)
+m.react('⚡');
 var apii = await fetch(`https://aemt.me/bard?text=${text}`)
 var res = await apii.json()
 await m.reply(res.result)
@@ -14,6 +14,7 @@ await m.reply(res.result)
 } catch (error) {
 console.error(error)
 throw '*احا ايرور*'
+m.react(done);
 }
 
 }
