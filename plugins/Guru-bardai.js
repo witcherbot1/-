@@ -7,9 +7,18 @@ if (!text) throw `قول اي حاجه!`
 try {
 
 await m.reply(wait)
+const { key } = await conn.sendMessage(m.chat, {
+      image: { url: 'https://telegra.ph/file/d879cbad22d59e9f6c94d.jpg' },
+      caption: 'سيبني افكر....'
+    }, {quoted: m})
 var apii = await fetch(`https://aemt.me/bard?text=${text}`)
 var res = await apii.json()
-await m.reply(res.result)
+await conn.relayMessage(m.chat, {
+        protocolMessage: {
+          key,
+          type: 14,
+          editedMessage: {
+            imageMessage: { caption: result }
 
 } catch (error) {
 console.error(error)
