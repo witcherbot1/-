@@ -1,6 +1,11 @@
 import fetch from 'node-fetch';
-
-let handler = async (m, { text, conn, usedPrefix, command }) => {
+import axios from 'axios'
+import translate from '@vitalets/google-translate-api'
+import { Configuration, OpenAIApi } from 'openai'
+const configuration = new Configuration({ organization: global.openai_org_id, apiKey: global.openai_key });
+const openaiii = new OpenAIApi(configuration);
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+if (usedPrefix == 'a' || usedPrefix == 'A') return    
   if (!text && !(m.quoted && m.quoted.text)) {
     throw `الرجاء تقديم نص أو اي شئ برسالة للحصول على رد.`;
   }
@@ -16,12 +21,12 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
       caption: 'سيبني افكر....'
     }, {quoted: m})
     conn.sendPresenceUpdate('composing', m.chat);
-    const prompt = encodeURIComponent(text);
+   let res = await gpt.ChatGpt(text, syms)
 
-    const guru1 = `${gurubot}/chatgpt?text=${prompt}`;
+    const Zoro1 = `https://api.amosayomide05.cf/gpt/?question=${text}&string_id=${m.sender}`;
     
     try {
-      let response = await fetch(guru1);
+      let response = await fetch(Zoro1);
       let data = await response.json();
       let result = data.result;
 
@@ -47,9 +52,9 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
       const model = 'llama';
       const senderNumber = m.sender.replace(/[^0-9]/g, ''); 
       const session = `GURU_BOT_${senderNumber}`;
-      const guru2 = `https://ultimetron.guruapi.tech/gpt3?prompt=${msg}`;
+      const Zoro2 = `https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`;
       
-      let response = await fetch(guru2);
+      let response = await fetch(Zoro2);
       let data = await response.json();
       let result = data.completion;
 
