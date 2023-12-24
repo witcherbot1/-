@@ -124,7 +124,7 @@ let vn = './media/flash.mp3'
 this.sendPresenceUpdate('recording', m.chat)   
 this.sendFile(m.chat, vn, 'error.mp3', null, m, true, {type: 'audioMessage', ptt: true})}
     
-if (chat.audios && m.text.match(/(ماركو|صوت|انمي19)/gi)) {    
+if (chat.audios && m.text.match(/(ماركو|صوت-انمي19)/gi)) {    
 let vn = './media/marco-1.mp3'
 this.sendPresenceUpdate('recording', m.chat)   
 this.sendFile(m.chat, vn, 'error.mp3', null, m, true, {type: 'audioMessage', ptt: true})}
@@ -139,7 +139,7 @@ let vn = './media/ora.mp3'
 this.sendPresenceUpdate('recording', m.chat)   
 this.sendFile(m.chat, vn, 'error.mp3', null, m, true, {type: 'audioMessage', ptt: true})}
     
-if (chat.audios && m.text.match(/(صوت|انمي21)/gi)) {    
+if (chat.audios && m.text.match(/(صوت-انمي21)/gi)) {    
 let vn = './media/roronoa-zoro.mp3'
 this.sendPresenceUpdate('recording', m.chat)   
 this.sendFile(m.chat, vn, 'error.mp3', null, m, true, {type: 'audioMessage', ptt: true})}
