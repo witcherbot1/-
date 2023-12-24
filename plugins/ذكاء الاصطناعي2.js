@@ -6,7 +6,7 @@ const configuration = new Configuration({ organization: global.openai_org_id, ap
 const openaiii = new OpenAIApi(configuration);
 let handler = async (m, { conn, text, usedPrefix, command }) => {
 if (usedPrefix == 'a' || usedPrefix == 'A') return    
-if (!text) throw `*${lenguajeGB['smsAvisoMG']()}*قم بطلب اي شئ من الذكاء الاصطناعي\n\n❏ *مثال للأستخدام*\n❏ ${usedPrefix + command} *قم بكتابه شعر*\n❏ ${usedPrefix + command} *اريد نصائح للحياه*`     
+if (!text) throw `*['smsAvisoMG']()}*قم بطلب اي شئ من الذكاء الاصطناعي\n\n❏ *مثال للأستخدام*\n❏ ${usedPrefix + command} *قم بكتابه شعر*\n❏ ${usedPrefix + command} *اريد نصائح للحياه*`     
 try {
 conn.sendPresenceUpdate('composing', m.chat)  
 let syms = `قم بالتصرف كأنك بوت واتساب تم انشاؤه بواسطتي انا زورو اسمك Zoro-Bot`
