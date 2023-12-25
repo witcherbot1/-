@@ -13,15 +13,15 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
 [7] سيفوز الفريق إذا خسر الفريق المنافس كل (نقاط الصحة <= 0) وحصل على غنائم الحرب
 
 *❏ C O M M A N D S *
-*${usedPrefix + command} join A/B* = الانضمام إلى اللعبة
-*${usedPrefix + command} left* = اللعبة اليسرى
-*${usedPrefix + command} money 10xx* = الرهان على المال
-*${usedPrefix + command} player* = لعبة لاعب
-*${usedPrefix + command} start* = بدء اللعبة`)
+*${usedPrefix + command} انضم A/B* = الانضمام إلى اللعبة
+*${usedPrefix + command} يسار* = اللعبة اليسرى
+*${usedPrefix + command} مال 10xx* = الرهان على المال
+*${usedPrefix + command} لاعب* = لعبة لاعب
+*${usedPrefix + command} ابدا* = بدء اللعبة`)
 
 
-  if (args[0] == "money"){
-    if (!(m.chat in conn.war)) return m.reply(`*الرجاء إنشاء غرفة أولاً (اكتب .war join)*`)
+  if (args[0] == "حرب-مال"){
+    if (!(m.chat in conn.war)) return m.reply(`*الرجاء إنشاء غرفة أولاً (اكتب .حرب انضم)*`)
     if(m.sender == conn.war[m.chat][0].user){
       if (args[1] != "undefined" && !isNaN(args[1])){
         args[1] = parseInt(args[1])
@@ -37,7 +37,7 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
   }
 
   // JOIN
-  if (args[0] == "join"){
+  if (args[0] == "انضم"){
     
     if (global.db.data.users[m.sender].money < 1000) return m.reply("*أموالك لا تقل عن جنيه مصري. 1000 للعب هذه اللعبة.*")
     // FIRST PLAYER
@@ -49,7 +49,7 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
       for (let i=1;i<10;i++){
         conn.war[m.chat][i] = {"user": "", "hp" : 0, "lvl" : 0, "turn" : false}
       }
-      return m.reply(`*أدخل اللعبة بنجاح كفريق A*\n\n*.war join a/b* = الانضمام إلى اللعبة\n*.war start* = بدء اللعبة`)
+      return m.reply(`*أدخل اللعبة بنجاح كفريق A*\n\n*.حرب انضم a/b* = الانضمام إلى اللعبة\n*.حرب ابدا* = بدء اللعبة`)
     }else {   // NOT FIRST PLAYER
       // IF FULL
       if (conn.war2[m.chat].war) {
@@ -64,14 +64,14 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
               total += 1
             }
           }
-          return m.reply(`*لقد دخلت اللعبة*\n\n*.war join a/b* = الانضمام إلى اللعبة\n*.war start* = بدء اللعبة`)
+          return m.reply(`*لقد دخلت اللعبة*\n\n*.حرب انضم a/b* = الانضمام إلى اللعبة\n*.حرب ابدا* = بدء اللعبة`)
         }
       }
       
       // JOIN MILIH TIM
       if (args[1]){
         if (args[1].toLowerCase() == "a"){
-          if (conn.war2[m.chat].money == 0) return conn.reply(m.chat,`*يساعد @${conn.war[m.chat][0].user.split('@')[0]} تحديد رأس المال الحربي الأولي (الحد الأدنى جنيه مصري. 1.000.000)*\n\n.war money 1000000`,m, {contextInfo : {mentionedJid : [conn.war[m.chat][0].user]}})
+          if (conn.war2[m.chat].money == 0) return conn.reply(m.chat,`*يساعد @${conn.war[m.chat][0].user.split('@')[0]} تحديد رأس المال الحربي الأولي (الحد الأدنى جنيه مصري. 1.000.000)*\n\n.حرب مال 1000000`,m, {contextInfo : {mentionedJid : [conn.war[m.chat][0].user]}})
           return m.reply('a')
           if (global.db.data.users[m.sender].money < conn.war2[m.chat].money) return m.reply(`*أموالك لا تقل عن جنيه مصري. ${conn.war2[m.chat].money.toLocaleString()} للعب هذه اللعبة.*`)
           for (let i = 1 ; i < 5 ; i++) {
@@ -84,11 +84,11 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
                   total += 1
                 }
               }
-              return m.reply(`*أدخل اللعبة بنجاح كفريق A*\n\n*.war join a/b* = الانضمام إلى اللعبة\n*.war start* = بدء اللعبة`)
+              return m.reply(`*أدخل اللعبة بنجاح كفريق A*\n\n*.حرب انضم a/b* = الانضمام إلى اللعبة\n*.حرب ابدا* = بدء اللعبة`)
             }
           } 
         }else if (args[1].toLowerCase() == "b"){
-          if (conn.war2[m.chat].money == 0) return conn.reply(m.chat,`*يساعد @${conn.war[m.chat][0].user.split('@')[0]} تحديد رأس المال الحربي الأولي (الحد الأدنى جنيه مصري. 1000000)*\n\n.war money 1000000`,m, {contextInfo : {mentionedJid : [conn.war[m.chat][0].user]}})
+          if (conn.war2[m.chat].money == 0) return conn.reply(m.chat,`*يساعد @${conn.war[m.chat][0].user.split('@')[0]} تحديد رأس المال الحربي الأولي (الحد الأدنى جنيه مصري. 1000000)*\n\n.حرب مال 1000000`,m, {contextInfo : {mentionedJid : [conn.war[m.chat][0].user]}})
           if (global.db.data.users[m.sender].money < conn.war2[m.chat].money) return m.reply(`*أموالك لا تقل عن جنيه مصري. ${conn.war2[m.chat].money.toLocaleString()} للعب هذه اللعبة.*`)
           for (let i = 5 ; i < 10 ; i++) {
             if (conn.war[m.chat][i].user == ""){
@@ -100,15 +100,15 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
                   total += 1
                 }
               }
-              return m.reply(`*تم الدخول إلى اللعبة بنجاح كفريق B*\n\n*.war join a/b* = الانضمام إلى اللعبة\n*.war start* = بدء اللعبة`)
+              return m.reply(`*تم الدخول إلى اللعبة بنجاح كفريق B*\n\n*.حرب انضم a/b* = الانضمام إلى اللعبة\n*.حرب ابدا* = بدء اللعبة`)
             }
           }
         }else {
-          return m.reply(`*اختر إما الفريق A أو B*\n\n.war انضم إلى A\n.war انضم إلى B`)
+          return m.reply(`*اختر إما الفريق A أو B*\n\n.حرب انضم إلى A\n.حرب انضم إلى B`)
         }
       }else {
         // JOIN SESUAI URUTAN
-        return m.reply(`*اختر إما الفريق A أو B*\n\n.war انضم إلى A\n.war انضم إلى B`)
+        return m.reply(`*اختر إما الفريق A أو B*\n\n.حرب انضم إلى A\n.حرب انضم إلى B`)
       }
       
 
@@ -124,7 +124,7 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
   }
 
   // LEFT GAME
-  if (args[0] == "left"){
+  if (args[0] == "حرب"){
     // IF GAME START
     if (conn.war2[m.chat].war) {
       m.reply(`*لقد بدأت الحرب، لا يمكنك الخروج*`)
@@ -139,7 +139,7 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
   }
 
   // CEK PLAYER
-  if (args[0] == "player"){ 
+  if (args[0] == "لاعب"){ 
     if (!(m.chat in conn.war)) return m.reply(`*لا يوجد لاعبون ينضمون إلى غرفة War Zone*`)
     var teamA = []
     var teamB = []
@@ -159,7 +159,7 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
   }
 
   // START GAME
-  if (args[0] == "start"){
+  if (args[0] == "ابدا"){
     if (conn.war2[m.chat].war) return m.reply(`*لقد بدأت الحرب بالفعل، لا يمكنك الانضمام.*`)
     teamA = 0
     teamB = 0
@@ -176,7 +176,7 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
       for (let i=0;i<5;i++){
         if (conn.war[m.chat][i].user != ""){
           let user = conn.war[m.chat][i].user
-          return conn.reply(m.chat,`*تم بدء اللعبة بنجاح*\n*يرجى @${user.split('@')[0]} لمهاجمة العدو*\n\n.war player = إحصائيات اللاعب\n.attack @tag = هجوم على العدو`, m, {contextInfo: { mentionedJid: [user] }})
+          return conn.reply(m.chat,`*تم بدء اللعبة بنجاح*\n*يرجى @${user.split('@')[0]} لمهاجمة العدو*\n\n.حرب لاعب = إحصائيات اللاعب\n.هجوم @منشن = هجوم على العدو`, m, {contextInfo: { mentionedJid: [user] }})
         }
       }
     }else {
@@ -193,6 +193,6 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
 }
 handler.help = ['war']
 handler.tags = ['game']
-handler.command = /^(war)$/i
+handler.command = /^(حرب)$/i
 handler.group = true
 export default handler
