@@ -4,16 +4,16 @@ const handler = async (m, {usedPrefix}) => {
   else who = m.sender;
   const name = conn.getName(who);
   m.reply(`
-┌───⊷ 𝐁𝐀𝐋𝐀𝐍𝐂𝐄 ⊶
-▢ *𝙽𝚘𝚖𝚋𝚛𝚎:* ${name}
-▢ *𝙳𝚒𝚊𝚖𝚊𝚗𝚝𝚎𝚜:* ${global.db.data.users[who].limit}💎
+┌───⊷ *الماس* ⊶
+▢ *الاسم:* ${name}
+▢ *الماس:* ${global.db.data.users[who].limit}💎
 └──────────────
-*𝙽𝙾𝚃𝙰:* 
-*𝙿𝚞𝚎𝚍𝚎𝚜 𝚌𝚘𝚖𝚙𝚛𝚊𝚛 𝚍𝚒𝚊𝚖𝚊𝚗𝚝𝚎𝚜 💎 𝚞𝚜𝚊𝚗𝚍𝚘 𝚕𝚘𝚜 𝚌𝚘𝚖𝚊𝚗𝚍𝚘𝚜*
-❏ *${usedPrefix}buy <cantidad>*
-❏ *${usedPrefix}buyall*`);
+*ملاحظات:* 
+*يمكنك شراء الماس باستخدام الأوامر التالية 💎*
+❏ *${usedPrefix}شراء <cantidad>*
+❏ *${usedPrefix}شراءالكل*`);
 };
 handler.help = ['bal'];
 handler.tags = ['xp'];
-handler.command = ['bal', 'diamantes', 'diamond', 'balance'];
+handler.command = ['bal', 'diamantes', 'الماس', 'balance'];
 export default handler;
