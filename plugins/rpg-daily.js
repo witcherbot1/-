@@ -46,7 +46,7 @@ const handler = async (m, {isPrems, conn}) => {
     texto += `*+${recompensas[reward]}* ${global.rpgshop.emoticon(reward)}\n┃ `;
   }
   const text = `╭━━🎁━🎁━🎁━━⬣
-┃ ✨ *مكافآت يومية*
+┃ ✨ *مكافآتك اليومية*
 ┃ *${premium ? '🎟️ مكافأة بريميوم' : '🆓 مكافأة مجانية'}*
 ┃ ${texto}
 ╰━━🎁━🎁━🎁━━⬣\n\n🎟️ *بريميوم:* ${premium ? '✅' : '❌'}\n${wm}`;
