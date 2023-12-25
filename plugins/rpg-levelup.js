@@ -8,28 +8,28 @@ const handler = async (m, { conn }) => {
   if (!canLevelUp(user.level, user.exp, global.multiplier)) {
     const { min, xp, max } = xpRange(user.level, global.multiplier);
     const message = `
-🏰 *Gremio de Aventureros*
-*¡Bienvenido, ${usertag}!*
+🏰 *نقابة المغامرين*
+*مرحبًا، ${usertag}!*
 
-*◉ Nivel actual:* ${user.level}
-*◉ Rango actual:* ${user.role}
-*◉ Puntos de Experiencia:* ${user.exp - min}/${xp}
+*◉ المستوى الحالي:* ${user.level}
+*◉ الرتبة الحالية:* ${user.role}
+*◉ نقاط الخبرة:* ${user.exp - min}/${xp}
 
-*—◉ Para ascender de nivel necesitas obtener ${max - user.exp} puntos de experiencia más. Sigue interactuando con el Bot!.*`.trim();
+*—◉ للارتقاء بالمستوى، يجب عليك الحصول على ${max - user.exp} نقطة خبرة إضافية. استمر في التفاعل مع البوت!*`.trim();
     return conn.sendMessage(m.chat, {text: message, mentions: [m.sender]}, {quoted: m});
   }
   const before = user.level * 1;
   while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++;
   if (before !== user.level) {
-    const levelUpMessage = `🎉 ¡Felicidades, ${name}! Has subido de nivel a ${user.level}`;
+    const levelUpMessage = `🎉 ¡مبرووووك، ${name}! لقد ارتقيت إلى المستوى ${user.level}`;
     const levelUpDetails = `
-🚀 *Nuevo Nivel Alcanzado*
+🚀 *تقدم في المستوى جديد*
 
-*◉ Nivel anterior:* ${before}
-*◉ Nuevo nivel:* ${user.level}
-*◉ Rango actual:* ${user.role}
+*◉ المستوى السابق:* ${before}
+*◉ المستوى الجديد:* ${user.level}
+*◉ الرتبة الحالية:* ${user.role}
 
-*—◉ Continúa explorando y realizando misiones para alcanzar nuevas alturas en el Gremio de Aventureros. Sigue interactuando con el Bot!.*`.trim();
+*—◉ استمر في استكشاف وأداء المهام لتحقيق إنجازات جديدة في نقابة المغامرين. استمر في التفاعل مع البوت!*`.trim();
     try {
       const levelUpImage = await levelup(levelUpMessage, user.level);
       conn.sendFile(m.chat, levelUpImage, 'levelup.jpg', levelUpDetails, m);
@@ -40,5 +40,5 @@ const handler = async (m, { conn }) => {
 };
 handler.help = ['levelup'];
 handler.tags = ['xp'];
-handler.command = ['nivel', 'lvl', 'levelup', 'level'];
+handler.command = ['مستواي', 'لفل', 'levelup', 'مستوي'];
 export default handler;
