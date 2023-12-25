@@ -49,7 +49,7 @@ const handler = async (m, {conn}) => {
   const ar11 = `${['🪚', '⛏️', '🧨', '💣', '🔫', '🔪', '🗡️', '🏹', '🦾', '🥊', '🧹', '🔨', '🛻'].getRandom()}`;
   const ar12 = `${['🪚', '⛏️', '🧨', '💣', '🔫', '🔪', '🗡️', '🏹', '🦾', '🥊', '🧹', '🔨', '🛻'].getRandom()}`;
   const hsl = `
-*✧ Resultados de la caza ${conn.getName(m.sender)} ✧*
+*✧ نتائج الصيد ${conn.getName(m.sender)} ✧*
 
  *🐂 ${ar1} ${anti1}*			 *🐃 ${ar7} ${anti7}*
  *🐅 ${ar2} ${anti2}*			 *🐮 ${ar8} ${anti8}*
@@ -71,7 +71,7 @@ const handler = async (m, {conn}) => {
   global.db.data.users[m.sender].ayam += rbrb12;
 
   const time = global.db.data.users[m.sender].lastberburu + 2700000; // 45 Minutos
-  if (new Date - global.db.data.users[m.sender].lastberburu < 2700000) return conn.reply(m.chat, `𝙿𝙾𝚁 𝙵𝙰𝚅𝙾𝚁 𝙳𝙴𝚂𝙲𝙰𝙽𝚂𝙰 𝚄𝙽 𝙼𝙾𝙼𝙴𝙽𝚃𝙾 𝙿𝙰𝚁𝙰 𝚂𝙴𝙶𝚄𝙸𝚁 𝙲𝙰𝚉𝙰𝙽𝙳𝙾\n\n⫹⫺ 𝚃𝙸𝙴𝙼𝙿𝙾 ${clockString(time - new Date())}\n${wm}`, m);
+  if (new Date - global.db.data.users[m.sender].lastberburu < 2700000) return conn.reply(m.chat, `لم يمر وقت كافي لإجراء المزيد من الصيد، يرجى الانتظار\n\n⫹⫺ الوقت المتبقي ${clockString(time - new Date())}\n${wm}`, m);
   // conn.sendButton(m.chat, `𝙿𝙾𝚁 𝙵𝙰𝚅𝙾𝚁 𝙳𝙴𝚂𝙲𝙰𝙽𝚂𝙰 𝚄𝙽 𝙼𝙾𝙼𝙴𝙽𝚃𝙾 𝙿𝙰𝚁𝙰 𝚂𝙴𝙶𝚄𝙸𝚁 𝙲𝙰𝚉𝙰𝙽𝙳𝙾`, `⫹⫺ 𝚃𝙸𝙴𝙼𝙿𝙾 ${clockString(time - new Date())}\n${wm}`, null, [['🏞️ 𝙰𝙽𝙸𝙼𝙰𝙻𝙴𝚂 𝙲𝙰𝙿𝚃𝚄𝚁𝙰𝙳𝙾𝚂 ', '.kandang'],[`🎒 𝙸𝙽𝚅𝙴𝙽𝚃𝙰𝙴𝚁𝙸𝙾`, `.inventario`]], m)
 
   setTimeout(() => {
@@ -82,19 +82,19 @@ const handler = async (m, {conn}) => {
   }, 20000);
 
   setTimeout(() => {
-    conn.reply(m.chat, `@${m.sender.split('@s.whatsapp.net')[0]} *${['OBJETIVO FIJADO 🎯', 'Carnada en Marcha 🍫 🍇 🍖', 'ANIMALES DETECTADOS!! 🐂 🐅 🐘 🐼', 'ANIMALES DETECTADOS!! 🐖 🐃 🐮 🐒'].getRandom()}*`, null, {mentions: [m.sender]});
+    conn.reply(m.chat, `@${m.sender.split('@s.whatsapp.net')[0]} *${['الحيوانات اكتشفت 🎯', 'طعام في الطريق 🍫 🍇 🍖', 'تم تحديد الهدف!! 🐂 🐅 🐘 🐼', 'حيوانات اكشتفت!! 🐖 🐃 🐮 🐒'].getRandom()}*`, null, {mentions: [m.sender]});
   }, 18000);
   // conn.sendHydrated(m.chat, `${conn.getName(m.sender)} *${['OBJETIVO FIJADO`${conn.getName(m.sender)} *${['OBJETIVO FIJADO 🎯','Carnada en Marcha 🍫 🍇 🍖','ANIMALES DETECTADOS!! 🐂 🐅 🐘 🐼','ANIMALES DETECTADOS!! 🐖 🐃 🐮 🐒'].getRandom()}*` 🎯','Carnada en Marcha 🍫 🍇 🍖','ANIMALES DETECTADOS!! 🐂 🐅 🐘 🐼','ANIMALES DETECTADOS!! 🐖 🐃 🐮 🐒'].getRandom()}*`, wm, null, null, null, null, null, [
   // [null, null]], null)}, 18000)
 
   setTimeout(() => {
-    conn.reply(m.chat, `@${m.sender.split('@s.whatsapp.net')[0]} *${['Armas lista para la Caza!!', 'Probando Armas 🔫 💣 🪓 🏹', 'CARROS PARA LA CAZA!! 🚗 🏍️ 🚜', 'TIEMPO BUENO PARA LA CAZA 🧤'].getRandom()}*`, null, {mentions: [m.sender]});
+    conn.reply(m.chat, `@${m.sender.split('@s.whatsapp.net')[0]} *${['جو مناسب للصيد!!', 'اسلحه الصيد 🔫 💣 🪓 🏹', 'السيارات!! 🚗 🏍️ 🚜', 'عاملون 🧤'].getRandom()}*`, null, {mentions: [m.sender]});
   }, 15000);
-  // conn.sendHydrated(m.chat, `${conn.getName(m.sender)} *${['Armas lista para la Caza!!','Probando Armas 🔫 💣 🪓 🏹','CARROS PARA LA CAZA!! 🚗 🏍️ 🚜','TIEMPO BUENO PARA LA CAZA 🧤'].getRandom()}*`, wm, null, null, null, null, null, [
+  // conn.sendHydrated(m.chat, `${conn.getName(m.sender)} *${['أبحث عن أدوات الصيد...', 'جارٍ تجهيز كل شيء الصيد!! 🔫 💣 🪓 🏹','إنشاء موقع الصيد...', 'تحضير مكان الصيد!!''].getRandom()}*`, wm, null, null, null, null, null, [
   // [null, null]], null)}, 15000)
 
   setTimeout(() => {
-    conn.reply(m.chat, `@${m.sender.split('@s.whatsapp.net')[0]} *${['Buscando implementos de caza...', 'Alistando todo para la caza!!', 'Estableciendo Lugar de la Caza...', 'PREPARANDO LUGAR DE CAZA!!'].getRandom()}*`, m, m.mentionedJid ? {mentions: [m.sender]} : {});
+    conn.reply(m.chat, `@${m.sender.split('@s.whatsapp.net')[0]} *${['أبحث عن أدوات الصيد...', 'جارٍ تجهيز كل شيء الصيد!!', 'إنشاء موقع الصيد...', 'تحضير مكان الصيد!!'].getRandom()}*`, m, m.mentionedJid ? {mentions: [m.sender]} : {});
   }, 0);
   // conn.sendHydrated(m.chat, `${conn.getName(m.sender)} *${['Buscando implementos de caza...','Alistando todo para la caza!!','Estableciendo Lugar de la Caza...','PREPARANDO LUGAR DE CAZA!!'].getRandom()}*`, wm, null, null, null, null, null, [
   // [null, null]], null)}, 0)
@@ -102,7 +102,7 @@ const handler = async (m, {conn}) => {
 };
 handler.help = ['berburu'];
 handler.tags = ['rpg'];
-handler.command = /^(hunt|berburu|caza(r)?)$/i;
+handler.command = /^(صيد|berburu|caza(r)?)$/i;
 handler.group = true;
 export default handler;
 
