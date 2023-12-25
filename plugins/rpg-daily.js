@@ -37,7 +37,7 @@ const handler = async (m, {isPrems, conn}) => {
   };
 
   const time = user.lastclaim + 7200000; // 2 Horas 7200000
-  if (new Date - user.lastclaim < 7200000) return await conn.reply(m.chat, `𝙔𝘼 𝙍𝙀𝘾𝙇𝘼𝙈𝘼𝙎𝙏𝙀 𝙏𝙐 𝙍𝙀𝙂𝘼𝙇𝙊 🎁\n𝙑𝙐𝙀𝙇𝙑𝙀 𝙀𝙉 *${msToTime(time - new Date())}* 𝙋𝘼𝙍𝘼 𝙑𝙊𝙇𝙑𝙀𝙍 𝘼 𝙍𝙀𝘾𝙇𝘼𝙈𝘼𝙍`, fkontak, m);
+  if (new Date - user.lastclaim < 7200000) return await conn.reply(m.chat, `تم الاستلام مسبقًا 🎁\nمن فضلك انتظر *${msToTime(time - new Date())}* لاستلام مكافأتك اليومية مرة أخرى`, fkontak, m);
   // await conn.sendButton(m.chat, `𝙔𝘼 𝙍𝙀𝘾𝙇𝘼𝙈𝘼𝙎𝙏𝙀 𝙏𝙐 𝙍𝙀𝙂𝘼𝙇𝙊 🎁\n𝙑𝙐𝙀𝙇𝙑𝙀 𝙀𝙉 *${msToTime(time - new Date())}* 𝙋𝘼𝙍𝘼 𝙑𝙊𝙇𝙑𝙀𝙍 𝘼 𝙍𝙀𝘾𝙇𝘼𝙈𝘼𝙍`, wm, null, [['𝗠 𝗘 𝗡 𝗨 ☘️', '/menu']], fkontak, m)
   let texto = '';
   for (const reward of Object.keys(recompensas)) {
@@ -46,18 +46,18 @@ const handler = async (m, {isPrems, conn}) => {
     texto += `*+${recompensas[reward]}* ${global.rpgshop.emoticon(reward)}\n┃ `;
   }
   const text = `╭━━🎁━🎁━🎁━━⬣
-┃ ✨ 𝙊𝘽𝙏𝙄𝙀𝙉𝙀𝙎 𝙐𝙉 𝙍𝙀𝙂𝘼𝙇𝙊!!
-┃ *${premium ? '🎟️ Recompensa Premium' : '🆓 Recompensa Gratis'}*
+┃ ✨ *مكافآت يومية*
+┃ *${premium ? '🎟️ مكافأة بريميوم' : '🆓 مكافأة مجانية'}*
 ┃ ${texto}
-╰━━🎁━🎁━🎁━━⬣\n\n🎟️ 𝗣 𝗥 𝗘 𝗠 𝗜 𝗨 𝗠 ⇢ ${premium ? '✅' : '❌'}\n${wm}`;
+╰━━🎁━🎁━🎁━━⬣\n\n🎟️ *بريميوم:* ${premium ? '✅' : '❌'}\n${wm}`;
   const img = './Menu.png';
-  await conn.sendFile(m.chat, img, 'mystic.jpg', text, fkontak);
+  await conn.sendFile(m.chat, img, 'Zoro.jpg', text, fkontak);
   // await conn.sendButton(m.chat, text, texto + `\n\n🎟️ 𝗣 𝗥 𝗘 𝗠 𝗜 𝗨 𝗠 ⇢ ${premium ? '✅' : '❌'}\n${wm}`, img, [['⛰️ 𝘼𝘽𝙍𝙄𝙍 𝘾𝙊𝙁𝙍𝙀 | 𝘾𝙊𝙁𝙁𝙀𝙍 ⛰️', '/cofre'], ['𝙑𝙤𝙡𝙫𝙚𝙧 𝙖𝙡 𝙈𝙚𝙣𝙪́ | 𝘽𝙖𝙘𝙠 𝙩𝙤 𝙈𝙚𝙣𝙪 ☘️', '/menu']], m, dos.getRandom())
   user.lastclaim = new Date * 1;
 };
 handler.help = ['daily'];
 handler.tags = ['xp'];
-handler.command = ['daily', 'reclamar', 'reclamo', 'regalo', 'claim'];
+handler.command = ['يومي', 'ديلي', 'reclamo', 'regalo', 'claim'];
 export default handler;
 
 function pickRandom(list) {
@@ -74,5 +74,5 @@ function msToTime(duration) {
   minutes = (minutes < 10) ? '0' + minutes : minutes;
   seconds = (seconds < 10) ? '0' + seconds : seconds;
 
-  return hours + ' Horas ' + minutes + ' Minutos';
+  return hours + ' ساعه ' + minutes + ' دقائق';
 }
