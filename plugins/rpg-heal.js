@@ -13,8 +13,7 @@ const handler = async (m, {conn, args, usedPrefix, __dirname}) => {
     return conn.reply(m.chat, `*${htki} الصفقة الصحية نقصت ${htka}\n\nاحتياج ${count - user.potion} من الصفقات 🥤 للشراء
 الصحة » ${user.health} ❤️
 الصفقات » ${user.potion} 🥤
-قم بشراء المزيد من الصفقات من محل الساحر لتتمكن من تبرع للآخرين 🥤
-𝙲𝙾𝙼𝙿𝚁𝙰 𝙿𝙾𝙲𝙸𝙾𝙽 𝙾 𝙿𝙸𝙳𝙴𝙻𝙴 𝙰 𝙰𝙻𝙶𝚄𝙸𝙴𝙽 𝚀𝚄𝙴 𝚃𝙴 𝚃𝚁𝙰𝙽𝚂𝙵𝙸𝙴𝚁𝙰`, m);
+قم بشراء المزيد من الصفقات من محل الساحر لتتمكن من تبرع للآخرين 🥤`, m);
   }
   /* conn.sendButton(m.chat,`${htki} 𝚂𝙸𝙽 𝙿𝙾𝙲𝙸𝙾𝙽𝙴𝚂 ${htka}`,
 `𝙽𝙴𝙲𝙴𝚂𝙸𝚃𝙰𝚂 ${count - user.potion} 𝙿𝙾𝙲𝙸𝙾𝙽 🥤 𝙿𝙰𝚁𝙰 𝙲𝚄𝚁𝙰𝚁𝚃𝙴
