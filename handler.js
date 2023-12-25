@@ -1529,21 +1529,30 @@ let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'nu
 }
 
 global.dfail = (type, m, conn) => {
-  const msg = {
-    rowner: '*[ ℹ️ ] Este comando solo puede ser utilizado por el propietario del bot.*',
-    owner: '*[ ℹ️ ] Este comando solo puede ser utilizado por el propietario del bot.*',
-    mods: '*[ ℹ️ ] Este comando solo puede ser utilizado por moderadores y el propietario del bot.*',
-    premium: '*[ ℹ️ ] Este comando solo puede ser utilizado por usurios premium y el propietario del bot.*',
-    group: '*[ ℹ️ ] Este comando solo puede ser utilizado en grupos.*',
-    private: '*[ ℹ️ ] Este comando solo puede ser utilizado en el chat privado del bot.*',
-    admin: '*[ ℹ️ ] Este comando solo puede ser usado por administradores del grupo.*',
-    botAdmin: '*[ ℹ️ ] Para utilizar este comando es necesario que el bot sea administrador del grupo.*',
-    unreg: '*[ ℹ️ ] Para utilizar este comando debes estar registrado.*\n\n*[ 💡 ] Utiliza el comando:* _/verificar nombre.edad_ *para registrarte.*',
-    restrict: '*[ ℹ️ ] Este comando fue desactivado por el propietario del bot.*',
-  }[type];
-  const aa = {quoted: m, userJid: conn.user.jid};
-  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '*[ ⚠ ] Advertencia*', body: 'ᴛʜᴇ ᴍʏsᴛɪᴄ - ʙᴏᴛ', thumbnail: imagen1, sourceUrl: 'https://github.com/BrunoSobrino/TheMystic-Bot-MD'}}}}, aa);
-  if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id});
+    let msg = {
+        rowner: '*『 الميزه دي للمطور بس! 』*',
+        owner: '*『 الميزه دي للمطور بس يحب ! 』*',
+        mods: '*『 الميزه دي لمالك البوت بس ! 』*',
+        premium: '*『 الميزه دي للاعضاء المميزين بس ! 』*',
+        group: '*『 الميزه دي في الجروبات بس ! 』*',
+        private: '*『 الميزه دي للبرايفت - الخاص بس ! 』*',
+        admin: '*『 الميزه دي للادمنز بس! 』*',
+        botAdmin: '*『 ارفع البوت ادمن الاول ! 』*',
+        unreg: '*[ لحظة !! انت مش مسجل ]*\n\n*『 سجل الامر عشان تفعله 』*\n*➣ #تفعيل*',
+        restrict: '*『 الميزه دي المالك لغيها ! 』*'
+    }[type]
+    let aa = { quoted: m, userJid: conn.user.jid }
+    let prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: '[ ⚠ ] تنبيه - إشعار', body: 'ᴛʜᴇ Zoro - ʙᴏᴛ', thumbnail: imagen1, sourceUrl: 'https://github.com/BrunoSobrino/TheMystic-Bot-MD' }}}}, aa)
+    if (msg) return conn.relayMessage(m.chat, prep.message, { messageId: prep.key.id })
+    //if (msg) return m.reply(msg)
+}
+
+let file = global.__filename(import.meta.url, true)
+watchFile(file, async () => {
+    unwatchFile(file)
+    console.log(chalk.redBright("Update 'handler.js'"))
+    if (global.reloadHandler) console.log(await global.reloadHandler())
+});
 };
 
 const file = global.__filename(import.meta.url, true);
