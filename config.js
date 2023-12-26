@@ -6,6 +6,7 @@ import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import axios from 'axios';
 import moment from 'moment-timezone';
+import { en, es, id, ar, pt } from './lib/idiomas/total-idiomas.js'
 
 global.botnumber = ""
 
@@ -35,6 +36,8 @@ global.owner = [
 
 global.suittag = ['201032389641'];
 global.prems = ['201032389641'];
+
+global.lenguajeGB = ar  //Idioma de The-LoliBot-MD, Ejemplo: es | en | pt...
 // Sticker WM
 global.botname = '𝒁𝑶𝑹𝑶'
 global.premium = 'true'
