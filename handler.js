@@ -1529,34 +1529,27 @@ let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'nu
 }
 
 global.dfail = (type, m, conn) => {
-  let msg = {
-    rowner: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل مالك البوت.*',
-    owner: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل مالك البوت.*',
-    mods: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل المشرفين ومالك البوت.*',
-    premium: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل مستخدمي النسخة المميزة ومالك البوت.*',
-    group: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط في المجموعات.*',
-    private: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط في المحادثة الخاصة للبوت.*',
-    admin: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل مسؤولي المجموعة.*',
-    botAdmin: '*[ ℹ️ ] لاستخدام هذا الأمر، يجب أن أكون مسؤولًا في المجموعة.*',
-    unreg: '*[ 🛑 انتبه!! انت غير مسجل 🛑 ]*\n\n*—◉ لاستخدام هذا الأمر، يجب عليك التسجيل، استخدم الأمر:*\n*➣ #verificar اسم.عمر*',
-    restrict: '*[ ℹ️ ] هذا الأمر تم تقييده/تعطيله بقرار من مالك البوت.*',
-  }[type]
-  let aa = {quoted: m, userJid: conn.user.jid}
-  let prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '*[ ⚠ ] تنبيه - التنبيه*', body: 'The ZoroBot', thumbnail: imagen1, sourceUrl: 'https://solo.to/yosef.zoro'}}}}, aa)
-  if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id})
+    let msg = {
+        rowner: '*『 الميزه دي للمطور بس! 』*',
+        owner: '*『 الميزه دي للمطور بس يحب ! 』*',
+        mods: '*『 الميزه دي لمالك البوت بس ! 』*',
+        premium: '*『 الميزه دي للاعضاء المميزين بس ! 』*',
+        group: '*『 الميزه دي في الجروبات بس ! 』*',
+        private: '*『 الميزه دي للبرايفت - الخاص بس ! 』*',
+        admin: '*『 الميزه دي للادمنز بس! 』*',
+        botAdmin: '*『 ارفع البوت ادمن الاول ! 』*',
+        unreg: '*[ لحظة !! انت مش مسجل ]*\n\n*『 سجل الامر عشان تفعله 』*\n*➣ #تفعيل*',
+        restrict: '*『 الميزه دي المالك لغيها ! 』*'
+    }[type]
+    let aa = { quoted: m, userJid: conn.user.jid }
+    let prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: '[ ⚠ ] تنبيه - إشعار', body: 'ᴛʜᴇ Zoro - ʙᴏᴛ', thumbnail: imagen1, sourceUrl: 'https://github.com/BrunoSobrino/TheMystic-Bot-MD' }}}}, aa)
+    if (msg) return conn.relayMessage(m.chat, prep.message, { messageId: prep.key.id })
+    //if (msg) return m.reply(msg)
 }
 
 let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {
-  unwatchFile(file);
-  console.log(chalk.redBright('Update \'handler.js\''))
-  if (global.reloadHandler) console.log(await global.reloadHandler())
-  
-  if (global.conns && global.conns.length > 0 ) {
-    let users = [...new Set([...global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
-    for (const userr of users) {
-      userr.subreloadHandler(false)
-    }
-  }
-  
+    unwatchFile(file)
+    console.log(chalk.redBright("Update 'handler.js'"))
+    if (global.reloadHandler) console.log(await global.reloadHandler())
 })
