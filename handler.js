@@ -1262,7 +1262,7 @@ const messageText = `❰ ⚠️ ❱ *¡المستخدم محظور!* ❰ ⚠️ 
           m.exp += xp;
         }
         if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-          mconn.conn.reply(m.chat, `*[ 💎 ] لقد نفدت النقاط الخاصة بك (الماس)، يمكنك الحصول على المزيد باستخدام الأمر:* _${usedPrefix}buyall_`, m);
+          mconn.conn.reply(m.chat, `*[ 💎 ] لقد نفدت النقاط الخاصة بك (الماس)، يمكنك الحصول على المزيد باستخدام الأمر:* _${usedPrefix}شراءالكل_`, m);
           continue; 
         }
         if (plugin.level > _user.level) {
@@ -1505,8 +1505,8 @@ export async function callUpdate(callUpdate) {
 
 export async function deleteUpdate(message) {
 let d = new Date(new Date + 3600000)
-let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' })
- let time = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })
+let date = d.toLocaleDateString('ar', { day: 'numeric', month: 'long', year: 'numeric' })
+ let time = d.toLocaleString('ar-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })
     try {
         const { fromMe, id, participant } = message
         if (fromMe) return 
