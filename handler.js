@@ -1210,94 +1210,66 @@ const messageText = `❰ ⚠️ ❱ *¡المستخدم محظور!* ❰ ⚠️ 
             user.commandCount = 1;
           }
         }
-	        let hl = _prefix;
-        let adminMode = global.db.data.chats[m.chat].modoadmin;
-        let dorrat = `${
-          comandos.botAdmin || comandos.admin || comandos.group || comandos || noPrefix || hl || m.text.slice(0, 1) == hl || comandos.command
-        }`;
-        if (adminMode && !isOwner && !isROwner && m.isGroup && !isAdmin && dorrat) return;
+	        const hl = _prefix;
+        const adminMode = global.db.data.chats[m.chat].modoadmin;
+        const mystica = `${plugin.botAdmin || plugin.admin || plugin.group || plugin || noPrefix || hl || m.text.slice(0, 1) == hl || plugin.command}`;
+        if (adminMode && !isOwner && !isROwner && m.isGroup && !isAdmin && mystica) return;
 
-        if (comandos.rowner && comandos.owner && !(isROwner || isOwner)) {
-          // Both Owner
-          fail("owner", m, this);
+        if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Both Owner
+          fail('owner', m, this);
           continue;
         }
-        if (comandos.rowner && !isROwner) {
-          // Real Owner
-          fail("rowner", m, this);
+        if (plugin.rowner && !isROwner) { // Real Owner
+          fail('rowner', m, this);
           continue;
         }
-        if (comandos.owner && !isOwner) {
-          // Number Owner
-          fail("owner", m, this);
+        if (plugin.owner && !isOwner) { // Number Owner
+          fail('owner', m, this);
           continue;
         }
-        if (comandos.mods && !isMods) {
-          // Moderator
-          fail("mods", m, this);
+        if (plugin.mods && !isMods) { // Moderator
+          fail('mods', m, this);
           continue;
         }
-        if (comandos.premium && !isPrems) {
-          // Premium
-          fail("premium", m, this);
+        if (plugin.premium && !isPrems) { // Premium
+          fail('premium', m, this);
           continue;
         }
-        if (comandos.group && !m.isGroup) {
-          // Group Only
-          fail("group", m, this);
+        if (plugin.group && !m.isGroup) { // Group Only
+          fail('group', m, this);
           continue;
-        } else if (comandos.botAdmin && !isBotAdmin) {
-          // You Admin
-          fail("botAdmin", m, this);
+        } else if (plugin.botAdmin && !isBotAdmin) { // You Admin
+          fail('botAdmin', m, this);
           continue;
-        } else if (comandos.admin && !isAdmin) {
-          // User Admin
-          fail("admin", m, this);
+        } else if (plugin.admin && !isAdmin) { // User Admin
+          fail('admin', m, this);
           continue;
         }
-        if (comandos.private && m.isGroup) {
-          // Private Chat Only
-          fail("private", m, this);
+        if (plugin.private && m.isGroup) { // Private Chat Only
+          fail('private', m, this);
           continue;
         }
-        if (comandos.register == true && _user.registered == false) {
-          // Butuh daftar?
-          fail("unreg", m, this);
+        if (plugin.register == true && _user.registered == false) { // Butuh daftar?
+          fail('unreg', m, this);
           continue;
         }
         m.isCommand = true;
-        let xp = "exp" in comandos ? parseInt(comandos.exp) : 17; // XP Earning per command
-        if (xp > 2000) m.reply("Ngecit -_-"); // Hehehe
-        else m.exp += xp;
-        if (isPrems && comandos.limit && global.db.data.users[m.sender].limit < comandos.limit * 1) {
-          this.reply(
-            m.chat,
-            `${ag}\n𝙉𝙊 𝙏𝙄𝙀𝙉𝙀 𝘿𝙄𝘼𝙈𝘼𝙉𝙏𝙀𝙎. 💎 𝙋𝙐𝙀𝘿𝙀 𝘾𝙊𝙈𝙋𝙍𝘼𝙍 𝘾𝙊𝙉 𝙀𝙇 𝘾𝙊𝙈𝘼𝙉𝘿𝙊 *${usedPrefix}buy*\n\n𝙄𝙏 𝙃𝘼𝙎 𝙉𝙊 𝘿𝙄𝘼𝙈𝙊𝙉𝘿𝙎. 💎 𝙔𝙊𝙐 𝘾𝘼𝙉 𝘽𝙐𝙔 𝙒𝙄𝙏𝙃 𝙏𝙃𝙀 𝘾𝙊𝙈𝙈𝘼𝙉𝘿 *${usedPrefix}buy*`,
-            m
-          );
-          continue; // Limit habis
+        const xp = 'exp' in plugin ? parseInt(plugin.exp) : 17; // XP Earning per command
+        if (xp > 200) {
+          m.reply('Ngecit -_-');
+        } // Hehehe
+        else {
+          m.exp += xp;
         }
-        if (!isPrems && comandos.dolares && global.db.data.users[m.sender].dolares < comandos.dolares * 1) {
-          this.reply(
-            m.chat,
-            `${ag}\n*No tiene dólares* 💵\n\n*puede conseguir 💵 con el comando #trabajar*`,
-            m
-          );
-          continue;
+        if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
+          mconn.conn.reply(m.chat, `*[ 💎 ] لقد نفدت النقاط الخاصة بك (الماس)، يمكنك الحصول على المزيد باستخدام الأمر:* _${usedPrefix}buyall_`, m);
+          continue; 
         }
-        if (!isPrems && comandos.bitcoins && global.db.data.users[m.sender].bitcoins < comandos.bitcoins * 1) {
-          this.reply(m.chat, `${ag}\n\n*No tiene bitcoins* 🏵️\n\n *puede conseguir Bitcoins 🏵️ comprando con #buy bitcoins [cantidad]*`, m);
-          continue;
+        if (plugin.level > _user.level) {
+          mconn.conn.reply(m.chat, `*[ 💠 ] يتطلب الأمر وجود مستوى ${plugin.level} لتتمكن من استخدام هذا الأمر. مستواك الحالي هو ${_user.level}, ستخدم الأمر ${usedPrefix}لرفع مستوي بالخبرة..*`, m);
+          continue; 
         }
-        if (comandos.level > _user.level) {
-          this.reply(
-            m.chat,
-            `𝙉𝙀𝘾𝙀𝙎𝙄𝙏𝘼 𝙀𝙇 𝙉𝙄𝙑𝙀𝙇 ➡️ *${comandos.level}* 𝙋𝘼𝙍𝘼 𝙋𝙊𝘿𝙀𝙍 𝙐𝙎𝘼𝙍 𝙀𝙎𝙏𝙀 𝘾𝙊𝙈𝘼𝙉𝘿𝙊. 𝙏𝙐 𝙉𝙄𝙑𝙀𝙇 𝙀𝙎 ➡️ *${_user.level}* 𝘼𝘾𝙏𝙐𝘼𝙇𝙄𝙕𝘼 𝙏𝙐 𝙉𝙄𝙑𝙀𝙇 𝘾𝙊𝙉 𝙀𝙇 𝘾𝙊𝙈𝘼𝙉𝘿𝙊 *${usedPrefix}nivel*\n\n𝙈𝙐𝙎𝙏 𝙍𝙀𝘼𝘾𝙃 𝙏𝙃𝙀 𝙇𝙀𝙑𝙀𝙇 #️⃣ *${comandos.level}* 𝙏𝙊 𝘽𝙀 𝘼𝘽𝙇𝙀 𝙏𝙊 𝙐𝙎𝙀 𝙏𝙃𝙄𝙎 𝘾𝙊𝙈𝙈𝘼𝙉𝘿. 𝙔𝙊𝙐𝙍 𝙇𝙀𝙑𝙀𝙇 𝙄𝙎 #️⃣ *${_user.level}* 𝙐𝙋𝘿𝘼𝙏𝙀 𝙒𝙄𝙏𝙃 𝘾𝙊𝙈𝙈𝘼𝙉𝘿 *${usedPrefix}level*`,
-            m
-          );
-          continue; // If the level has not been reached
-        }
-        let extra = {
+        const extra = {
           match,
           usedPrefix,
           noPrefix,
@@ -1321,43 +1293,50 @@ const messageText = `❰ ⚠️ ❱ *¡المستخدم محظور!* ❰ ⚠️ 
           __filename,
         };
         try {
-          await comandos.call(this, m, extra);
-          if (!isPrems) m.limit = m.limit || comandos.limit || false;
-          m.dolares = m.dolares || comandos.dolares || false;
+          await plugin.call(this, m, extra);
+          if (!isPrems) {
+            m.limit = m.limit || plugin.limit || false;
+          }
         } catch (e) {
-          // Error occured
           m.error = e;
           console.error(e);
           if (e) {
             let text = format(e);
-            for (let key of Object.values(global.APIKeys)) text = text.replace(new RegExp(key, "g"), "#HIDDEN#");
-            if (e.name)
-              for (let [jid] of global.mods.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
-                let data = (await conn.onWhatsApp(jid))[0] || {};
-                if (data.exists)
-                  m.reply(
-                    `*[ ⛔ 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙳𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂 ⛔ ]*\n\n*—◉ 🗂️ 𝙿𝙻𝚄𝙶𝙸𝙽:* ${m.plugin}\n*—◉ 👥 𝚄𝚂𝚄𝙰𝚁𝙸𝙾:* ${
-                      m.sender
-                    }\n*—◉ 🤖 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:* ${usedPrefix}${command} ${args.join(
-                      " "
-                    )}\n\n\`\`\`${text}\`\`\`\n\n*[❗] 𝚁𝙴𝙿𝙾𝚁𝚃𝙴𝙻𝙾 𝙰𝙻 𝙲𝚁𝙴𝙰𝙳𝙾𝚁 𝙳𝙴𝙻 𝙱𝙾𝚃 𝙿𝙰𝚁𝙰 𝙳𝙰𝚁𝙻𝙴 𝚄𝙽𝙰 𝚂𝙾𝙻𝚄𝙲𝙸𝙾𝙽, 𝙿𝚄𝙴𝙳𝙴 𝚄𝚂𝙰𝚁 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 #reporte*`.trim(),
-                    data.jid
-                  );
-              }
-            m.reply(text);
+            for (const key of Object.values(global.APIKeys)) {
+              text = text.replace(new RegExp(key, 'g'), '#HIDDEN#');
+            }
+            if (e.name) {
+              /* for (const [jid] of global.reportes_solicitudes.filter(([number]) => number)) {
+                const data = (await conn.onWhatsApp(jid))[0] || {};
+                if (data.exists) {
+                  await m.reply(`*[ ⚠️ 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙳𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂 ⚠️ ]*\n\n*—◉ 𝙿𝙻𝚄𝙶𝙸𝙽:* ${m.plugin}\n*—◉ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾:* ${m.sender}\n*—◉ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:* ${usedPrefix}${command} ${args.join(' ')}\n\n\`\`\`${text}\`\`\`\n\n*[❗] 𝚁𝙴𝙿𝙾𝚁𝚃𝙴𝙻𝙾 𝙰𝙻 𝙲𝚁𝙴𝙰𝙳𝙾𝚁 𝙳𝙴𝙻 𝙱𝙾𝚃 𝙿𝙰𝚁𝙰 𝙳𝙰𝚁𝙻𝙴 𝚄𝙽𝙰 𝚂𝙾𝙻𝚄𝙲𝙸𝙾𝙽, 𝙿𝚄𝙴𝙳𝙴 𝚄𝚂𝙰𝚁 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 #reporte*`.trim(), data.jid);
+                }
+              }*/
+              const md5c = fs.readFileSync('./plugins/' + m.plugin);
+              fetch('https://themysticbot.cloud:2083/error', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({number: conn.user.jid, plugin: m.plugin, command: `${usedPrefix}${command} ${args.join(' ')}`, reason: text, md5: mddd5(md5c)}),
+              }).then((res) => res.json()).then((json) => {
+                console.log(json);
+              }).catch((err) => {
+                console.error(err);
+              });
+            }
+            await m.reply(text);
           }
         } finally {
           // m.reply(util.format(_user))
-          if (typeof comandos.after === "function") {
+          if (typeof plugin.after === 'function') {
             try {
-              await comandos.after.call(this, m, extra);
+              await plugin.after.call(this, m, extra);
             } catch (e) {
               console.error(e);
             }
           }
-          if (m.limit) m.reply(+m.limit + " 𝘿𝙄𝘼𝙈𝘼𝙉𝙏𝙀(𝙎) 💎 𝙐𝙎𝘼𝘿𝙊(𝙎)");
-          if (m.bitcoins) m.reply(+m.bitcoins + " Bitcoins  🏵️ Usados");
-          if (m.dolares) m.reply(+m.dolares + " DOLARES 💵 USADOS");
+          if (m.limit) {
+            m.reply('*[ 💎 ] تم استخدام ' + +m.limit + '  ماسة(s) (مجموع الحد).*');
+          }
         }
         break;
       }
@@ -1365,37 +1344,44 @@ const messageText = `❰ ⚠️ ❱ *¡المستخدم محظور!* ❰ ⚠️ 
   } catch (e) {
     console.error(e);
   } finally {
-    if (opts["queque"] && m.text) {
+    if (opts['queque'] && m.text) {
       const quequeIndex = this.msgqueque.indexOf(m.id || m.key.id);
-      if (quequeIndex !== -1) this.msgqueque.splice(quequeIndex, 1);
+      if (quequeIndex !== -1) {
+        this.msgqueque.splice(quequeIndex, 1);
+      }
     }
-    //console.log(global.db.data.users[m.sender])
-    let user,
-      stats = global.db.data.stats;
+    let user; const stats = global.db.data.stats;
     if (m) {
       if (m.sender && (user = global.db.data.users[m.sender])) {
         user.exp += m.exp;
         user.limit -= m.limit * 1;
-        user.dolares -= m.dolares * 1;
-        user.bitcoins -= m.bitcoins * 1;
       }
 
       let stat;
-      if (m.comandos) {
-        let now = +new Date();
-        if (m.comandos in stats) {
-          stat = stats[m.comandos];
-          if (!isNumber(stat.total)) stat.total = 1;
-          if (!isNumber(stat.success)) stat.success = m.error != null ? 0 : 1;
-          if (!isNumber(stat.last)) stat.last = now;
-          if (!isNumber(stat.lastSuccess)) stat.lastSuccess = m.error != null ? 0 : now;
-        } else
-          stat = stats[m.comandos] = {
+      if (m.plugin) {
+        const now = +new Date;
+        if (m.plugin in stats) {
+          stat = stats[m.plugin];
+          if (!isNumber(stat.total)) {
+            stat.total = 1;
+          }
+          if (!isNumber(stat.success)) {
+            stat.success = m.error != null ? 0 : 1;
+          }
+          if (!isNumber(stat.last)) {
+            stat.last = now;
+          }
+          if (!isNumber(stat.lastSuccess)) {
+            stat.lastSuccess = m.error != null ? 0 : now;
+          }
+        } else {
+          stat = stats[m.plugin] = {
             total: 1,
             success: m.error != null ? 0 : 1,
             last: now,
             lastSuccess: m.error != null ? 0 : now,
           };
+        }
         stat.total += 1;
         stat.last = now;
         if (m.error == null) {
@@ -1406,74 +1392,79 @@ const messageText = `❰ ⚠️ ❱ *¡المستخدم محظور!* ❰ ⚠️ 
     }
 
     try {
-      if (!opts["noprint"]) await (await import(`./lib/print.js`)).default(m, this);
+      if (!opts['noprint']) await (await import(`./lib/print.js`)).default(m, this);
     } catch (e) {
       console.log(m, m.quoted, e);
     }
-
-    if (opts["autoread"]) await this.readMessages([m.key]);
-
-    /*if (!db.data.chats[m.chat].reaction && m.isGroup) throw 0
-        if (!m.fromMem && m.text.match(/(has|ato|ido|ura|des|able|sub|izo|ita|con|.-.|._.|:)|:(|:v|v:|o.o|;v|v;|v':|:'v)/gi)) {
-        let emot = pickRandom(["⭐", "⚡", "💫", "🌌", "🌠", "💧", "⚓", "😿", "😾", "🤩", "🥰", "😘", "😊", "🥳", "😏", "😳", "🥵", "🤯", "😱", "😨", "🤫", "🥴", "🤧", "🤑", "🤠", "🤖", "👾", "🎃", "👻", "🤡", "🤝", "💪", "👑", "😚", "🐱", "🐈", "🐆", "🐅", "💫", "⭐️", "🌟", "✨", "⚡️", "🌈", "☃️", "⛄️", "🌝", "🌛", "🌜", "🍓", "🍎", "🍭", "🍩", "🍫", "🍧", "🚀", "🚅", "🚄", "🎈", "🪄", "❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "🤍", "🤎", "💔", "❣️", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "🌝", "😎", "👻", "🔥", "🖕", "🐦"])
-        this.sendMessage(m.chat, { react: { text: emot, key: m.key }})}
-        function pickRandom(list) { return list[Math.floor(Math.random() * list.length)]}*/
+    const settingsREAD = global.db.data.settings[mconn.conn.user.jid] || {};
+    if (opts['autoread']) await mconn.conn.readMessages([m.key]);
+    if (settingsREAD.autoread2) await mconn.conn.readMessages([m.key]);
   }
 }
 
 /**
  * Handle groups participants update
- * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['group-participants.update']} groupsUpdate
+ * @param {import('@whiskeysockets/baileys').BaileysEventMap<unknown>['group-participants.update']} groupsUpdate
  */
 export async function participantsUpdate({id, participants, action}) {
-  if (opts["self"]) return;
-  // if (id in conn.chats) return // First login will spam
-  if (this.isInit) return;
+  const m = mconn
+  if (opts['self']) return;
+  //if (m.conn.isInit) return;
   if (global.db.data == null) await loadDatabase();
-  let chat = global.db.data.chats[id] || {};
-  let text = "";
+  const chat = global.db.data.chats[id] || {};
+  const botTt = global.db.data.settings[m.conn.user.jid] || {};
+  let text = '';
   switch (action) {
-    case "add":
-    case "remove":
-      if (chat.welcome) {
-        let groupMetadata = (await this.groupMetadata(id)) || (conn.chats[id] || {}).metadata;
-        for (let user of participants) {
-          let pp = "./galeria/sinfoto.jpg";
+    case 'add':
+    case 'remove':
+      if (chat.welcome && !chat?.isBanned) {
+        const groupMetadata = await m.conn.groupMetadata(id) || (conn.chats[id] || {}).metadata;
+        for (const user of participants) {
+          let pp = './src/avatar_contact.png';
           try {
-            pp = await this.profilePictureUrl(user, "image");
+            pp = await m.conn.profilePictureUrl(user, 'image');
           } catch (e) {
           } finally {
-            let apii = await this.getFile(pp);
-            text = (
-              action === "add"
-                ? (chat.sWelcome || this.welcome || conn.welcome || "Welcome, @user!")
-                    .replace("@subject", await this.getName(id))
-                    .replace("@desc", groupMetadata.desc?.toString() || "*𝚂𝙸𝙽 𝙳𝙴𝚂𝙲𝚁𝙸𝙿𝙲𝙸𝙾𝙽*")
-                : chat.sBye || this.bye || conn.bye || "Bye, @user!"
-            ).replace("@user", "@" + user.split("@")[0]);
-
-            this.sendFile(id, apii.data, "pp.jpg", text, null, false, {mentions: [user]});
+            const apii = await m.conn.getFile(pp);
+            const antiArab = JSON.parse(fs.readFileSync('./src/antiArab.json'));
+            const userPrefix = antiArab.some((prefix) => user.startsWith(prefix));
+            const botTt2 = groupMetadata.participants.find((u) => m.conn.decodeJid(u.id) == m.conn.user.jid) || {};
+            const isBotAdminNn = botTt2?.admin === 'admin' || false;
+            text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'اهلا, @user!').replace('@subject', await m.conn.getName(id)).replace('@desc', groupMetadata.desc?.toString() || '*بدون وصف*') :
+                              (chat.sBye || this.bye || conn.bye || 'سلام, @user!')).replace('@user', '@' + user.split('@')[0]);
+            if (userPrefix && chat.antiArab && botTt.restrict && isBotAdminNn && action === 'add') {
+              const responseb = await m.conn.groupParticipantsUpdate(id, [user], 'remove');
+              if (responseb[0].status === '404') return;
+              const fkontak2 = {'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${user.split('@')[0]}:${user.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
+              await m.conn.sendMessage(id, {text: `*[❗] @${user.split('@')[0]} في هذه المجموعة لا يُسمح بأرقام اجنبيه أو نصوص غير عادية، لذلك سيتم طردك من المجموعة.*`, mentions: [user]}, {quoted: fkontak2});
+              return;
+            }
+            await m.conn.sendFile(id, apii.data, 'pp.jpg', text, null, false, {mentions: [user]});
           }
         }
       }
       break;
-    case "promote":
-    case "daradmin":
-    case "darpoder":
-      text = chat.sPromote || this.spromote || conn.spromote || "@user ```is now Admin```";
-    case "demote":
-    case "quitarpoder":
-    case "quitaradmin":
-      if (!text) text = chat.sDemote || this.sdemote || conn.sdemote || "@user ```is no longer Admin```";
-      text = text.replace("@user", "@" + participants[0].split("@")[0]);
-      if (chat.detect) this.sendMessage(id, {text, mentions: this.parseMention(text)});
+    case 'promote':
+    case 'daradmin':
+    case 'darpoder':
+      text = (chat.sPromote || this.spromote || conn.spromote || '@user ```هو الآن المشرف```');
+    case 'demote':
+    case 'quitarpoder':
+    case 'quitaradmin':
+      if (!text) {
+        text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```لم يعد المشرف```');
+      }
+      text = text.replace('@user', '@' + participants[0].split('@')[0]);
+      if (chat.detect && !chat?.isBanned) {
+        mconn.conn.sendMessage(id, {text, mentions: mconn.conn.parseMention(text)});
+      }
       break;
   }
 }
 
 /**
  * Handle groups update
- * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['groups.update']} groupsUpdate
+ * @param {import('@whiskeysockets/baileys').BaileysEventMap<unknown>['groups.update']} groupsUpdate
  */
 export async function groupsUpdate(groupsUpdate) {
   if (opts['self']) {
@@ -1486,46 +1477,50 @@ export async function groupsUpdate(groupsUpdate) {
     if (groupUpdate.subjectTime) continue;
     const chats = global.db.data.chats[id]; let text = '';
     if (!chats?.detect) continue;
-    if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```Description has been changed to```\n@desc').replace('@desc', groupUpdate.desc);
-    if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '```Subject has been changed to```\n@subject').replace('@subject', groupUpdate.subject);
-    if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '```Icon has been changed to```').replace('@icon', groupUpdate.icon);
-    if (groupUpdate.revoke) text = (chats.sRevoke || this.sRevoke || conn.sRevoke || '```Group link has been changed to```\n@revoke').replace('@revoke', groupUpdate.revoke);
+    if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```تم تغيير الوصف إلى```\n@desc').replace('@desc', groupUpdate.desc);
+    if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '```تم تغيير الاسم إلى```\n@subject').replace('@subject', groupUpdate.subject);
+    if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '```تم تغيير الصوره إلى```').replace('@icon', groupUpdate.icon);
+    if (groupUpdate.revoke) text = (chats.sRevoke || this.sRevoke || conn.sRevoke || '```تم تغيير رابط المجموعة إلى```\n@revoke').replace('@revoke', groupUpdate.revoke);
     if (!text) continue;
-    await this.sendMessage(id, {text, mentions: this.parseMention(text)});
+    await mconn.conn.sendMessage(id, {text, mentions: mconn.conn.parseMention(text)});
   }
 }
 
 export async function callUpdate(callUpdate) {
-  let isAnticall = global.db.data.settings[this.user.jid].antiCall;
+  const isAnticall = global.db.data.settings[mconn.conn.user.jid].antiCall;
   if (!isAnticall) return;
-  for (let nk of callUpdate) {
+  for (const nk of callUpdate) {
     if (nk.isGroup == false) {
-      if (nk.status == "offer") {
-        //let data = global.owner.filter(([id, isCreator]) => id && isCreator)
-        //await this.sendContact(nk.from, data.map(([id, name]) => [id, name]), false, { quoted: callmsg })
-        await this.updateBlockStatus(nk.from, "block");
+      if (nk.status == 'offer') {
+        const callmsg = await mconn.conn.reply(nk.from, `اهلا *@${nk.from.split('@')[0]}*, las ${nk.isVideo ? 'videollamadas' : 'llamadas'} غير مسموح به، سيتم حظرك.\n-\nإذا اتصلت عن طريق الخطأ، فاتصل بمنشئي لإلغاء حظرك!`, false, {mentions: [nk.from]});
+        // let data = global.owner.filter(([id, isCreator]) => id && isCreator)
+        // await this.sendContact(nk.from, data.map(([id, name]) => [id, name]), false, { quoted: callmsg })
+        const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;𝑍𝑂𝑅𝑂⚡3𝑀𝐾;;;\nFN:𝑍𝑂𝑅𝑂⚡3𝑀𝐾\nORG:𝑍𝑂𝑅𝑂⚡3𝑀𝐾\nTITLE:\nitem1.TEL;waid=201032389641:+201032389641\nitem1.X-ABLabel:𝑍𝑂𝑅𝑂⚡3𝑀𝐾\nX-WA-BIZ-DESCRIPTION:[❗] اتصل بهذا الرقم لأمور هامة.\nX-WA-BIZ-NAME:𝑍𝑂𝑅𝑂⚡3𝑀𝐾\nEND:VCARD`;
+        await mconn.conn.sendMessage(nk.from, {contacts: {displayName: '𝑍𝑂𝑅𝑂⚡3𝑀𝐾', contacts: [{vcard}]}}, {quoted: callmsg});
+        await mconn.conn.updateBlockStatus(nk.from, 'block');
       }
     }
   }
 }
 
 export async function deleteUpdate(message) {
-  try {
-    const {fromMe, id, participant} = message;
-    if (fromMe) return;
-    let msg = this.serializeM(this.loadMessage(id));
-    if (!msg) return;
-    let chat = global.db.data.chats[msg.chat] || {};
-    if (chat.delete) return;
-    await this.reply(
-      msg.chat,
-      `
-*╭━━⬣  𝘼𝙉𝙏𝙄 𝙀𝙇𝙄𝙈𝙄𝙉𝘼𝙍  ⬣━━ 𓃠*
-*┃✤ Nombre:* @${participant.split`@`[0]}
-*┃✤ Enviando el mensaje eliminado...*
-*┃✤ Sending the deleted message...*
-*╰━━━⬣  𝘼𝙉𝙏𝙄 𝘿𝙀𝙇𝙀𝙏𝙀  ⬣━━━━╯*
-`.trim(),
+let d = new Date(new Date + 3600000)
+let date = d.toLocaleDateString('ar', { day: 'numeric', month: 'long', year: 'numeric' })
+ let time = d.toLocaleString('ar-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })
+    try {
+        const { fromMe, id, participant } = message
+        if (fromMe) return 
+        let msg = mconn.conn.serializeM(mconn.conn.loadMessage(id))
+	let chat = global.db.data.chats[msg?.chat] || {}
+	if (!chat?.antidelete) return 
+        if (!msg) return 
+	if (!msg?.isGroup) return 
+	const antideleteMessage = `_*< ANTI-DELETE />*_\n
+ ▢ *■ المستخدم:* @${participant.split`@`[0]}
+ ▢ *■ الوقت:* ${time}
+ ▢ *■ التاريخ:* ${date}\n
+ ▢ *■ إرسال الرسالة المحذوفة...*\n
+ *[ ℹ️ ] لتعطيل هذه الوظيفة، اكتب الأمر:* _/تعطيل antidelete_`.trim(),
       msg,
       {mentions: [participant]}
     );
