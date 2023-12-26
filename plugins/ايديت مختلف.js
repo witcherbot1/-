@@ -99,8 +99,7 @@ const dir = [
     'https://i.imgur.com/8QDdUHo.mp4',
 ];
 let handler = async (m, { conn }) => {
-  conn.sendFile(m.chat, {dir: {url: res}, caption: `*𝑬𝑫𝑰𝑻 𝑩𝒀 𝒁𝑶𝑹𝑶*`}, {quoted: m});
-}, 'dado.webp', '', m)
+  conn.sendFile(m.chat, dir[Math.floor(Math.random() * dir.length)], 'dado.webp', '', m)
   m.react('🎞');
 }
 handler.help = ['dado']
