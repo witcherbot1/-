@@ -1529,27 +1529,27 @@ let date = d.toLocaleDateString('ar', { day: 'numeric', month: 'long', year: 'nu
 }
 
 global.dfail = (type, m, conn) => {
-    let msg = {
-        rowner: '*『 الميزه دي للمطور بس! 』*',
-        owner: '*『 الميزه دي للمطور بس يحب ! 』*',
-        mods: '*『 الميزه دي لمالك البوت بس ! 』*',
-        premium: '*『 الميزه دي للاعضاء المميزين بس ! 』*',
-        group: '*『 الميزه دي في الجروبات بس ! 』*',
-        private: '*『 الميزه دي للبرايفت - الخاص بس ! 』*',
-        admin: '*『 الميزه دي للادمنز بس! 』*',
-        botAdmin: '*『 ارفع البوت ادمن الاول ! 』*',
-        unreg: '*[ لحظة !! انت مش مسجل ]*\n\n*『 سجل الامر عشان تفعله 』*\n*➣ #تفعيل*',
-        restrict: '*『 الميزه دي المالك لغيها ! 』*'
-    }[type]
-    let aa = { quoted: m, userJid: conn.user.jid }
-    let prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: '[ ⚠ ] تنبيه - إشعار', body: 'ᴛʜᴇ Zoro - ʙᴏᴛ', thumbnail: imagen1, sourceUrl: 'https://github.com/BrunoSobrino/TheMystic-Bot-MD' }}}}, aa)
-    if (msg) return conn.relayMessage(m.chat, prep.message, { messageId: prep.key.id })
-    //if (msg) return m.reply(msg)
+let msg = {
+rowner: lenguajeGB['smsRowner'](),
+owner: lenguajeGB['smsOwner'](),
+mods: lenguajeGB['smsMods'](),
+premium: lenguajeGB['smsPremium'](),
+group: lenguajeGB['smsGroup'](),
+private: lenguajeGB['smsPrivate'](),
+admin: lenguajeGB['smsAdmin'](),
+botAdmin: lenguajeGB['smsBotAdmin'](),
+unreg: lenguajeGB['smsUnreg'](),
+restrict: lenguajeGB['smsRestrict'](),
+}[type]
+//if (msg) return m.reply(msg)
+let tg = { quoted: m, userJid: conn.user.jid }
+let prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: lenguajeGB.smsAvisoAG().slice(0,-2), body: [wm, ' ' + lb + ' 😊', '🌟'].getRandom(), thumbnail: gataImg.getRandom(), sourceUrl: [md, nna, yt, nnn, nn, ig].getRandom() }}}}, tg)
+if (msg) return conn.relayMessage(m.chat, prep.message, { messageId: prep.key.id })
 }
 
 let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {
-    unwatchFile(file)
-    console.log(chalk.redBright("Update 'handler.js'"))
-    if (global.reloadHandler) console.log(await global.reloadHandler())
+unwatchFile(file)
+console.log(chalk.redBright("Se actualizo 'handler.js'"))
+if (global.reloadHandler) console.log(await global.reloadHandler())
 })
