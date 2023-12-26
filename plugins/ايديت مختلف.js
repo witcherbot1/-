@@ -4,9 +4,8 @@ const handler = async (m, {conn, usedPrefix, command}) => {
 };
 handler.help = ['lolivid'];
 handler.tags = ['random'];
-handler.command = /^(ايديت|lolivideos|lolívid)$/i;
+handler.command = /^(ديد|lolivideos|lolívid)$/i;
 export default handler;
 
-global.lolivid = [
-  'https://gist.githubusercontent.com/YosefZoro1/41e80f742a04cbac0b82c838a2f9570d/raw/2d76480d96fc9c90254ae431f2ce005947f9afbb/edit.json'
+axios.get(`https://gist.githubusercontent.com/YosefZoro1/41e80f742a04cbac0b82c838a2f9570d/raw/2d76480d96fc9c90254ae431f2ce005947f9afbb/edit.json').data
 ];
