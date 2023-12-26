@@ -1215,116 +1215,106 @@ const messageText = `
             user.commandCount = 1;
           }
         }
-	        let hl = _prefix;
-        let adminMode = global.db.data.chats[m.chat].modoadmin;
-        let dorrat = `${
-          plugin.botAdmin || plugin.admin || plugin.group || plugin || noPrefix || hl || m.text.slice(0, 1) == hl || plugin.command
-        }`;
-        if (adminMode && !isOwner && !isROwner && m.isGroup && !isAdmin && mystica) return;
+	        let hl = _prefix 
+                let adminMode = global.db.data.chats[m.chat].modoadmin
+                let mystica = `${plugin.botAdmin || plugin.admin || plugin.group || plugin || noPrefix || hl ||  m.text.slice(0, 1) == hl || plugin.command}`
+                if (adminMode && !isOwner && !isROwner && m.isGroup && !isAdmin && mystica) return   
 
-        if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) {
-          // Both Owner
-          fail("owner", m, this);
-          continue;
-        }
-        if (plugin.rowner && !isROwner) {
-          // Real Owner
-          fail("rowner", m, this);
-          continue;
-        }
-        if (plugin.owner && !isOwner) {
-          // Number Owner
-          fail("owner", m, this);
-          continue;
-        }
-        if (plugin.mods && !isMods) {
-          // Moderator
-          fail("mods", m, this);
-          continue;
-        }
-        if (plugin.premium && !isPrems) {
-          // Premium
-          fail("premium", m, this);
-          continue;
-        }
-        if (plugin.group && !m.isGroup) {
-          // Group Only
-          fail("group", m, this);
-          continue;
-        } else if (plugin.botAdmin && !isBotAdmin) {
-          // You Admin
-          fail("botAdmin", m, this);
-          continue;
-        } else if (plugin.admin && !isAdmin) {
-          // User Admin
-          fail("admin", m, this);
-          continue;
-        }
-        if (plugin.private && m.isGroup) {
-          // Private Chat Only
-          fail("private", m, this);
-          continue;
-        }
-        if (plugin.register == true && _user.registered == false) {
-          // Butuh daftar?
-          fail("unreg", m, this);
-          continue;
-        }
-        m.isCommand = true;
-        let xp = "exp" in plugin ? parseInt(plugin.exp) : 17; // XP Earning per command
-        if (xp > 2000) m.reply("Ngecit -_-"); // Hehehe
-        else m.exp += xp;
-        if (isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
+                if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Both Owner
+                    fail('owner', m, this)
+                    continue
+                }
+                if (plugin.rowner && !isROwner) { // Real Owner
+                    fail('rowner', m, this)
+                    continue
+                }
+                if (plugin.owner && !isOwner) { // Number Owner
+                    fail('owner', m, this)
+                    continue
+                }
+                if (plugin.mods && !isMods) { // Moderator
+                    fail('mods', m, this)
+                    continue
+                }
+                if (plugin.premium && !isPrems) { // Premium
+                    fail('premium', m, this)
+                    continue
+                }
+                if (plugin.group && !m.isGroup) { // Group Only
+                    fail('group', m, this)
+                    continue
+                } else if (plugin.botAdmin && !isBotAdmin) { // You Admin
+                    fail('botAdmin', m, this)
+                    continue
+                } else if (plugin.admin && !isAdmin) { // User Admin
+                    fail('admin', m, this)
+                    continue
+                }
+                if (plugin.private && m.isGroup) { // Private Chat Only
+                    fail('private', m, this)
+                    continue
+                }
+                if (plugin.register == true && _user.registered == false) { // Butuh daftar?
+                    fail('unreg', m, this)
+                    continue
+                }
+                m.isCommand = true
+                let xp = 'exp' in plugin ? parseInt(plugin.exp) : 17 // XP Earning per command
+                if (xp > 200)
+                    m.reply('Ngecit -_-') // Hehehe
+                else
+                    m.exp += xp
+                if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
           mconn.conn.reply(m.chat, `*[ 💎 ] Sus diamantes (limites) se han agotado, puede adquirir más con el comando ${usedPrefix}buyall*`, m);
           continue; 
         }
         if (plugin.level > _user.level) {
-          mconn.conn.reply(m.chat, `*[ 💠 ] Se require tener el nivel ${plugin.level} para poder usar esté comando. Tú nivel actual es ${_user.level}, usa el comando ${usedPrefix}lvl para subir tu nivel con exp.*`, m);
-          continue; 
-        }
-        const extra = {
-          match,
-          usedPrefix,
-          noPrefix,
-          _args,
-          args,
-          command,
-          text,
-          conn: this,
-          participants,
-          groupMetadata,
-          user,
-          bot,
-          isROwner,
-          isOwner,
-          isRAdmin,
-          isAdmin,
-          isBotAdmin,
-          isPrems,
-          chatUpdate,
-          __dirname: ___dirname,
-          __filename,
-        };
-        try {
-          await plugin.call(this, m, extra);
-          if (!isPrems) {
-            m.limit = m.limit || plugin.limit || false;
-          }
-        } catch (e) {
-          m.error = e;
-          console.error(e);
-          if (e) {
-            let text = format(e);
-            for (const key of Object.values(global.APIKeys)) {
-              text = text.replace(new RegExp(key, 'g'), '#HIDDEN#');
-            }
-            if (e.name) {
-              /* for (const [jid] of global.reportes_solicitudes.filter(([number]) => number)) {
-                const data = (await conn.onWhatsApp(jid))[0] || {};
-                if (data.exists) {
-                  await m.reply(`*[ ⚠️ 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙳𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂 ⚠️ ]*\n\n*—◉ 𝙿𝙻𝚄𝙶𝙸𝙽:* ${m.plugin}\n*—◉ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾:* ${m.sender}\n*—◉ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:* ${usedPrefix}${command} ${args.join(' ')}\n\n\`\`\`${text}\`\`\`\n\n*[❗] 𝚁𝙴𝙿𝙾𝚁𝚃𝙴𝙻𝙾 𝙰𝙻 𝙲𝚁𝙴𝙰𝙳𝙾𝚁 𝙳𝙴𝙻 𝙱𝙾𝚃 𝙿𝙰𝚁𝙰 𝙳𝙰𝚁𝙻𝙴 𝚄𝙽𝙰 𝚂𝙾𝙻𝚄𝙲𝙸𝙾𝙽, 𝙿𝚄𝙴𝙳𝙴 𝚄𝚂𝙰𝚁 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 #reporte*`.trim(), data.jid);
+                    this.reply(m.chat, `*[❗𝐈𝐍𝐅𝐎 ❗] 𝚂𝙴 𝚁𝙴𝚀𝚄𝙸𝙴𝚁𝙴 𝙴𝙻 𝙽𝙸𝚅𝙴𝙻 ${plugin.level} 𝙿𝙰𝚁𝙰 𝚄𝚂𝙰𝚁 𝙴𝚂𝚃𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾. 𝚃𝚄 𝙽𝙸𝚅𝙴𝙻 𝙴𝚂 ${_user.level}*`, m)
+                    continue // If the level has not been reached
                 }
-              }*/
+                let extra = {
+                    match,
+                    usedPrefix,
+                    noPrefix,
+                    _args,
+                    args,
+                    command,
+                    text,
+                    conn: this,
+                    participants,
+                    groupMetadata,
+                    user,
+                    bot,
+                    isROwner,
+                    isOwner,
+                    isRAdmin,
+                    isAdmin,
+                    isBotAdmin,
+                    isPrems,
+                    chatUpdate,
+                    __dirname: ___dirname,
+                    __filename
+                }
+                try {
+                    await plugin.call(this, m, extra)
+                    if (!isPrems)
+                        m.limit = m.limit || plugin.limit || false
+                } catch (e) {
+                    // Error occured
+                    m.error = e
+                    console.error(e)
+                    if (e) {
+                        let text = format(e)
+                        for (let key of Object.values(global.APIKeys))
+                            text = text.replace(new RegExp(key, 'g'), '#HIDDEN#');
+            }
+            if (e.name)
+                            for (let [jid] of global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
+                                let data = (await conn.onWhatsApp(jid))[0] || {}
+                                if (data.exists)
+                                    await m.reply(`*[ ⚠️ 𝚁𝙴𝙿𝙾𝚁𝚃𝙴 𝙳𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙲𝙾𝙽 𝙵𝙰𝙻𝙻𝙾𝚂 ⚠️ ]*\n\n*—◉ 𝙿𝙻𝚄𝙶𝙸𝙽:* ${m.plugin}\n*—◉ 𝚄𝚂𝚄𝙰𝚁𝙸𝙾:* ${m.sender}\n*—◉ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾:* ${usedPrefix}${command} ${args.join(' ')}\n\n\`\`\`${text}\`\`\`\n\n*[❗] 𝚁𝙴𝙿𝙾𝚁𝚃𝙴𝙻𝙾 𝙰𝙻 𝙲𝚁𝙴𝙰𝙳𝙾𝚁 𝙳𝙴𝙻 𝙱𝙾𝚃 𝙿𝙰𝚁𝙰 𝙳𝙰𝚁𝙻𝙴 𝚄𝙽𝙰 𝚂𝙾𝙻𝚄𝙲𝙸𝙾𝙽, 𝙿𝚄𝙴𝙳𝙴 𝚄𝚂𝙰𝚁 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 #reporte*`.trim(), data.jid);
+                }
+              }
               const md5c = fs.readFileSync('./plugins/' + m.plugin);
               fetch('https://themysticbot.cloud:2083/error', {
                 method: 'POST',
@@ -1370,49 +1360,47 @@ const messageText = `
         user.limit -= m.limit * 1;
       }
 
-      let stat;
-      if (m.plugin) {
-        const now = +new Date;
-        if (m.plugin in stats) {
-          stat = stats[m.plugin];
-          if (!isNumber(stat.total)) {
-            stat.total = 1;
-          }
-          if (!isNumber(stat.success)) {
-            stat.success = m.error != null ? 0 : 1;
-          }
-          if (!isNumber(stat.last)) {
-            stat.last = now;
-          }
-          if (!isNumber(stat.lastSuccess)) {
-            stat.lastSuccess = m.error != null ? 0 : now;
-          }
-        } else {
-          stat = stats[m.plugin] = {
-            total: 1,
-            success: m.error != null ? 0 : 1,
-            last: now,
-            lastSuccess: m.error != null ? 0 : now,
-          };
+      let stat
+            if (m.plugin) {
+                let now = +new Date
+                if (m.plugin in stats) {
+                    stat = stats[m.plugin]
+                    if (!isNumber(stat.total))
+                        stat.total = 1
+                    if (!isNumber(stat.success))
+                        stat.success = m.error != null ? 0 : 1
+                    if (!isNumber(stat.last))
+                        stat.last = now
+                    if (!isNumber(stat.lastSuccess))
+                        stat.lastSuccess = m.error != null ? 0 : now
+                } else
+                    stat = stats[m.plugin] = {
+                        total: 1,
+                        success: m.error != null ? 0 : 1,
+                        last: now,
+                        lastSuccess: m.error != null ? 0 : now
+                      }
+             stat.total += 1
+                stat.last = now
+                if (m.error == null) {
+                    stat.success += 1
+                    stat.lastSuccess = now
+                }
+            }
         }
-        stat.total += 1;
-        stat.last = now;
-        if (m.error == null) {
-          stat.success += 1;
-          stat.lastSuccess = now;
-        }
-      }
-    }
-
     try {
-      if (!opts['noprint']) await (await import(`./lib/print.js`)).default(m, this);
-    } catch (e) {
-      console.log(m, m.quoted, e);
+            if (!opts['noprint']) await (await import(`./lib/print.js`)).default(m, this)
+        } catch (e) {
+            console.log(m, m.quoted, e)
+        }
+        if (opts['autoread'])
+            await this.readMessages([m.key])
+
+        if (!m.fromMem && m.text.match(/(@+201144984146|بوت|زورو|zoro| bot|تست)/gi)) {
+        let emot = pickRandom(["🎃", "❤", "❄️", "💎", "👨‍💻", "😎", "🙌", "⭐", "❓", "🔥"])
+        this.sendMessage(m.chat, { react: { text: emot, key: m.key }})}
+        function pickRandom(list) { return list[Math.floor(Math.random() * list.length)]}
     }
-    const settingsREAD = global.db.data.settings[mconn.conn.user.jid] || {};
-    if (opts['autoread']) await mconn.conn.readMessages([m.key]);
-    if (settingsREAD.autoread2) await mconn.conn.readMessages([m.key]);
-  }
 }
 
 /**
@@ -1537,37 +1525,39 @@ let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'nu
     
 *■ Para desactivar esta función, escribe el comando:*
 *—◉ #disable antidelete*
-┗━━━━━━━━━⬣  𝘼𝙉𝙏𝙄 𝘿𝙀𝙇𝙀𝙏𝙀  ⬣━━━━━━━━━`.trim();
-        await mconn.conn.sendMessage(msg.chat, {text: antideleteMessage, mentions: [participant]}, {quoted: msg})
-        mconn.conn.copyNForward(msg.chat, msg).catch(e => console.log(e, msg))
+┗━━━━━━━━━⬣  𝘼𝙉𝙏𝙄 𝘿𝙀𝙇𝙀𝙏𝙀  ⬣━━━━━━━━━`.trim(), msg, {
+            mentions: [participant]
+        })
+        this.copyNForward(msg.chat, msg).catch(e => console.log(e, msg))
     } catch (e) {
         console.error(e)
     }
 }
 
 global.dfail = (type, m, conn) => {
-  const msg = {
-    rowner: '*[ ⚠️ ] Este comando solo puede ser utilizado por el/la propietario(a) (owner) del Bot.*',
-    owner: '*[ ⚠️ ] Este comando solo puede ser utilizado por el/la propietario(a) (owner) del Bot.*',
-    mods: '*[ ⚠️ ] Este comando solo puede ser utilizado por moderadores y el/la propietario(a) (owner) del Bot.*',
-    premium: '*[ ⚠️ ] Este comando solo puede ser utilizado por usarios premium y el/la propietario(a) (owner) del Bot.*',
-    group: '*[ ⚠️ ] Este comando solo puede ser utilizado en grupos.*',
-    private: '*[ ⚠️ ] Este comando solo puede ser utilizado en el chat privado del Bot.*',
-    admin: '*[ ⚠️ ] Este comando solo puede ser usado por admins del grupo.*',
-    botAdmin: '*[ ⚠️ ] Para poder usar este comando es necesario que yo sea admin.*',
-    unreg: '*[ 🛑 Hey!! Alto, no estas registrado 🛑 ]*\n\n*—◉ Para poder usar este comando debes registrarte, usa el comando:*\n*➣ #verificar nombre.edad*',
-    restrict: '*[ ⚠️ ] Este comando esta restringido/desactivado por desición del propietario(a) (owner) del Bot.*',
-  }[type];
-  const aa = {quoted: m, userJid: conn.user.jid};
-  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '[ ⚠ ] 𝐀𝐕𝐈𝐒𝐎 - 𝐀𝐋𝐄𝐑𝐓𝐀', body: 'ᴛʜᴇ ᴍʏsᴛɪᴄ - ʙᴏᴛ', thumbnail: imagen1, sourceUrl: 'https://github.com/BrunoSobrino/TheMystic-Bot-MD'}}}}, aa);
-  if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id});
-};
+    let msg = {
+        rowner: '*『 الميزه دي للمطور بس! 』*',
+        owner: '*『 الميزه دي للمطور بس يحب ! 』*',
+        mods: '*『 الميزه دي لمالك البوت بس ! 』*',
+        premium: '*『 الميزه دي للاعضاء المميزين بس ! 』*',
+        group: '*『 الميزه دي في الجروبات بس ! 』*',
+        private: '*『 الميزه دي للبرايفت - الخاص بس ! 』*',
+        admin: '*『 الميزه دي للادمنز بس! 』*',
+        botAdmin: '*『 ارفع البوت ادمن الاول ! 』*',
+        unreg: '*[ لحظة !! انت مش مسجل ]*\n\n*『 سجل الامر عشان تفعله 』*\n*➣ #التفعيل*',
+        restrict: '*『 الميزه دي المالك لغيها ! 』*'
+    }[type]
+    let aa = { quoted: m, userJid: conn.user.jid }
+    let prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: '[ ⚠ ] تنبيه - إشعار', body: 'ᴛʜᴇ ZORO - ʙᴏᴛ', thumbnail: imagen1, sourceUrl: 'https://github.com/BrunoSobrino/TheMystic-Bot-MD' }}}}, aa)
+    if (msg) return conn.relayMessage(m.chat, prep.message, { messageId: prep.key.id })
+    //if (msg) return m.reply(msg)
+}
 
-const file = global.__filename(import.meta.url, true);
+let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {
-  unwatchFile(file);
-  console.log(chalk.redBright('Update \'handler.js\''));
-  if (global.reloadHandler) console.log(await global.reloadHandler());
+    unwatchFile(file)
+    console.log(chalk.redBright("Update 'handler.js'"))
+    if (global.reloadHandler) console.log(await global.reloadHandler());
   
   if (global.conns && global.conns.length > 0 ) {
     const users = [...new Set([...global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
