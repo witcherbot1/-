@@ -1,7 +1,7 @@
 import gtts from 'node-gtts';
 import {readFileSync, unlinkSync} from 'fs';
 import {join} from 'path';
-const defaultLang = 'es';
+const defaultLang = 'ar';
 const handler = async (m, {conn, args, usedPrefix, command}) => {
   let lang = args[0];
   let text = args.slice(1).join(' ');
