@@ -1505,8 +1505,8 @@ export async function callUpdate(callUpdate) {
 
 export async function deleteUpdate(message) {
 let d = new Date(new Date + 3600000)
-let date = d.toLocaleDateString('ar', { day: 'numeric', month: 'long', year: 'numeric' })
- let time = d.toLocaleString('ar-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })
+let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' })
+ let time = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })
     try {
         const { fromMe, id, participant } = message
         if (fromMe) return 
@@ -1520,17 +1520,13 @@ let date = d.toLocaleDateString('ar', { day: 'numeric', month: 'long', year: 'nu
  ▢ *■ الوقت:* ${time}
  ▢ *■ التاريخ:* ${date}\n
  ▢ *■ إرسال الرسالة المحذوفة...*\n
- *[ ℹ️ ] لتعطيل هذه الوظيفة، اكتب الأمر:* _/تعطيل antidelete_`.trim(),
-      msg,
-      {mentions: [participant]}
-    );
-
-    this.copyNForward(msg.chat, msg).catch((e) => console.log(e, msg));
-  } catch (e) {
-    console.error(e);
-  }
+ *[ ℹ️ ] لتعطيل هذه الوظيفة، اكتب الأمر:* _/تعطيل antidelete_`.trim();
+        await mconn.conn.sendMessage(msg.chat, {text: antideleteMessage, mentions: [participant]}, {quoted: msg})
+        this.copyNForward(msg.chat, msg).catch((e) => console.log(e, msg));
+    } catch (e) {
+        console.error(e)
+    }
 }
-
 
 global.dfail = (type, m, conn) => { 
    let msg = { 
@@ -1545,35 +1541,22 @@ global.dfail = (type, m, conn) => {
      unreg: "*[ ❎ 𝐇𝐄𝐘!! 𝐀𝐋𝐓𝐎, 𝐍𝐎 𝐄𝐒𝐓𝐀𝐒 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐃𝐎 ❎ ]*\n\n*—◉ 𝙿𝙰𝚁𝙰 𝚄𝚂𝙰𝚁 𝙴𝚂𝚃𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙳𝙴𝙱𝙴𝚂 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙰𝚁𝚃𝙴, 𝚄𝚂𝙰 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾*\n*➣ #verificar*", 
      restrict: "*[ ⚠️ 𝐀𝐋𝐄𝐑𝐓𝐀 ⚠️ ] 𝙴𝚂𝚃𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙴𝚂𝚃𝙰 𝚁𝙴𝚂𝚃𝚁𝙸𝙽𝙶𝙸𝙳𝙾/𝙳𝙴𝚂𝙰𝙲𝚃𝙸𝚅𝙰𝙳𝙾 𝙿𝙾𝚁 𝙳𝙴𝚂𝙸𝙲𝙸𝙾𝙽 𝙳𝙴𝙻 𝙿𝚁𝙾𝙿𝙸𝙴𝚃𝙰𝚁𝙸𝙾/𝙰 (𝙾𝚆𝙽𝙴𝚁) 𝙳𝙴𝙻 𝙱𝙾𝚃*", 
    }[type]; 
-   let aa = {quoted: m, userJid: conn.user.jid}; 
-   let prep = generateWAMessageFromContent( 
-     m.chat, 
-     { 
-       extendedTextMessage: { 
-         text: msg, 
-         contextInfo: { 
-           externalAdReply: { 
-             title: "[ ⚠ ] 𝐀𝐕𝐈𝐒𝐎 - 𝐀𝐋𝐄𝐑𝐓𝐀", 
-             body: "𝙳𝚘𝚛𝚛𝚊𝚝-𝙱𝚘𝚝-𝙼𝙳", 
-             thumbnail: imagen1, 
-             sourceUrl: "https://github.com/DIEGO-OFC/DORRAT-BOT-MD", 
-           }, 
-         }, 
-       }, 
-     }, 
-     aa 
-   ); 
-   if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id}); 
-   //if (msg) return m.reply(msg) 
- };
-global.zds = ["VeyaaGG"];
+  let aa = {quoted: m, userJid: conn.user.jid}; 
+   let prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '*[ ⚠ ] تنبيه - التنبيه*', body: 'The ZoroBot', thumbnail: imagen1, sourceUrl: 'https://solo.to/yosef.zoro'}}}}, aa);
+  if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id});
+};
 
-let file = global.__filename(import.meta.url, true);
+const file = global.__filename(import.meta.url, true);
 watchFile(file, async () => {
   unwatchFile(file);
-  console.log(chalk.redBright("Update 'handler.js'"));
+  console.log(chalk.redBright('Update \'handler.js\''));
   if (global.reloadHandler) console.log(await global.reloadHandler());
+  
+  if (global.conns && global.conns.length > 0 ) {
+    const users = [...new Set([...global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
+    for (const userr of users) {
+      userr.subreloadHandler(false)
+    }
+  }
+  
 });
-
-global.listkatakotor =
-  /k(o?a)ngk(o?a)ng|yat(e?i)m|ancrit|bokep|anj(k|g)|sundala|ajn?(g|k)|a?njin(g|k)|bajingan|cabul|lonte|b(a?n)?gsa?t|ko?nto?l|me?me?(k|q)|pe?pe?(k|q)|meki|titi(t|d)|pe?ler|tetek|toket|ngewe|go?blo?k|to?lo?l|idiot|(k|ng)e?nto?(t|d)|jembut|bego|dajj?al|janc(u|o)k|pantek|puki ?(mak)?|kimak|kampang|lonte|col(i|mek?)|pelacur|henceu?t|nigga|fuck|dick|bitch|tits|bastard|gay|lesbi|asshole/g;
