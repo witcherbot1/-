@@ -199,12 +199,12 @@ if (opts['server']) (await import('./server.js')).default(global.conn, PORT);
         que me arrepiento de ser un grasoso
         Por que la grasa es un sentimiento
         - El waza 👻👻👻👻 (Aiden)            
-        
+
    Yo tambien se hacer momazos Aiden...
         ahi te va el ajuste de los borrados
         inteligentes de las sesiones y de los sub-bot
         By (Rey Endymion 👺👍🏼) 
-        
+
    Ninguno es mejor que tilin god
         - atte: sk1d             */
 
@@ -351,14 +351,14 @@ global.reloadHandler = async function(restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate);
   }
 
-  conn.welcome = '👋 ¡Bienvenido/a!\n@user';
-  conn.bye = '👋 ¡Hasta luego!\n@user';
-  conn.spromote = '*[ ℹ️ ] @user Fue promovido a administrador.*';
-  conn.sdemote = '*[ ℹ️ ] @user Fue degradado de administrador.*';
-  conn.sDesc = '*[ ℹ️ ] La descripción del grupo ha sido modificada.*';
-  conn.sSubject = '*[ ℹ️ ] El nombre del grupo ha sido modificado.*';
-  conn.sIcon = '*[ ℹ️ ] Se ha cambiado la foto de perfil del grupo.*';
-  conn.sRevoke = '*[ ℹ️ ] El enlace de invitación al grupo ha sido restablecido.*';
+    conn.welcome = '✦━━━━━━[ 𝑍𝑂𝑅𝑂⚡𝐵𝑂𝑇 ]━━━━━━✦\n\n┏––––––━━━━━━━━•\n│⫹⫺ @subject\n┣━━━━━━━━┅┅┅\n│( نورت يحب✨@user)\n├[ *المطور* ]—\n│ *𝑍𝑂𝑅𝑂*\n┗––––––━━┅┅┅\n\n––––––┅┅ *اقرأ الوصف* ┅┅––––––\n@desc' 
+    conn.bye = '*╔══════════════*\n*╟❧ @user*\n*╟❧ هتغور يجي غيرك طابور🚯*\n*╚══════════════*'
+    conn.spromote = '*@user تستحق الادمن ⚡*'
+    conn.sdemote = '*@user لم تستحق الادمن 💔*'
+    conn.sDesc = '*تم تعديل وصف الجروب*\n\n*الوصف الجديد:* @desc'
+    conn.sSubject = ' تم تغير اسم الجروب ✨🌝*\n*الاسم الجديد:* @subject'
+    conn.sIcon = '*تم تغير صوره الجروب ✨🦦*'
+    conn.sRevoke = '*تم تحديث رابط الجروب ✨❄️*\n*اللينك الجديد:* @revoke';
 
   conn.handler = handler.handler.bind(global.conn);
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn);
@@ -512,7 +512,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `[ ⏳ ] Uptime: ${uptime}`;
+  const bio = `[ ⏳ ] وقت العمل: ${uptime}`;
   await conn.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
