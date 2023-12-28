@@ -1543,7 +1543,7 @@ global.dfail = (type, m, conn) => {
   }[type];
   const aa = {quoted: m, userJid: conn.user.jid};
   const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '*[ ⚠ ] تنبيه - التنبيه*', body: 'The ZoroBot', thumbnail: imagen1, sourceUrl: 'https://solo.to/yosef.zoro'}}}}, aa);
-  if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id});
+  if (msg) return  m.reply(msg)
 };
 
 const file = global.__filename(import.meta.url, true);
