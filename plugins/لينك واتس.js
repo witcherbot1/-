@@ -13,5 +13,6 @@ https://api.whatsapp.com/send?phone=${text}`;
 handler.help = ['wa'];
 handler.tags = ['tools'];
 handler.command = ['فنش'];
+handler.owner = true;
 
 export default handler;
