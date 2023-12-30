@@ -1,7 +1,7 @@
 import fetch from "node-fetch"
 let handler = async (m, { conn }) => {
 
-  let data = await (await fetch('https://gist.githubusercontent.com/YosefZoro1/ceced524f1f4dac896a800509dd8c114/raw/d7f59f37d4e6de5c00cf8581ddd865170a8d5f33/gairl.json')).json()
+  let data = await (await fetch('https://gist.githubusercontent.com/YosefZoro1/ceced524f1f4dac896a800509dd8c114/raw/ff81a9819cbb1470d4949623b2f86d91cbae51ab/gairl.json')).json()
   let cita = data[Math.floor(Math.random() * data.length)]
 
   let cowi = await(await fetch(cita.cowo)).buffer()
@@ -11,7 +11,7 @@ let handler = async (m, { conn }) => {
 }
 handler.help = ['Miku bot']
 handler.tags = ['Miku bot']
-handler.command = /^طقمي|تطقيمي$/i
+handler.command = /^طقم-بنات|طقم1$/i
 handler.limit = true
 
 export default handler
