@@ -52,7 +52,7 @@ global.thumb = fs.readFileSync('./Menu2.jpg')
 
 
 global.packname = '𝐵𝑌:𝑍𝑂𝑅𝑂⚡𝐵𝑂𝑇';
-global.author = '𝐵𝑌:𝑌𝛩𝑺𝐸𝐹⚡3𝑀𝐾';
+global.author = '𝑌𝛩𝑺𝐸𝐹⚡3𝑀𝐾';
 global.wm = '𝑍𝑂𝑅𝑂 - 𝐵𝑂𝑇';
 global.titulowm = '𝑍𝑂𝑅𝑂 - 𝐵𝑂𝑇';
 global.titulowm2 = `𝑍𝑂𝑅𝑂 - 𝐵𝑂𝑇`
