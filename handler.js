@@ -1430,7 +1430,7 @@ export async function participantsUpdate({id, participants, action}) {
                 } finally {
                   let text = (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user')
                     .replace('@group', await this.getName(id))
-                    .replace('@desc', groupMetadata.desc?.toString() || 'error')
+                    .replace('@desc', groupMetadata.desc?.toString() || 'لايوجد وصف')
                     .replace('@user', '@' + user.split('@')[0]);
           
                   let nthMember = groupMetadata.participants.length;
