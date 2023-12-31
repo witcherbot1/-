@@ -1450,18 +1450,7 @@ export async function participantsUpdate({id, participants, action}) {
                     let welcomeResponse = await fetch(welcomeApiUrl);
                     let welcomeBuffer = await welcomeResponse.buffer();
           
-                    this.sendMessage(id, {
-                        text: text,
-                        contextInfo: {
-                        mentionedJid: [user],
-                        externalAdReply: { 
-                        title: "THE ZORO BOT",
-                        body: "مرحبا بك في المجموعة",
-                        thumbnailUrl: welcomeApiUrl,
-                        sourceUrl: 'https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9',
-                        mediaType: 1,
-                        renderLargerThumbnail: true
-                        }}})
+                    this.sendFile(id, welcomeBuffer, 'welcome.png', text, null, false, { mentions: [user] });
                   } catch (error) {
                     console.error(`حدث خطأ أثناء إنشاء صورة الترحيب: ${error}`);
                   }
@@ -1503,18 +1492,7 @@ export async function participantsUpdate({id, participants, action}) {
                     let leaveResponse = await fetch(leaveApiUrl);
                     let leaveBuffer = await leaveResponse.buffer();
           
-                    this.sendMessage(id, {
-                        text: text,
-                        contextInfo: {
-                        mentionedJid: [user],
-                        externalAdReply: {
-                        title: "THE ZORO BOT",
-                        body: "الي القاء",
-                        thumbnailUrl: leaveApiUrl,
-                        sourceUrl: 'https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9',
-                        mediaType: 1,
-                        renderLargerThumbnail: true
-                        }}})
+                    this.sendFile(id, leaveBuffer, 'leave.png', text, null, false, { mentions: [user] });
                   } catch (error) {
                     console.error(`حدث خطأ أثناء إنشاء صورة الإجازة: ${error}`);
                   }
