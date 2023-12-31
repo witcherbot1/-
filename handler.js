@@ -1436,8 +1436,8 @@ export async function participantsUpdate({id, participants, action}) {
                   let nthMember = groupMetadata.participants.length;
                   let secondText = `اهلا ياحب, ${await this.getName(user)}, رقم ${nthMember}العضو`;
           
-                  let welcomeApiUrl = `https://api.popcat.xyz/welcomecard?username=${encodeURIComponent(
-                    await this.getName(user)
+                  let welcomeApiUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.discordapp.com/attachments/850808002545319957/859359637106065408/bg.png&text1=${encodeURIComponent(
+                    await this.getName(user)&text2=اهلا+بك+في+جروبنا+يحب
                   )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
                     ppgp
                   )}&memberCount=${encodeURIComponent(
