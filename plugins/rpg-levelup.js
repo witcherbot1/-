@@ -1,44 +1,47 @@
-import { canLevelUp, xpRange } from '../lib/levelling.js';
-import { levelup } from '../lib/canvas.js';
+import { xpRange } from '../lib/levelling.js';
+import Canvacord from 'canvacord';
 
-const handler = async (m, { conn }) => {
-  const name = conn.getName(m.sender);
-  const usertag = '@' + m.sender.split('@s.whatsapp.net')[0];
-  const user = global.db.data.users[m.sender];
-  if (!canLevelUp(user.level, user.exp, global.multiplier)) {
-    const { min, xp, max } = xpRange(user.level, global.multiplier);
-    const message = `
-🏰 *نقابة المغامرين*
-*مرحبًا، ${usertag}!*
+let handler = async (m, { conn }) => {
+  let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
 
-*◉ المستوى الحالي:* ${user.level}
-*◉ الرتبة الحالية:* ${user.role}
-*◉ نقاط الخبرة:* ${user.exp - min}/${xp}
+  if (!(who in global.db.data.users)) throw `✳️ المستخدم غير موجود في قاعدة البيانات الخاصة بي`;
 
-*—◉ للارتقاء بالمستوى، يجب عليك الحصول على ${max - user.exp} نقطة خبرة إضافية. استمر في التفاعل مع البوت!*`.trim();
-    return conn.sendMessage(m.chat, {text: message, mentions: [m.sender]}, {quoted: m});
-  }
-  const before = user.level * 1;
-  while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++;
-  if (before !== user.level) {
-    const levelUpMessage = `🎉 ¡مبرووووك، ${name}! لقد ارتقيت إلى المستوى ${user.level}`;
-    const levelUpDetails = `
-🚀 *تقدم في المستوى جديد*
+  let pp = await conn.profilePictureUrl(who, 'image').catch(_ => './Menu2.jpg');
+  let user = global.db.data.users[who];
+  let { exp, level, role } = global.db.data.users[who];
+  let { min, xp } = xpRange(user.level, global.multiplier);
+  let username = conn.getName(who);
 
-*◉ المستوى السابق:* ${before}
-*◉ المستوى الجديد:* ${user.level}
-*◉ الرتبة الحالية:* ${user.role}
+  let crxp = exp - min
+  let customBackground  = './Assets/rankbg.jpg'
+  let requiredXpToLevelUp = xp
 
-*—◉ استمر في استكشاف وأداء المهام لتحقيق إنجازات جديدة في نقابة المغامرين. استمر في التفاعل مع البوت!*`.trim();
-    try {
-      const levelUpImage = await levelup(levelUpMessage, user.level);
-      conn.sendFile(m.chat, levelUpImage, 'levelup.jpg', levelUpDetails, m);
-    } catch (e) {
-      conn.sendMessage(m.chat, {text: levelUpDetails, mentions: [m.sender]}, {quoted: m});
-    }
-  }
-};
-handler.help = ['levelup'];
-handler.tags = ['xp'];
+  const card = await new Canvacord.Rank()
+  .setAvatar(pp)
+  .setLevel(level)
+  .setCurrentXP(crxp) 
+  .setRequiredXP(requiredXpToLevelUp) 
+  .setProgressBar('#db190b', 'COLOR') // Set progress bar color here
+  .setDiscriminator(who.substring(3, 7))
+  .setCustomStatusColor('#db190b')
+  .setLevelColor('#FFFFFF', '#FFFFFF')
+  .setOverlay('#000000')
+  .setUsername(username)
+  .setBackground('IMAGE', customBackground)
+  .setRank(level, 'المستوي', false)
+  .renderEmojis(true)
+  .build();
+
+  const str = `🏮 *الاسم:* ${username}\n\n⚡ *الخبرة:* ${crxp} / ${requiredXpToLevelUp}\n\n🏅 *الرتبة:* *${role}*`
+
+  try {
+    conn.sendFile(m.chat, card, 'rank.jpg', str, m, false, { mentions: [who] });
+    m.react('✅');
+  } catch (error) {
+    console.error(error);
+  }}
+
+handler.help = ['rank'];
+handler.tags = ['economy'];
 handler.command = ['مستواي', 'لفل', 'levelup', 'مستوي'];
 export default handler;
