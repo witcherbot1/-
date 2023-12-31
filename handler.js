@@ -1455,8 +1455,10 @@ export async function participantsUpdate({id, participants, action}) {
                         contextInfo: {
                         mentionedJid: [user],
                         externalAdReply: {
+                        title: "THE ZORO BOT",
                         body: "مرحبا بك في المجموعة",
-                        thumbnailUrl: welcomeApiUrl
+                        thumbnailUrl: welcomeApiUrl,
+                        sourceUrl: 'https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9',
                         mediaType: 1,
                         renderLargerThumbnail: true
                         }}})
