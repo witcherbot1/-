@@ -1430,13 +1430,13 @@ export async function participantsUpdate({id, participants, action}) {
                 } finally {
                   let text = (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user')
                     .replace('@group', await this.getName(id))
-                    .replace('@desc', groupMetadata.desc?.toString() || 'error')
+                    .replace('@desc', groupMetadata.desc?.toString() || 'مفيش وصف')
                     .replace('@user', '@' + user.split('@')[0]);
           
                   let nthMember = groupMetadata.participants.length;
                   let secondText = `اهلا ياحب, ${await this.getName(user)}, رقم ${nthMember}العضو`;
           
-                  let welcomeApiUrl = `https://welcome.guruapi.tech/welcome-image?username=${encodeURIComponent(
+                  let welcomeApiUrl = `https://api.popcat.xyz/welcomecard?username=${encodeURIComponent(
                     await this.getName(user)
                   )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
                     ppgp
