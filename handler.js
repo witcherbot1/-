@@ -1416,34 +1416,112 @@ export async function participantsUpdate({id, participants, action}) {
   let text = '';
   switch (action) {
     case 'add':
-    case 'remove':
-      if (chat.welcome && !chat?.isBanned) {
-        const groupMetadata = await m.conn.groupMetadata(id) || (conn.chats[id] || {}).metadata;
-        for (const user of participants) {
-          let pp = './src/avatar_contact.png';
-          try {
-            pp = await m.conn.profilePictureUrl(user, 'image');
-          } catch (e) {
-          } finally {
-            const apii = await m.conn.getFile(pp);
-            const antiArab = JSON.parse(fs.readFileSync('./src/antiArab.json'));
-            const userPrefix = antiArab.some((prefix) => user.startsWith(prefix));
-            const botTt2 = groupMetadata.participants.find((u) => m.conn.decodeJid(u.id) == m.conn.user.jid) || {};
-            const isBotAdminNn = botTt2?.admin === 'admin' || false;
-            text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'اهلا, @user!').replace('@subject', await m.conn.getName(id)).replace('@desc', groupMetadata.desc?.toString() || '*بدون وصف*') :
-                              (chat.sBye || this.bye || conn.bye || 'سلام, @user!')).replace('@user', '@' + user.split('@')[0]);
-            if (userPrefix && chat.antiArab && botTt.restrict && isBotAdminNn && action === 'add') {
-              const responseb = await m.conn.groupParticipantsUpdate(id, [user], 'remove');
-              if (responseb[0].status === '404') return;
-              const fkontak2 = {'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${user.split('@')[0]}:${user.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
-              await m.conn.sendMessage(id, {text: `*[❗] @${user.split('@')[0]} في هذه المجموعة لا يُسمح بأرقام اجنبيه أو نصوص غير عادية، لذلك سيتم طردك من المجموعة.*`, mentions: [user]}, {quoted: fkontak2});
-              return;
+    if (chat.welcome) {
+              let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata;
+              for (let user of participants) {
+                let pp, ppgp;
+                try {
+                  pp = await this.profilePictureUrl(user, 'image');
+                  ppgp = await this.profilePictureUrl(id, 'image');
+                } catch (error) {
+                  console.error(`Error retrieving profile picture: ${error}`);
+                  pp = 'https://i.imgur.com/8B4jwGq.jpeg'; // Assign default image URL
+                  ppgp = 'https://i.imgur.com/8B4jwGq.jpeg'; // Assign default image URL
+                } finally {
+                  let text = (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user')
+                    .replace('@group', await this.getName(id))
+                    .replace('@desc', groupMetadata.desc?.toString() || 'error')
+                    .replace('@user', '@' + user.split('@')[0]);
+          
+                  let nthMember = groupMetadata.participants.length;
+                  let secondText = `Welcome, ${await this.getName(user)}, our ${nthMember}th member`;
+          
+                  let welcomeApiUrl = `https://welcome.guruapi.tech/welcome-image?username=${encodeURIComponent(
+                    await this.getName(user)
+                  )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
+                    ppgp
+                  )}&memberCount=${encodeURIComponent(
+                    nthMember.toString()
+                  )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
+                    'https://cdn.wallpapersafari.com/71/19/7ZfcpT.png'
+                  )}`;
+          
+                  try {
+                    let welcomeResponse = await fetch(welcomeApiUrl);
+                    let welcomeBuffer = await welcomeResponse.buffer();
+          
+                    this.sendMessage(id, {
+                        text: text,
+                        contextInfo: {
+                        mentionedJid: [user],
+                        externalAdReply: {
+                        title: "ᴛʜᴇ ɢᴜʀᴜ-ʙᴏᴛ",
+                        body: "welcome to Group",
+                        thumbnailUrl: welcomeApiUrl,
+                        sourceUrl: 'https://chat.whatsapp.com/BFfD1C0mTDDDfVdKPkxRAA',
+                        mediaType: 1,
+                        renderLargerThumbnail: true
+                        }}})
+                  } catch (error) {
+                    console.error(`Error generating welcome image: ${error}`);
+                  }
+                }
+              }
             }
-            await m.conn.sendFile(id, apii.data, 'pp.jpg', text, null, false, {mentions: [user]});
-          }
-        }
-      }
-      break;
+            break;
+          
+          case 'remove':
+            if (chat.welcome) {
+              let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata;
+              for (let user of participants) {
+                let pp, ppgp;
+                try {
+                  pp = await this.profilePictureUrl(user, 'image');
+                  ppgp = await this.profilePictureUrl(id, 'image');
+                } catch (error) {
+                  console.error(`Error retrieving profile picture: ${error}`);
+                  pp = 'https://i.imgur.com/8B4jwGq.jpeg'; // Assign default image URL
+                  ppgp = 'https://i.imgur.com/8B4jwGq.jpeg'; // Assign default image URL
+                } finally {
+                  let text = (chat.sBye || this.bye || conn.bye || 'HELLO, @user')
+                    .replace('@user', '@' + user.split('@')[0]);
+          
+                  let nthMember = groupMetadata.participants.length;
+                  let secondText = `Goodbye, our ${nthMember}th group member`;
+          
+                  let leaveApiUrl = `https://welcome.guruapi.tech/leave-image?username=${encodeURIComponent(
+                    await this.getName(user)
+                  )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
+                    ppgp
+                  )}&memberCount=${encodeURIComponent(
+                    nthMember.toString()
+                  )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
+                    'https://cdn.wallpapersafari.com/71/19/7ZfcpT.png'
+                  )}`;
+          
+                  try {
+                    let leaveResponse = await fetch(leaveApiUrl);
+                    let leaveBuffer = await leaveResponse.buffer();
+          
+                    this.sendMessage(id, {
+                        text: text,
+                        contextInfo: {
+                        mentionedJid: [user],
+                        externalAdReply: {
+                        title: "ᴛʜᴇ ɢᴜʀᴜ-ʙᴏᴛ",
+                        body: "Goodbye from  Group",
+                        thumbnailUrl: leaveApiUrl,
+                        sourceUrl: 'https://chat.whatsapp.com/BFfD1C0mTDDDfVdKPkxRAA',
+                        mediaType: 1,
+                        renderLargerThumbnail: true
+                        }}})
+                  } catch (error) {
+                    console.error(`Error generating leave image: ${error}`);
+                  }
+                }
+              }
+            }
+            break;
     case 'promote':
     case 'daradmin':
     case 'darpoder':
