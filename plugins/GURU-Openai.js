@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 import axios from 'axios'
 import translate from '@vitalets/google-translate-api'
 import { Configuration, OpenAIApi } from 'openai'
@@ -7,7 +7,7 @@ const openaiii = new OpenAIApi(configuration);
 let handler = async (m, { conn, text, usedPrefix, command }) => {
 if (usedPrefix == 'a' || usedPrefix == 'A') return    
   if (!text && !(m.quoted && m.quoted.text)) {
-    throw `الرجاء تقديم نص أو اي شئ برسالة للحصول على رد.`;
+    throw `Please provide some text or quote a message to get a response.`;
   }
 
   if (!text && m.quoted && m.quoted.text) {
@@ -17,22 +17,21 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
   try {
     m.react(rwait)
     const { key } = await conn.sendMessage(m.chat, {
-      image: { url: 'https://telegra.ph/file/d879cbad22d59e9f6c94d.jpg' },
-      caption: 'سيبني افكر....'
+      image: { url: 'https://telegra.ph/file/c3f9e4124de1f31c1c6ae.jpg' },
+      caption: 'Thinking....'
     }, {quoted: m})
     conn.sendPresenceUpdate('composing', m.chat);
-   let res = await gpt.ChatGpt(text, syms)
-
-    let ia2 = await fetch(`https://api.popcat.xyz/chatbot?msg=${text}`)
+    let res = await gpt.ChatGpt(text, syms)
+    const guru1 = `https://api.amosayomide05.cf/gpt/?question=${text}&string_id=${m.sender}`;
     
     try {
-      let response = await ia2.json()
+      let response = await fetch(guru1);
       let data = await response.json();
       let result = data.result;
 
       if (!result) {
         
-        throw new Error('لا يوجد استجابة JSON صالحة من الAPI الأول');
+        throw new Error('No valid JSON response from the first API');
       }
 
       await conn.relayMessage(m.chat, {
@@ -46,15 +45,15 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
       }, {});
       m.react(done);
     } catch (error) {
-      console.error('خطأ من الAPI الأول:', error);
+      console.error('Error from the first API:', error);
 
   
       const model = 'llama';
       const senderNumber = m.sender.replace(/[^0-9]/g, ''); 
-      const session = `ZORO_BOT_${senderNumber}`;
-      let tioress = await fetch(`https://api.popcat.xyz/chatbot?msg=${text}`)
+      const session = `GURU_BOT_${senderNumber}`;
+      const guru2 = `https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`;
       
-      let response = await tioress.json()
+      let response = await fetch(guru2);
       let data = await response.json();
       let result = data.completion;
 
@@ -70,8 +69,9 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
       m.react(done);
     }
 
-    } catch {
-        throw `*[❗] خطأ، يرجى إدخال نص صحيح*`;
+  } catch (error) {
+    console.error('Error:', error);
+    throw `*ERROR*`;
   }
 };
 handler.help = ['chatgpt']
