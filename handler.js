@@ -1430,14 +1430,14 @@ export async function participantsUpdate({id, participants, action}) {
                 } finally {
                   let text = (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user')
                     .replace('@group', await this.getName(id))
-                    .replace('@desc', groupMetadata.desc?.toString() || 'مفيش وصف')
+                    .replace('@desc', groupMetadata.desc?.toString() || 'error')
                     .replace('@user', '@' + user.split('@')[0]);
           
                   let nthMember = groupMetadata.participants.length;
                   let secondText = `اهلا ياحب, ${await this.getName(user)}, رقم ${nthMember}العضو`;
           
-                  let welcomeApiUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.discordapp.com/attachments/850808002545319957/859359637106065408/bg.png&text1=${encodeURIComponent(
-                    await this.getName(user)&text2=اهلا+بك+في+جروبنا+يحب
+                  let welcomeApiUrl = `https://welcome.guruapi.tech/welcome-image?username=${encodeURIComponent(
+                    await this.getName(user)
                   )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
                     ppgp
                   )}&memberCount=${encodeURIComponent(
@@ -1455,10 +1455,8 @@ export async function participantsUpdate({id, participants, action}) {
                         contextInfo: {
                         mentionedJid: [user],
                         externalAdReply: {
-                        title: "THE ZORO BOT",
                         body: "مرحبا بك في المجموعة",
-                        thumbnailUrl: welcomeApiUrl,
-                        sourceUrl: 'https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9',
+                        thumbnailUrl: welcomeApiUrl
                         mediaType: 1,
                         renderLargerThumbnail: true
                         }}})
