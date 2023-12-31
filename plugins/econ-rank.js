@@ -1,63 +1,48 @@
+import { xpRange } from '../lib/levelling.js';
+import Canvacord from 'canvacord';
 
-import { canLevelUp, xpRange } from '../lib/levelling.js'
 let handler = async (m, { conn }) => {
-	  let name = conn.getName(m.sender)
-    let pp = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/1e6076572ce3669b65eca.jpg')
-    let user = global.db.data.users[m.sender]
-    if (!canLevelUp(user.level, user.exp, global.multiplier)) {
-        let { min, xp, max } = xpRange(user.level, global.multiplier)
-        let txt = `
-┌───⊷ *LEVEL*
-▢ Number : *${name}*
-▢ Level : *${user.level}*
-▢ XP : *${user.exp - min}/${xp}*
-▢ Role : *${user.role}*
-└──────────────
+  let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
 
-You lack *${max - user.exp}* of *XP* to level up
-`.trim()
-try {
-  let imgg = API('fgmods', '/api/rank', {
-    username: name,
-    xp: user.exp - min,
-    exp: xp,
-    avatar: pp,
-    level: user.level,
-    background: 'https://telegra.ph/file/dae8bc61cd092f55da0d5.jpg'
-}, 'apikey')
+  if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`;
 
-    conn.sendFile(m.chat, imgg, 'level.jpg', txt, m)
-} catch (e) {
-    m.reply(txt)
-}
-    }
-    let before = user.level * 1
-    while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++
-    if (before !== user.level) {
-    	user.role = global.rpg.role(user.level).name
+  let pp = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/1e6076572ce3669b65eca.jpg');
+  let user = global.db.data.users[m.sender];
+  let { exp, level, role } = global.db.data.users[who];
+  let { min, xp } = xpRange(user.level, global.multiplier);
+  let username = conn.getName(who);
 
-        let str = `
-┌─⊷ *LEVEL UP*
-▢ Previous level : *${before}*
-▢ current level : *${user.level}*
-▢ Role : *${user.role}*
-└──────────────
+  let crxp = exp - min
+  let customBackground  = './Assets/rankbg.jpg'
+  let requiredXpToLevelUp = xp
 
-*_The more you interact with the bots, the higher your level will be_*
-`.trim()
-        try {
-            let img = API('fgmods', '/api/levelup', { 
-                avatar: pp 
-             }, 'apikey')
-      conn.sendFile(m.chat, img, 'levelup.jpg', str, m)
-        } catch (e) {
-            m.reply(str)
-        }
-    }
-}
+  const card = await new Canvacord.Rank()
+  .setAvatar(pp)
+  .setLevel(level)
+  .setCurrentXP(crxp) 
+  .setRequiredXP(requiredXpToLevelUp) 
+  .setProgressBar('#db190b', 'COLOR') // Set progress bar color here
+  .setDiscriminator(who.substring(3, 7))
+  .setCustomStatusColor('#db190b')
+  .setLevelColor('#FFFFFF', '#FFFFFF')
+  .setOverlay('#000000')
+  .setUsername(username)
+  .setBackground('IMAGE', customBackground)
+  .setRank(level, 'LEVEL', false)
+  .renderEmojis(true)
+  .build();
 
-handler.help = ['levelup']
-handler.tags = ['econ']
-handler.command = ['nivel', 'lvl', 'levelup', 'level'] 
+  const str = `🏮 *Username:* ${username}\n\n⭐ *Experience:* ${crxp} / ${requiredXpToLevelUp}\n\n🏅 *Rank:* *${role}*`
 
-export default handler
+  try {
+    conn.sendFile(m.chat, card, 'rank.jpg', str, m, false, { mentions: [who] });
+    m.react('✅');
+  } catch (error) {
+    console.error(error);
+  }}
+
+handler.help = ['rank'];
+handler.tags = ['economy'];
+handler.command = ['rank'];
+
+export default handler;
