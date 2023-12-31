@@ -1417,46 +1417,46 @@ export async function participantsUpdate({id, participants, action}) {
   switch (action) {
     case 'add':
     if (chat.welcome) {
-              let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata;
-              for (let user of participants) {
-                let pp, ppgp;
-                try {
-                  pp = await this.profilePictureUrl(user, 'image');
-                  ppgp = await this.profilePictureUrl(id, 'image');
-                } catch (error) {
-                  console.error(`حدث خطأ أثناء استرداد الصورة الشخصية: ${error}`);
-                  pp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; // Assign default image URL
-                  ppgp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; // Assign default image URL
-                } finally {
-                  let text = (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user')
-                    .replace('@group', await this.getName(id))
-                    .replace('@desc', groupMetadata.desc?.toString() || 'لايوجد وصف')
-                    .replace('@user', '@' + user.split('@')[0]);
-          
-                  let nthMember = groupMetadata.participants.length;
-                  let secondText = `اهلا ياحب, ${await this.getName(user)}, رقم ${nthMember}العضو`;
-          
-                  let welcomeApiUrl = `https://welcome.guruapi.tech/welcome-image?username=${encodeURIComponent(
-                    await this.getName(user)
-                  )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
-                    ppgp
-                  )}&memberCount=${encodeURIComponent(
-                    nthMember.toString()
-                  )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
-                    'https://telegra.ph/file/919c9aa59b8dc5cae41a8.jpg'
-                  )}`;
-          
-                  try {
-                    let welcomeResponse = await fetch(welcomeApiUrl);
-                    let welcomeBuffer = await welcomeResponse.buffer();
-          
-                    this.sendFile(id, welcomeBuffer, 'welcome.png', text, null, false, { mentions: [user] });
-                  } catch (error) {
-                    console.error(`حدث خطأ أثناء إنشاء صورة الترحيب: ${error}`);
-                  }
-                }
-              }
-            }
+  let groupMetadata = (await this.groupMetadata(id)) || (conn.chats[id] || {}).metadata;
+  for (let user of participants) {
+    let pp, ppgp;
+    try {
+      pp = await this.profilePictureUrl(user, 'image');
+      ppgp = await this.profilePictureUrl(id, 'image');
+    } catch (error) {
+      console.error(`حدث خطأ أثناء استرداد الصورة الشخصية: ${error}`);
+      pp = 'https://telegra.ph/file/1e6076572ce3669b65eca.jpg';
+      ppgp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg';
+    } finally {
+      let text = (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user')
+        .replace('@group', await this.getName(id))
+        .replace('@desc', groupMetadata.desc?.toString() || 'لايوجد وصف')
+        .replace('@user', '@' + user.split('@')[0]);
+
+      let nthMember = groupMetadata.participants.length;
+      let secondText = `اهلا ياحب, ${await this.getName(user)}, رقم ${nthMember} العضو`;
+
+      let welcomeApiUrl = `https://welcome.guruapi.tech/welcome-image?username=${encodeURIComponent(
+        await this.getName(user)
+      )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
+        ppgp
+      )}&memberCount=${encodeURIComponent(
+        nthMember.toString()
+      )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
+        'https://telegra.ph/file/919c9aa59b8dc5cae41a8.png'
+      )}`;
+
+      try {
+        let welcomeResponse = await fetch(welcomeApiUrl);
+        let welcomeBuffer = await welcomeResponse.buffer();
+
+        this.sendFile(id, welcomeBuffer, 'welcome.png', text, null, false, { mentions: [user] });
+      } catch (error) {
+        console.error(`حدث خطأ أثناء إنشاء صورة الترحيب: ${error}`);
+      }
+    }
+  }
+}
             break;
           
           case 'remove':
@@ -1469,7 +1469,7 @@ export async function participantsUpdate({id, participants, action}) {
                   ppgp = await this.profilePictureUrl(id, 'image');
                 } catch (error) {
                   console.error(`حدث خطأ أثناء استرداد الصورة الشخصية: ${error}`);
-                  pp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; // Assign default image URL
+                  pp = 'https://telegra.ph/file/1e6076572ce3669b65eca.jpg'; // Assign default image URL
                   ppgp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; // Assign default image URL
                 } finally {
                   let text = (chat.sBye || this.bye || conn.bye || 'اهلا, @user')
@@ -1485,7 +1485,7 @@ export async function participantsUpdate({id, participants, action}) {
                   )}&memberCount=${encodeURIComponent(
                     nthMember.toString()
                   )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
-                    'https://telegra.ph/file/919c9aa59b8dc5cae41a8.jpg'
+                    'https://telegra.ph/file/919c9aa59b8dc5cae41a8.png'
                   )}`;
           
                   try {
