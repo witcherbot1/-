@@ -23,7 +23,7 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
     conn.sendPresenceUpdate('composing', m.chat);
    let res = await gpt.ChatGpt(text, syms)
 
-    let ia2 = await fetch(`https://vihangayt.me/tools/chatgpt?q=${text}`)
+    let ia2 = await fetch(`https://vihangayt.me/tools/chatgpt3?q=${text}`)
     
     try {
       let response = await ia2.json()
@@ -52,7 +52,7 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
       const model = 'llama';
       const senderNumber = m.sender.replace(/[^0-9]/g, ''); 
       const session = `ZORO_BOT_${senderNumber}`;
-      let tioress = await fetch(`https://api.lolhuman.xyz/api/openai?apikey=${lolkeysapi}&text=${text}&user=${m.sender}`)
+      let tioress = await fetch(`https://vihangayt.me/tools/chatgpt3?q=${text}`)
       
       let response = await tioress.json()
       let data = await response.json();
