@@ -1424,9 +1424,9 @@ export async function participantsUpdate({id, participants, action}) {
                   pp = await this.profilePictureUrl(user, 'image');
                   ppgp = await this.profilePictureUrl(id, 'image');
                 } catch (error) {
-                  console.error(`Error retrieving profile picture: ${error}`);
-                  pp = 'https://i.imgur.com/8B4jwGq.jpeg'; // Assign default image URL
-                  ppgp = 'https://i.imgur.com/8B4jwGq.jpeg'; // Assign default image URL
+                  console.error(`حدث خطأ أثناء استرداد الصورة الشخصية: ${error}`);
+                  pp = 'https://telegra.ph/file/c6e93e154336db7585c98.jpg'; // Assign default image URL
+                  ppgp = 'https://telegra.ph/file/c6e93e154336db7585c98.jpg'; // Assign default image URL
                 } finally {
                   let text = (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user')
                     .replace('@group', await this.getName(id))
@@ -1434,7 +1434,7 @@ export async function participantsUpdate({id, participants, action}) {
                     .replace('@user', '@' + user.split('@')[0]);
           
                   let nthMember = groupMetadata.participants.length;
-                  let secondText = `Welcome, ${await this.getName(user)}, our ${nthMember}th member`;
+                  let secondText = `اهلا ياحب, ${await this.getName(user)}, رقم ${nthMember}العضو`;
           
                   let welcomeApiUrl = `https://welcome.guruapi.tech/welcome-image?username=${encodeURIComponent(
                     await this.getName(user)
@@ -1443,7 +1443,7 @@ export async function participantsUpdate({id, participants, action}) {
                   )}&memberCount=${encodeURIComponent(
                     nthMember.toString()
                   )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
-                    'https://cdn.wallpapersafari.com/71/19/7ZfcpT.png'
+                    'https://telegra.ph/file/919c9aa59b8dc5cae41a8.jpg'
                   )}`;
           
                   try {
@@ -1455,15 +1455,15 @@ export async function participantsUpdate({id, participants, action}) {
                         contextInfo: {
                         mentionedJid: [user],
                         externalAdReply: {
-                        title: "ᴛʜᴇ ɢᴜʀᴜ-ʙᴏᴛ",
-                        body: "welcome to Group",
+                        title: "THE ZORO BOT",
+                        body: "مرحبا بك في المجموعة",
                         thumbnailUrl: welcomeApiUrl,
-                        sourceUrl: 'https://chat.whatsapp.com/BFfD1C0mTDDDfVdKPkxRAA',
+                        sourceUrl: 'https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9',
                         mediaType: 1,
                         renderLargerThumbnail: true
                         }}})
                   } catch (error) {
-                    console.error(`Error generating welcome image: ${error}`);
+                    console.error(`حدث خطأ أثناء إنشاء صورة الترحيب: ${error}`);
                   }
                 }
               }
@@ -1479,15 +1479,15 @@ export async function participantsUpdate({id, participants, action}) {
                   pp = await this.profilePictureUrl(user, 'image');
                   ppgp = await this.profilePictureUrl(id, 'image');
                 } catch (error) {
-                  console.error(`Error retrieving profile picture: ${error}`);
-                  pp = 'https://i.imgur.com/8B4jwGq.jpeg'; // Assign default image URL
-                  ppgp = 'https://i.imgur.com/8B4jwGq.jpeg'; // Assign default image URL
+                  console.error(`حدث خطأ أثناء استرداد الصورة الشخصية: ${error}`);
+                  pp = 'https://telegra.ph/file/c6e93e154336db7585c98.jpg'; // Assign default image URL
+                  ppgp = 'https://telegra.ph/file/c6e93e154336db7585c98.jpg'; // Assign default image URL
                 } finally {
-                  let text = (chat.sBye || this.bye || conn.bye || 'HELLO, @user')
+                  let text = (chat.sBye || this.bye || conn.bye || 'اهلا, @user')
                     .replace('@user', '@' + user.split('@')[0]);
           
                   let nthMember = groupMetadata.participants.length;
-                  let secondText = `Goodbye, our ${nthMember}th group member`;
+                  let secondText = `وداعا, رقم ${nthMember}عضونا`;
           
                   let leaveApiUrl = `https://welcome.guruapi.tech/leave-image?username=${encodeURIComponent(
                     await this.getName(user)
@@ -1496,7 +1496,7 @@ export async function participantsUpdate({id, participants, action}) {
                   )}&memberCount=${encodeURIComponent(
                     nthMember.toString()
                   )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
-                    'https://cdn.wallpapersafari.com/71/19/7ZfcpT.png'
+                    'https://telegra.ph/file/919c9aa59b8dc5cae41a8.jpg'
                   )}`;
           
                   try {
@@ -1508,15 +1508,15 @@ export async function participantsUpdate({id, participants, action}) {
                         contextInfo: {
                         mentionedJid: [user],
                         externalAdReply: {
-                        title: "ᴛʜᴇ ɢᴜʀᴜ-ʙᴏᴛ",
-                        body: "Goodbye from  Group",
+                        title: "THE ZORO BOT",
+                        body: "الي القاء",
                         thumbnailUrl: leaveApiUrl,
-                        sourceUrl: 'https://chat.whatsapp.com/BFfD1C0mTDDDfVdKPkxRAA',
+                        sourceUrl: 'https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9',
                         mediaType: 1,
                         renderLargerThumbnail: true
                         }}})
                   } catch (error) {
-                    console.error(`Error generating leave image: ${error}`);
+                    console.error(`حدث خطأ أثناء إنشاء صورة الإجازة: ${error}`);
                   }
                 }
               }
