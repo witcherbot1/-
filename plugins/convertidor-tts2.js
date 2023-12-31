@@ -49,20 +49,18 @@ const handler = async (m, { conn, usedPrefix, command, text, args }) => {
   conn.sendMessage(m.chat, {audio: {url: masivo.resultado}, fileName: 'error.mp3', mimetype: 'audio/mpeg', ptt: true}, {quoted: m});
 };
 
-handler.command = /^(g?tts2|انطق2)$/i;
+handler.command = /^(g?tts2|تحدث)$/i;
 export default handler;
 
-const secretKey = 'fe2ee40099494579af0ecf871b5af266';
-const userId = 'SrgwcKcLzSY63IdsAxd1PzscFjL2';
+const secretKey = 'c933c9980b58d95720cfdbbf97450ebe';
 
 async function getVoiceList() {
-  const url = 'https://play.ht/api/v2/voices';
+  const url = 'https://api.elevenlabs.io/v1/text-to-speech';
   const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      AUTHORIZATION: `Bearer ${secretKey}`,
-      'X-USER-ID': userId
+      AUTHORIZATION: `Bearer ${secretKey}`
     }
   };
   try {
@@ -96,7 +94,7 @@ async function makeTTSRequest(texto, efecto) {
     'content-type': 'application/json'
   };
   try {
-    const response = await axios.post('https://play.ht/api/v2/tts', requestData, { headers });
+    const response = await axios.post('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', requestData, { headers });
     const events = response.data.split('\r\n\r\n');
     const eventData = events.find(event => event.includes('"stage":"complete"'));
     const urlMatch = eventData.match(/"url":"([^"]+)"/);
