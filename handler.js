@@ -1425,8 +1425,8 @@ export async function participantsUpdate({id, participants, action}) {
                   ppgp = await this.profilePictureUrl(id, 'image');
                 } catch (error) {
                   console.error(`حدث خطأ أثناء استرداد الصورة الشخصية: ${error}`);
-                  pp = 'https://telegra.ph/file/c6e93e154336db7585c98.jpg'; // Assign default image URL
-                  ppgp = 'https://telegra.ph/file/c6e93e154336db7585c98.jpg'; // Assign default image URL
+                  pp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; // Assign default image URL
+                  ppgp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; // Assign default image URL
                 } finally {
                   let text = (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user')
                     .replace('@group', await this.getName(id))
@@ -1480,8 +1480,8 @@ export async function participantsUpdate({id, participants, action}) {
                   ppgp = await this.profilePictureUrl(id, 'image');
                 } catch (error) {
                   console.error(`حدث خطأ أثناء استرداد الصورة الشخصية: ${error}`);
-                  pp = 'https://telegra.ph/file/c6e93e154336db7585c98.jpg'; // Assign default image URL
-                  ppgp = 'https://telegra.ph/file/c6e93e154336db7585c98.jpg'; // Assign default image URL
+                  pp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; // Assign default image URL
+                  ppgp = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; // Assign default image URL
                 } finally {
                   let text = (chat.sBye || this.bye || conn.bye || 'اهلا, @user')
                     .replace('@user', '@' + user.split('@')[0]);
