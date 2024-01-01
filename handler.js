@@ -1440,7 +1440,7 @@ export async function participantsUpdate({id, participants, action}) {
                     'https://telegra.ph/file/919c9aa59b8dc5cae41a8.png'
                   )}&text1=${encodeURIComponent(
                     await this.getName(user)
-                  )}&text2=نورت+الجروب+يحب&text3=عدد+الاعضاء${encodeURIComponent(
+                  )}&text2=نورت+الجروب+يحب&text3=عدد+الاعضاء+:${encodeURIComponent(
                     nthMember.toString()
                   )}&avatar=${encodeURIComponent(pp)}`;
           
@@ -1480,7 +1480,7 @@ export async function participantsUpdate({id, participants, action}) {
                     'https://telegra.ph/file/919c9aa59b8dc5cae41a8.png'
                   )}&text1=${encodeURIComponent(
                     await this.getName(user)
-                  )}&text2=👋ارجو+ان+تكون+استمتعت+معنا+الي+القاء&text3=عدد+الاعضاء${encodeURIComponent(
+                  )}&text2=الي+القاء&text3=عدد+الاعضاء+:${encodeURIComponent(
                     nthMember.toString()
                   )}&avatar=${encodeURIComponent(pp)}`;
           
