@@ -1,48 +1,53 @@
-import { xpRange } from '../lib/levelling.js';
-import Canvacord from 'canvacord';
+import { canLevelUp, xpRange } from '../lib/levelling.js';
 
 let handler = async (m, { conn }) => {
-  let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
+    let name = conn.getName(m.sender);
+    let pp = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg');
+    let user = global.db.data.users[m.sender];
+    let background = 'https://telegra.ph/file/d37b343ee8f981be6ffba.jpg'; 
 
-  if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`;
+    if (!canLevelUp(user.level, user.exp, global.multiplier)) {
+        let { min, xp, max } = xpRange(user.level, global.multiplier);
+        let txt = `
+┌───⊷ *الـــرانـــك*
+⌯ الاسـم : *${name}*
+⌯ الـلـفل : *${user.level}*
+⌯ الـخبـرة : *${user.exp - min}/${xp}*
+⌯ التصنيف : *${user.role}*
+└──────────────
 
-  let pp = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/1e6076572ce3669b65eca.jpg');
-  let user = global.db.data.users[m.sender];
-  let { exp, level, role } = global.db.data.users[who];
-  let { min, xp } = xpRange(user.level, global.multiplier);
-  let username = conn.getName(who);
+⌯ ${name} تحتاج الي *${max - user.exp}* خبرة للارتقاء الي مستوي جديد 🚀
+`.trim();
 
-  let crxp = exp - min
-  let customBackground  = './Assets/rankbg.jpg'
-  let requiredXpToLevelUp = xp
+        try {
+            let imgg = `https://wecomeapi.onrender.com/rankup-image?username=${encodeURIComponent(name)}&currxp=${user.exp - min}&needxp=${xp}&level=${user.level}&rank=${encodeURIComponent(pp)}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(background)}`;
+            conn.sendFile(m.chat, imgg, 'level.jpg', txt, m);
+        } catch (e) {
+            m.reply(txt);
+        }
+    } else {
+        let str = `
+┌─⊷ *الـمـسـتـوي*
+⌯ المستوي السابق : *${user.level - 1}*
+⌯ المستوي الحالي : *${user.level}*
+⌯ التصنيف : *${user.role}*
+└──────────────
 
-  const card = await new Canvacord.Rank()
-  .setAvatar(pp)
-  .setLevel(level)
-  .setCurrentXP(crxp) 
-  .setRequiredXP(requiredXpToLevelUp) 
-  .setProgressBar('#db190b', 'COLOR') // Set progress bar color here
-  .setDiscriminator(who.substring(3, 7))
-  .setCustomStatusColor('#db190b')
-  .setLevelColor('#FFFFFF', '#FFFFFF')
-  .setOverlay('#000000')
-  .setUsername(username)
-  .setBackground('IMAGE', customBackground)
-  .setRank(level, 'LEVEL', false)
-  .renderEmojis(true)
-  .build();
+Woo-hoo, ${name}! You've soared to new heights and reached level ${user.level}! 🎉 Time to celebrate! 🎊
+Your newfound power will strike fear into the hearts of trolls, and the bots will bow before your command! Keep up the incredible work, and who knows what epic adventures await you next! 🌟
+`.trim();
 
-  const str = `🏮 *Username:* ${username}\n\n⭐ *Experience:* ${crxp} / ${requiredXpToLevelUp}\n\n🏅 *Rank:* *${role}*`
+        try {
+            let img = `https://wecomeapi.onrender.com/levelup-image?avatar=${encodeURIComponent(pp)}`;
+            conn.sendFile(m.chat, img, 'levelup.jpg', str, m);
+        } catch (e) {
+            m.reply(str);
+        }
+    }
+}
 
-  try {
-    conn.sendFile(m.chat, card, 'rank.jpg', str, m, false, { mentions: [who] });
-    m.react('✅');
-  } catch (error) {
-    console.error(error);
-  }}
+handler.help = ['levelup'];
+handler.tags = ['econ'];
+handler.command = ['nivel', 'lvl', 'لفل', 'level'];
 
-handler.help = ['rank'];
-handler.tags = ['economy'];
-handler.command = ['rank'];
-
-export default handler;
+export default handler
