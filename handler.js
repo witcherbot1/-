@@ -1440,7 +1440,7 @@ export async function participantsUpdate({id, participants, action}) {
                     'https://telegra.ph/file/919c9aa59b8dc5cae41a8.png'
                   )}&text1=${encodeURIComponent(
                     await this.getName(user)
-                  )}&text2=اهلا+بك/ي+في+جروبنا&text3=Member=${encodeURIComponent(
+                  )}&text2=نورت+الجروب+يحب&text3=عدد+الاعضاء${encodeURIComponent(
                     nthMember.toString()
                   )}&avatar=${encodeURIComponent(pp)}`;
           
@@ -1476,15 +1476,13 @@ export async function participantsUpdate({id, participants, action}) {
                   let nthMember = groupMetadata.participants.length;
                   let secondText = `وداعا, رقم ${nthMember}عضونا`;
           
-                  let leaveApiUrl = `https://welcome.guruapi.tech/leave-image?username=${encodeURIComponent(
-                    await this.getName(user)
-                  )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
-                    ppgp
-                  )}&memberCount=${encodeURIComponent(
-                    nthMember.toString()
-                  )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
+                  let leaveApiUrl = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(
                     'https://telegra.ph/file/919c9aa59b8dc5cae41a8.png'
-                  )}`;
+                  )}&text1=${encodeURIComponent(
+                    await this.getName(user)
+                  )}&text2=👋ارجو+ان+تكون+استمتعت+معنا+الي+القاء&text3=عدد+الاعضاء${encodeURIComponent(
+                    nthMember.toString()
+                  )}&avatar=${encodeURIComponent(pp)}`;
           
                   try {
                     let leaveResponse = await fetch(leaveApiUrl);
