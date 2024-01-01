@@ -1436,15 +1436,13 @@ export async function participantsUpdate({id, participants, action}) {
                   let nthMember = groupMetadata.participants.length;
                   let secondText = `اهلا ياحب, ${await this.getName(user)}, رقم ${nthMember}العضو`;
           
-                  let welcomeApiUrl = `https://welcome.guruapi.tech/welcome-image?username=${encodeURIComponent(
-                    await this.getName(user)
-                  )}&guildName=${encodeURIComponent(await this.getName(id))}&guildIcon=${encodeURIComponent(
-                    ppgp
-                  )}&memberCount=${encodeURIComponent(
-                    nthMember.toString()
-                  )}&avatar=${encodeURIComponent(pp)}&background=${encodeURIComponent(
+                  let welcomeApiUrl = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(
                     'https://telegra.ph/file/919c9aa59b8dc5cae41a8.png'
-                  )}`;
+                  )}&text1=${encodeURIComponent(
+                    await this.getName(user)
+                  )}&text2=اهلا+بك/ي+في+جروبنا&text3=Member=${encodeURIComponent(
+                    nthMember.toString()
+                  )}&avatar=${encodeURIComponent(pp)}`;
           
                   try {
                     let welcomeResponse = await fetch(welcomeApiUrl);
