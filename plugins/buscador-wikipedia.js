@@ -1,44 +1,40 @@
-import axios from 'axios';
-import fetch from 'node-fetch';
 import cheerio from 'cheerio';
-async function wikipedia(querry) {
-  try {
-    const link = await axios.get(`https://es.wikipedia.org/wiki/${querry}`);
-    const $ = cheerio.load(link.data);
-    const judul = $('#firstHeading').text().trim();
-    const thumb = $('#mw-content-text').find('div.mw-parser-output > div:nth-child(1) > table > tbody > tr:nth-child(2) > td > a > img').attr('src') || `//i.ibb.co/nzqPBpC/http-error-404-not-found.png`;
-    const isi = [];
-    $('#mw-content-text > div.mw-parser-output').each(function(rayy, Ra) {
-      const penjelasan = $(Ra).find('p').text().trim();
-      isi.push(penjelasan);
-    });
-    for (const i of isi) {
-      const data = {
-        status: link.status,
-        result: {
-          judul: judul,
-          thumb: 'https:' + thumb,
-          isi: i}};
-      return data;
-    }
-  } catch (err) {
-    const notFond = {
-      status: link.status,
-      Pesan: eror};
-    return notFond;
-  }
-}
-const handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw `*[❗️] يجب إدخال اسم الموضوع الذي تريد البحث عنه*`;
-  try {
-    const result = await wikipedia(`${text}`);
-    m.reply(`*معلومات ويكيبيديا حول: ${result.result.title}*\n\n${result.result.content.join('\n\n')}`);
-  } catch {
-    m.reply('*[❗️] خطأ أثناء جلب المعلومات، يُرجى المحاولة مرة أخرى*');
-  }
-};
+import fetch from 'node-fetch';
 
-handler.help = ['wikipedia'].map((v) => v + ' <موضوع>');
-handler.tags = ['internet'];
-handler.command = /^(wiki|wikipedia)$/i;
-export default handler;
+let handler = async (m, {
+    conn,
+    args,
+    usedPrefix,
+    text,
+    command
+}) => {
+            if (!text) return m.reply("ابحث في ويكيبيديا\nمثال: .ويكي القوه")
+            await m.reply(wait)
+            try {
+                let item = await Wiki(text)
+                let cap = `🔍 *[ نتائج البحث ]*
+
+📌 *العنوان :* ${item[0].judul}
+📋 *ويكيبيديا :* ${item[0].wiki}
+`
+                await conn.sendFile(m.chat, item[0].thumb || logo, "", cap, m)
+                
+            } catch (e) {
+                await m.reply(eror)
+            }
+}
+handler.help = ["ويكي"]
+handler.tags = ["internet"]
+handler.command = /(ويكيبيديا|ويكى|معلومات|ويكي)$/i
+export default handler
+
+/* New Line */
+async function Wiki(query) {
+  const res = await fetch(`https://ar.m.wikipedia.org/w/index.php?search=${query}`);
+  const html = await res.text();
+  const $ = cheerio.load(html);
+  const wiki = $('#mf-section-0').find('p').text();
+  const thumb = $('#mf-section-0').find('div > div > a > img').attr('src') || '//https://telegra.ph/file/c6e93e154336db7585c98.jpg';
+  const judul = $('h1#section_0').text();
+  return [{ wiki, thumb: `https:${thumb}`, judul }];
+}
