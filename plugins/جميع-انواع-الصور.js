@@ -116,8 +116,20 @@ const handler = async (m, {command, conn}) => {
     conn.sendMessage(m.chat, {image: {url: haha.data}, caption: `_${command}_`.trim()}, {quoted: m});
   }
 
+  if (command == 'سياره') {
+    const haha = await conn.getFile(`https://api.popcat.xyz/car?apikey=${apikey}`);
+    await conn.reply(m.chat, global.wait, m);
+    conn.sendMessage(m.chat, {image: {url: haha.data}, caption: `${title}`.trim()}, {quoted: m});
+  }
+
   if (command == 'wpaesthetic2') {
     const haha = await conn.getFile(`https://api.zahwazein.xyz/randomimage/aesthetic?apikey=${apikey}`);
+    await conn.reply(m.chat, global.wait, m);
+    conn.sendMessage(m.chat, {image: {url: haha.data}, caption: `_${command}_`.trim()}, {quoted: m});
+  }
+
+  if (command == 'انميز') {
+    const haha = await conn.getFile(`https://api.zahwazein.xyz/randomanime/anime?apikey=${apikey}`);
     await conn.reply(m.chat, global.wait, m);
     conn.sendMessage(m.chat, {image: {url: haha.data}, caption: `_${command}_`.trim()}, {quoted: m});
   }
@@ -140,7 +152,7 @@ const handler = async (m, {command, conn}) => {
     conn.sendMessage(m.chat, {image: {url: haha.data}, caption: `_${command}_`.trim()}, {quoted: m});
   }
 };
-handler.command = ['جبل', 'ببجي', 'جيمينج', 'aesthetic', 'عشوائي', 'coffee', 'pentol', 'كرتون', 'ciberespacio', 'تيكنولوجيا', 'درايمون', 'هكر', 'كوكب', 'randomprofile', 'wpaesthetic2', 'wpvehiculo', 'wallhp', 'wpmoto'];
+handler.command = ['جبل', 'ببجي', 'جيمينج', 'انميز', 'عشوائي', 'coffee', 'سياره', 'كرتون', 'ciberespacio', 'تيكنولوجيا', 'درايمون', 'هكر', 'كوكب', 'randomprofile', 'wpaesthetic2', 'wpvehiculo', 'wallhp', 'wpmoto'];
 export default handler;
 
 async function wallpaper(title, page = '1') {
