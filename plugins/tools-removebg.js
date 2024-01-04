@@ -8,8 +8,8 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
     const q = m.quoted ? m.quoted : m;
     const mime = (q.msg || q).mimetype || '';
-
-
+    
+    
     const img = await q.download();
     //let apikey = 'HP1LME2sjA6BeBb6jHtfsU7h' 
     let apikey = 'jf3DB4nBaYLnGjyfLnwTJUtX'
@@ -28,22 +28,22 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
 
     if (response.status !== 200) {
-      throw new Error(`خــطــأ ${response.status} ${response.statusText}`);
+      throw new Error(`خطأ: ${response.status} ${response.statusText}`);
     }
 
     const imageData = response.data;
 
     fs.writeFileSync('./tmp/no-bg.png', imageData);
 
-    const caption = 'تم بواسطه✅
-      𝑍𝑂𝑅𝑂⚡3𝑀𝐾';
+    // إضافة التسمية التوضيحية إلى الصورة
+    const caption = 'تم الصنع بواسطة, dark man';
     conn.sendFile(m.chat, './tmp/no-bg.png', '', caption, m);
-
+ 
   } catch (e) {
     console.error(e);
-    m.reply('قم بوضع علامة على الصوره لتفريغها.‼');
+    m.reply('قم بوضع علامة على الصوره لتفريغها.');
   }
 };
 
-handler.command = /^تفريغ|فرغ|زيل_الخلفيه$/i;
+handler.command = /^rmbg|removebg|تفريغ|أفراغ|افراغ$/i;
 export default handler;
