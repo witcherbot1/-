@@ -1,13 +1,8 @@
-import fetch from 'node-fetch'
-import axios from 'axios'
-import translate from '@vitalets/google-translate-api'
-import { Configuration, OpenAIApi } from 'openai'
-const configuration = new Configuration({ organization: global.openai_org_id, apiKey: global.openai_key });
-const openaiii = new OpenAIApi(configuration);
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-if (usedPrefix == 'a' || usedPrefix == 'A') return    
+import fetch from 'node-fetch';
+
+let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
-    throw `Please provide some text or quote a message to get a response.`;
+    throw `الرجاء تقديم نص أو اي شئ برسالة للحصول على رد.`;
   }
 
   if (!text && m.quoted && m.quoted.text) {
@@ -17,12 +12,13 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
   try {
     m.react(rwait)
     const { key } = await conn.sendMessage(m.chat, {
-      image: { url: 'https://telegra.ph/file/c3f9e4124de1f31c1c6ae.jpg' },
-      caption: 'Thinking....'
+      image: { url: 'https://telegra.ph/file/c6e93e154336db7585c98.jpg' },
+      caption: 'سيبني افكر....'
     }, {quoted: m})
     conn.sendPresenceUpdate('composing', m.chat);
-    let res = await gpt.ChatGpt(text, syms)
-    const guru1 = `https://api.amosayomide05.cf/gpt/?question=${text}&string_id=${m.sender}`;
+    const prompt = encodeURIComponent(text);
+
+    const guru1 = `${gurubot}/chatgpt?text=${prompt}`;
     
     try {
       let response = await fetch(guru1);
@@ -31,7 +27,7 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
 
       if (!result) {
         
-        throw new Error('No valid JSON response from the first API');
+        throw new Error('لا يوجد استجابة JSON صالحة من الAPI الأول');
       }
 
       await conn.relayMessage(m.chat, {
@@ -45,13 +41,13 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
       }, {});
       m.react(done);
     } catch (error) {
-      console.error('Error from the first API:', error);
+      console.error('خطأ من الAPI الأول:', error);
 
   
       const model = 'llama';
       const senderNumber = m.sender.replace(/[^0-9]/g, ''); 
       const session = `GURU_BOT_${senderNumber}`;
-      const guru2 = `https://api.lolhuman.xyz/api/openai-turbo?apikey=${lolkeysapi}&text=${text}`;
+      const guru2 = `https://ultimetron.guruapi.tech/gpt3?prompt=${prompt}`;
       
       let response = await fetch(guru2);
       let data = await response.json();
@@ -69,9 +65,8 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
       m.react(done);
     }
 
-  } catch (error) {
-    console.error('Error:', error);
-    throw `*ERROR*`;
+    } catch {
+        throw `*[❗] خطأ، يرجى إدخال نص صحيح*`;
   }
 };
 handler.help = ['chatgpt']
