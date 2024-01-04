@@ -1,7 +1,7 @@
 import fetch from "node-fetch"
 let handler = async (m, { conn }) => {
 
-  let data = await (await fetch('https://gist.githubusercontent.com/YosefZoro1/ced88af88a1e463e881d77227c5679e8/raw/e69622a1db834bbce57d789d66839642286b7086/boy.json')).json()
+  let data = await (await fetch('https://gist.githubusercontent.com/YosefZoro1/5d7e0acf4d8ebec05091a6cf465dde93/raw/347d3051239550fee064ad9097aacd26838885a4/boys.json')).json()
   let cita = data[Math.floor(Math.random() * data.length)]
 
   let cowi = await(await fetch(cita.cowo)).buffer()
