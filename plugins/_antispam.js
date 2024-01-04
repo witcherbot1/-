@@ -12,7 +12,7 @@ handler.before = async function (m, {conn, isAdmin, isBotAdmin, isOwner, isROwne
   const sender = m.sender
   const currentTime = new Date().getTime()
   const timeWindow = 5000 // الحد الزمني المسموح به
-  const messageLimit = 8 // عدد الرسائل في هذا الوقت
+  const messageLimit = 5 // عدد الرسائل في هذا الوقت
 
   let time, time2, time3, mensaje
   time = 60000 // 1 دقيقة
