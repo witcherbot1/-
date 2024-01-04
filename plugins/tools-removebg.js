@@ -36,7 +36,8 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     fs.writeFileSync('./tmp/no-bg.png', imageData);
 
     // إضافة التسمية التوضيحية إلى الصورة
-    const caption = 'تم الصنع بواسطة, dark man';
+    const caption = 'تم بواسطه✅
+      𝑍𝑂𝑅𝑂⚡3𝑀𝐾';
     conn.sendFile(m.chat, './tmp/no-bg.png', '', caption, m);
  
   } catch (e) {
