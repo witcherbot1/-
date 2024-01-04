@@ -1592,10 +1592,10 @@ global.dfail = (type, m, conn) => {
     botAdmin: '*[ ℹ️ ] لاستخدام هذا الأمر، يجب أن أكون مسؤولًا في المجموعة.*',
     unreg: '*[ 🛑 انتبه!! انت غير مسجل 🛑 ]*\n\n*—◉ لاستخدام هذا الأمر، يجب عليك التسجيل، استخدم الأمر:*\n*➣ #verificar اسم.عمر*',
     restrict: '*[ ℹ️ ] هذا الأمر تم تقييده/تعطيله بقرار من مالك البوت.*',
-  }
-    [type]
-    let imgerror = 'https://telegra.ph/file/b9a7d7f3cfbc1920cf2d3.mp4'
-    if (msg) return conn.sendFile(m.chat, imgerror, 'imgerror.gif', msg, m)});
+  }[type];
+  const aa = {quoted: m, userJid: conn.user.jid};
+  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '[ ⚡ ] جروب دعم بوت زورو 👇🐉', body: 'The ZoroBot', sourceUrl: 'https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9'}}}}, aa);
+  if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id});
 };
 
 const file = global.__filename(import.meta.url, true);
