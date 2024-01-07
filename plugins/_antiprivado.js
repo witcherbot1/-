@@ -8,7 +8,7 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isROwner }
     const bot = global.db.data.settings[this.user.jid] || {};
 
     if (bot.antiPrivate && !isOwner && !isROwner) {
-        await m.reply(`*[❗] مرحبًا @${m.sender.split`@`[0]}، يُمنع التحدث في الخاص مع البوت لهذا السبب سيتم حظرك.*\n*اذا كنت تريد تجربه البوت ادخل جروب البوت『 https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9 』*\n*『اذا كنت تريد ان تكلم مطور البوت هذا رقمي 『‏‪+201032389641‬‏*`, false, { mentions: [m.sender] });
+        await m.reply(`*[❗] مرحبًا @${m.sender.split`@`[0]}، يُمنع التحدث في الخاص مع البوت لهذا السبب سيتم حظرك.*\n\n*اذا كنت تريد تجربه البوت ادخل جروب البوت『 https://chat.whatsapp.com/LtKQ0Ocx0kp3NilKw5bRj9 』*\n\n*اذا كنت تريد ان تكلم مطور البوت هذا رقمي 『‏‪+201032389641‬‏『*`, false, { mentions: [m.sender] });
         await this.updateBlockStatus(m.chat, 'block');
     }
 
