@@ -1,6 +1,4 @@
 export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isROwner }) {
-    return true;
-}
     if (m.isBaileys && m.fromMe) return !0;
     if (m.isGroup) return !1;
     if (!m.message) return !0;
