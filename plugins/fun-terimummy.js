@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import translate from 'translate-google-api';
+import translate from '@vitalets/google-translate-api';
 
 let yoMamaJokeHandler = async (m, { conn, text }) => {
   try {
