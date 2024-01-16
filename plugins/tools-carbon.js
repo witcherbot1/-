@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 
 let handler = async (m, { conn, args }) => {
   if (!args[0]) {
-    return conn.reply(m.chat, '❗ يرجى تقديم نص لإنشاء صورة الكود.', m)
+    return conn.reply(m.chat, 'Please provide some text to generate the code image.', m)
   }
 
   let codeText = args.join(' ')
@@ -20,19 +20,19 @@ let handler = async (m, { conn, args }) => {
     });
 
     if (!response.ok) {
-      throw new Error('⚠ فشل في إنشاء صورة للكود.')
+      throw new Error('Failed to generate the code image.')
     }
 
     let imageBuffer = await response.buffer();
-    conn.sendFile(m.chat, imageBuffer, 'code.png', '✅ اتفضل حب صوره الكود:', m)
+    conn.sendFile(m.chat, imageBuffer, 'code.png', 'Here is the code image:', m)
   } catch (error) {
     console.error(error);
-    conn.reply(m.chat, '❌حدث خطأ أثناء إنشاء صورة الكود.' m)
+    conn.reply(m.chat, 'An error occurred while generating the code image.', m)
   }
 }
 
 handler.help = ['.carbon <code>']
 handler.tags = ['tools']
-handler.command = /^كاربون$/i;
+handler.command = /^carbon$/i;
 
 export default handler
