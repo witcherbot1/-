@@ -17,9 +17,9 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
     
     let translation = await translate(yoMamaJoke, { to: 'ar' });
 
-    let yoMamaJoke = translation.text;
+    let translatedYoMamaJoke = translation.text;
 
-    m.reply(yoMamaJoke);
+    m.reply(translatedYoMamaJoke);
   } catch (error) {
     console.error(error);
   }
