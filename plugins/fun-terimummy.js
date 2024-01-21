@@ -3,21 +3,24 @@ import translate from '@vitalets/google-translate-api';
 
 let yoMamaJokeHandler = async (m, { conn, text }) => {
   try {
-    let res = await fetch(`https://shizoapi.onrender.com/api/texts/quotes?apikey=shizo`);
+    let factResponse = await fetch(`https://nekos.life/api/v2/fact`);
+    let nameResponse = await fetch(`https://nekos.life/api/v2/name`);
 
-    if (!res.ok) {
-      throw new Error(`فشل طلب API مع الحالة ${res.status}`);
+    if (!factResponse.ok || !nameResponse.ok) {
+      throw new Error(`فشل طلب API مع الحالة ${factResponse.status} و ${nameResponse.status}`);
     }
 
-    let json = await res.json();
+    let factJson = await factResponse.json();
+    let nameJson = await nameResponse.json();
+    
+    console.log('Fact JSON response:', factJson);
+    console.log('Name JSON response:', nameJson);
 
-    console.log('JSON response:', json);
-
-    let yoMamaJoke = `${json.result}`;
+    let yoMamaJoke = `${factJson.fact}`;
+    let translatedName = `${nameJson.name}`;
     
     let translation = await translate(yoMamaJoke, { to: 'ar' });
-
-    let translatedYoMamaJoke = translation.text;
+    let translatedYoMamaJoke = `القائل ${translatedName}: الحقيقه ${translation.text}`;
 
     m.reply(translatedYoMamaJoke);
   } catch (error) {
@@ -27,6 +30,6 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
 
 yoMamaJokeHandler.help = ['yomamajoke'];
 yoMamaJokeHandler.tags = ['fun'];
-yoMamaJokeHandler.command = /^(اقتباس2|تشجيع|مثابره)$/i;
+yoMamaJokeHandler.command = /^(اقتباس2|حقيقه|مثابره)$/i;
 
 export default yoMamaJokeHandler;
