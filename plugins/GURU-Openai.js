@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
-    throw `الرجاء تقديم نص أو اي شئ برسالة للحصول على رد.`;
+    throw `Please provide some text or quote a message to get a response.`;
   }
 
   if (!text && m.quoted && m.quoted.text) {
@@ -12,8 +12,8 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
   try {
     m.react(rwait)
     const { key } = await conn.sendMessage(m.chat, {
-      image: { url: 'https://telegra.ph/file/c6e93e154336db7585c98.jpg' },
-      caption: 'سيبني افكر....'
+      image: { url: 'https://telegra.ph/file/c3f9e4124de1f31c1c6ae.jpg' },
+      caption: 'Thinking....'
     }, {quoted: m})
     conn.sendPresenceUpdate('composing', m.chat);
     const prompt = encodeURIComponent(text);
@@ -27,7 +27,7 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
 
       if (!result) {
         
-        throw new Error('لا يوجد استجابة JSON صالحة من الAPI الأول');
+        throw new Error('No valid JSON response from the first API');
       }
 
       await conn.relayMessage(m.chat, {
@@ -41,7 +41,7 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
       }, {});
       m.react(done);
     } catch (error) {
-      console.error('خطأ من الAPI الأول:', error);
+      console.error('Error from the first API:', error);
 
   
       const model = 'llama';
@@ -65,12 +65,13 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
       m.react(done);
     }
 
-    } catch {
-        throw `*[❗] خطأ، يرجى إدخال نص صحيح*`;
+  } catch (error) {
+    console.error('Error:', error);
+    throw `*ERROR*`;
   }
 };
 handler.help = ['chatgpt']
 handler.tags = ['AI']
-handler.command = ['يحب', 'chatgpt', 'ai', 'gpt'];
+handler.command = ['bo'];
 
 export default handler;
