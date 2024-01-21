@@ -163,7 +163,12 @@ if (chat.audios && m.text.match(/(مزتي)/gi)) {
 let vn = './media/مزتي.mp4'
 this.sendPresenceUpdate('recording', m.chat)   
 this.sendFile(m.chat, vn, 'error.mp3', null, m, true, {type: 'audioMessage', ptt: true})}
-   
+
+if (chat.audios && m.text.match(/(الاعظم|الأعظم)/gi)) {    
+let vn = './ايديت.mp4'
+this.sendPresenceUpdate('recording', m.chat)   
+this.sendFile(m.chat, vn, 'error.mp3', null, m, true, {type: 'audioMessage', ptt: true})}
+    
 return !0 }
 export default handler
 function pickRandom(list) {
