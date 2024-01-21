@@ -25,7 +25,6 @@ handler.menu = ['tiktokslide <الرابط>'];
 handler.tags = ['search'];
 handler.command = /^((صور|صور)تيك)$/i;
 
-handler.premium = true;
 handler.limit = true;
 
 export default handler;
