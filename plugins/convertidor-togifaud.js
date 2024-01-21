@@ -7,7 +7,7 @@ const handler = async (m, {conn, usedPrefix, command}) => {
   if (!/(mp4)/.test(mime)) throw `*[❗] نوع الميديا المدعوم ليس (mp4)، يرجى الرد على ملف فيديو.*`;
   m.reply(global.wait);
   const media = await q.download();
-  conn.sendMessage(m.chat, {video: media, gifPlayback: true, caption: '*ᴀϙᴜɪ ᴇsᴛᴀ sᴜ ɢɪғ ᴄᴏɴ ᴀᴜᴅɪᴏ, ᴀʟ ᴀʙʀɪʀʟᴏ sᴇ ʀᴇᴘʀᴏᴅᴜᴄᴇ ᴄᴏɴ ᴀᴜᴅɪᴏ*'}, {quoted: m});
+  conn.sendMessage(m.chat, {video: media, gifPlayback: true, caption: '*اتفضل يحب✅\n𝐵𝑌:𝑍𝑂𝑅𝑂⚡𝐵𝑂𝑇*'}, {quoted: m});
 };
 handler.command = ['لجيف'];
 export default handler;
