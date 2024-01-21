@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
-    throw `الرجاء تقديم نص أو استشهاد برسالة للحصول على رد.`;
+    throw `*هـذا هـو chatgpt اكـتب سـؤالـك وسـيرد عـليك*\nمـثال:\n*.زورو اريـد بعـض النـصائح لـعيش حيـاه سـعيده*\n\n*.زورو كـيف ابـدأ فـي مـجال الـبرمجه*`;
   }
 
   if (!text && m.quoted && m.quoted.text) {
@@ -12,8 +12,8 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
   try {
     m.react(rwait)
     const { key } = await conn.sendMessage(m.chat, {
-      image: { url: 'https://telegra.ph/file/c3f9e4124de1f31c1c6ae.jpg' },
-      caption: 'فكرة....'
+      image: { url: 'https://telegra.ph/file/abafb0983183373f95cf4.png' },
+      caption: 'ثانيه افكر....⚡'
     }, {quoted: m})
     conn.sendPresenceUpdate('composing', m.chat);
     const prompt = encodeURIComponent(text);
@@ -32,7 +32,7 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
         key,
         type: 14,
         editedMessage: {
-          imageMessage: { caption: result }
+          imageMessage: { caption: result \n𝐵𝑌:𝑍𝑂𝑅𝑂⚡𝐵𝑂𝑇 }
         }
       }
     }, {});
@@ -40,11 +40,11 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
 
   } catch (error) {
     console.error('خطأ:', error);
-    throw `*خطأ*`;
+    throw `*[❗] خطأ، يرجى إدخال نص صحيح*`;
   }
 };
 handler.help = ['chats']
 handler.tags = ['ذكاء صناعي']
-handler.command = ['bo'];
+handler.command = ['زورو','زوز'];
 
 export default handler;
