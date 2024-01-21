@@ -55,7 +55,7 @@ for (let i = 0; i < img.length; i++) {
     }
   }
 };
-handler.command = /^(instagramdl|انستجرام|igdl|ig|instagramdl2|instagram2|igdl2|ig2|instagramdl3|instagram3|igdl3|ig3)$/i;
+handler.command = /^(instagramdl|انستجرام|انستا|ig|instagramdl2|instagram2|igdl2|ig2|instagramdl3|instagram3|igdl3|ig3)$/i;
 export default handler;
 
 const getBuffer = async (url, options) => {
