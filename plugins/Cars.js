@@ -8,13 +8,13 @@ let handler = async (m, { command, conn, usedPrefix }) => {
       throw new Error('استجابة API غير صحيحة');
     }
 
-    conn.sendFile(m.chat, res.image, 'car_image.jpg', `${res.title}`, m);
+    conn.sendFile(m.chat, res.image, 'car_image.jpg', `نـوع الـسياره🏎️:${res.title}`, m);
   } catch (error) {
     console.error(error);
     conn.reply(m.chat, 'حدث خطأ أثناء جلب البيانات', m);
   }
 };
 
-handler.command = handler.help = ['car|c'];
+handler.command = handler.help = ['car', 'سياره'];
 handler.tags = ['car'];
 export default handler;
