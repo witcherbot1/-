@@ -16,5 +16,5 @@ let handler = async (m, { command, conn, usedPrefix }) => {
 };
 
 handler.command = handler.help = ['car|c'];
-handler.tags = ['anime'];
+handler.tags = ['car'];
 export default handler;
