@@ -1,12 +1,17 @@
 import fetch from 'node-fetch';
+import translate from '@vitalets/google-translate-api'; // استدعاء حزمة google-translate-api
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw `*هذا الأمر يقوم بإنشاء صور من ملحوظات النص*\n\n*مثال على الاستخدام*\n*◉ ${usedPrefix + command} فتاة أنيمي جميلة*\n*◉ ${usedPrefix + command} إيلون ماسك بلون وردي الناتج*`;
+  if (!text) throw `*ينشئ هذا الأمر صورًا من المطالبات النصية*\n\n*𝙴مثال للاستخدام*\n*◉ ${usedPrefix + Command} فتاة أنمي جميلة*\n*◉ ${usedPrefix + Command} Elon Musk باللون الوردي*`;
 
   try {
-    m.reply('*يرجى الانتظار، جار إنشاء الصور...*');
+    m.reply('*الرجاء الانتظار، جارٍ إنشاء الصور...*');
 
-    const endpoint = `https://gurugpt.cyclic.app/dalle?prompt=${encodeURIComponent(text)}`;
+    // قم بترجمة النص إلى الإنجليزية باستخدام Google Translate API
+    const translation = await translate(text, { to: 'en' });
+    const translatedText = translation.text;
+
+    const endpoint = `https://cute-tan-gorilla-yoke.cyclic.app/imagine?text=${encodeURIComponent(translatedText)}`;
     const response = await fetch(endpoint);
     
     if (response.ok) {
@@ -16,11 +21,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       throw '*فشل إنشاء الصورة*';
     }
   } catch {
-    throw '*عذرًا! حدث خطأ ما أثناء إنشاء الصور. يرجى المحاولة مرة أخرى لاحقًا.*';
+    throw '*أُووبس! حدث خطأ ما أثناء إنشاء الصور. الرجاء معاودة المحاولة في وقت لاحق.*';
   }
 };
 
 handler.help = ['dalle'];
 handler.tags = ['AI'];
-handler.command = ['dalle', 'رسم', 'ارسم', 'openai2'];
+handler.command = ['dalle', 'ارسم', 'imagine', 'openai2'];
 export default handler;
