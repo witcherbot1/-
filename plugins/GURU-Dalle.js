@@ -8,8 +8,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     m.reply('*الرجاء الانتظار، جارٍ إنشاء الصور...*');
 
     // قم بترجمة النص إلى الإنجليزية باستخدام Google Translate API
-    const translation = await translate(text, { to: 'en' });
-    const translatedText = translation.text;
+    const translatedText = await translate(text, { to: 'en' });
 
     const endpoint = `https://cute-tan-gorilla-yoke.cyclic.app/imagine?text=${encodeURIComponent(translatedText)}`;
     const response = await fetch(endpoint);
