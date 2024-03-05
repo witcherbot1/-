@@ -3,7 +3,7 @@
 ☂️ 𝐏𝐀𝐑𝐀 𝐔𝐒𝐀𝐑𝐈𝐎𝐒 𝐃𝐄 𝐇𝐄𝐑𝐎𝐊𝐔
 p align="center">  
   <a href="">
-    <img alt="Guru" height="300" src="https://cdn.jsdelivr.net/gh/Guru322/api@Guru/K.jpg">
+    <img alt="Guru" height="300" src="https://telegra.ph/file/dcd71fae4e5e61e5fcf31.jpg">
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/YosefZoro1/YosefZoro1) <img src="https://c.tenor.com/OIc0cAei3dwAAAAd/gato-baile.gif" height="32px">
 ### Añada lo siguente al Buildpack: <img src="https://cdn-0.emojis.wiki/emoji-pics/microsoft/backhand-index-pointing-down-microsoft.png" height="32px">
 ```bash
