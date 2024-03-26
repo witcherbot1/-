@@ -37,7 +37,7 @@ let readMore = more.repeat(850)
 let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remoteJid: 'status@broadcast' }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
     m.react('📃')
-    let videoUrl = 'https://telegra.ph/file/91d49d18d0846b75af6b6.mp4'
+    let videoUrl = 'https://telegra.ph/file/aeab5d4f872c2efb36189.jpg'
     const str = `
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
 *🐉✬⃝╿↵ مرحــبـا ⌊${name}⌉*
@@ -276,4 +276,4 @@ function clockString(ms) {
         res = "تصبح على خير 🌙"
       }
       return res
-    }
+        }
