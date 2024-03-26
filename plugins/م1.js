@@ -37,12 +37,13 @@ let readMore = more.repeat(850)
 let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remoteJid: 'status@broadcast' }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
     m.react('📃')
+    let videoUrl = './Menu.png'
     const str = `
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
 *🐉✬⃝╿↵ مرحــبـا ⌊${name}⌉*
 ── • ◈ • ──
 *🐉✬⃝╿حط قبل كل امر : ⌊ . ⌉*
-*🐉✬⃝╿*
+*🐉✬⃝╿مـطـوري : +201032389641*
 *🐉✬⃝╿ باي بال:* paypal.me/Yosef160
 *🐉✬⃝╿الـبــوت لـجــروبـات بـس*
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
@@ -243,14 +244,14 @@ global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remot
 │✮ ⃟🚀❯ .بنج
 │✮ ⃟👾❯ .بوت
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢`
-    const { result, key, timeout } = await conn.sendMessage(m.chat, { video: { url: menuvid }, caption: str.trim(),  gifPlayback: true,
+    const { result, key, timeout } = await conn.sendMessage(m.chat, { video: { url: videoUrl }, caption: str.trim(),  gifPlayback: true,
   gifAttribution: 0}, { quoted: fcontact })
     m.react(done)
 
 }
 handler.help = ['main']
 handler.tags = ['group']
-handler.command = ['ااوامر', 'م1','اوامر','الأوامر'] 
+handler.command = ['الاوامر', 'المهام','اوامر','الأوامر'] 
 
 export default handler
 function clockString(ms) {
@@ -275,4 +276,4 @@ function clockString(ms) {
         res = "تصبح على خير 🌙"
       }
       return res
-    }
+}
