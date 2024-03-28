@@ -71,7 +71,7 @@ global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remot
 }
 handler.help = ['main']
 handler.tags = ['group']
-handler.command = ['1', '1','1','1'] 
+handler.command = ['3', '3','3','3'] 
 
 export default handler
 function clockString(ms) {
