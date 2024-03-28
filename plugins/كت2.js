@@ -15,11 +15,12 @@ let handler = async (m, { conn, usedPrefix }) => {
     let _clue = json.response;
     let clue = _clue.replace(/[A-Za-z]/g, ''); // Fixed this line
     let caption = `
-ⷮ ${json.question}
+*〄┋الـسـؤال ⁉️ ⇇〘 ${json.question} 〙*
 
-❐↞┇الـوقـت⏳↞ ${(timeout / 1000).toFixed(2)}┇
-❐↞┇الـجـائـزة💰↞ ${poin} نقاط┇
-『𝙕𝙊𝙍𝙊-𝘽𝙊𝙏』
+*↲الـوقـت 🧭 ⇇〘 ${(timeout / 1000).toFixed(2)}┇ 
+*↲الـجـائـزة 🪙  ⇇〘 ${poin} نقاط┇ 〙*
+
+◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞
 `.trim();
     conn.tekateki[id] = [
        await conn.reply(m.chat, caption, m),
