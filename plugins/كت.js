@@ -11,7 +11,7 @@ handler.before = async function (m) {
         // m.reply(JSON.stringify(json, null, '\t'))
         if (m.text.toLowerCase() == json.response.toLowerCase().trim()) {
             global.db.data.users[m.sender].exp += this.tekateki[id][2]
-            m.reply(`*❐┃اجـابـة صـحـيـحـة┃✅ ❯*\n\n*❐↞┇الـجـائـزة💰↞ ${this.tekateki[id][2]} نقطة┇*`)
+            m.reply(`*⎔ ━─ ─ ╎⊱ ‹🎐› ⊰ ╎─ ─━ ⎔*\n\n*⧉ أحـسـنـت إجـابـة صـحـيـحـة 🍭✅*\n\n*〄 جـائـزتـك 🍬⇠* ${this.tekateki[id][2]} نـقـطـة┇*`)
             clearTimeout(this.tekateki[id][3])
             delete this.tekateki[id]
         } else if (similarity(m.text.toLowerCase(), json.response.toLowerCase().trim()) >= threshold) m.reply(`Casi lo logras!`)
