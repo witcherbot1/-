@@ -39,7 +39,7 @@ global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remot
     m.react('🖇')
     let videoUrl = 'https://telegra.ph/file/847691b0517ba465c3a1b.mp4'
     const str = `
- *⎔ ━─ ─ ╎⊱ ‹🎐› ⊰ ╎─ ─━ ⎔*
+ *⎔ ━─ ─ ╎⊱ ‹🌊› ⊰ ╎─ ─━ ⎔*
 
 *"${taguser} مـرحـبـا"*
 
@@ -55,8 +55,8 @@ global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remot
 *⚙️┊↵لوجو」*
 *⚙️┊↵وهمي」*
 
-◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞
-*⎔ ━─ ─ ╎⊱ ‹🎐› ⊰ ╎─ ─━ ⎔*`
+◜◈ 𝑩𝑶𝑻 ╎𝑮𝑰𝒀𝑼𝑼 🌊◞
+*⎔ ━─ ─ ╎⊱ ‹🌊› ⊰ ╎─ ─━ ⎔*`
     const { result, key, timeout } = await conn.sendMessage(m.chat, { video: { url: videoUrl }, caption: str.trim(),  gifPlayback: true,
   gifAttribution: 0}, { quoted: fcontact })
     m.react(done)
