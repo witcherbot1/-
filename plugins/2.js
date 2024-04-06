@@ -55,7 +55,7 @@ global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remot
 *🕋┊↵اية الكرسي」*
 *🕋┊↵سورة」*
 
-◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🌊◞
+◜◈ 𝑩𝑶𝑻 ╎𝑮𝑰𝒀𝑼𝑼 🌊◞
 *⎔ ━─ ─ ╎⊱ ‹🌊› ⊰ ╎─ ─━ ⎔*`
     const { result, key, timeout } = await conn.sendMessage(m.chat, { video: { url: videoUrl }, caption: str.trim(),  gifPlayback: true,
   gifAttribution: 0}, { quoted: fcontact })
