@@ -37,25 +37,25 @@ let readMore = more.repeat(850)
 let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remoteJid: 'status@broadcast' }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
     m.react('👤')
-    let videoUrl = 'https://telegra.ph/file/1f5851f4d801a68dbb6cc.mp4'
+    let videoUrl = 'https://telegra.ph/file/52939dba4447b4bc8c6fc.mp4'
     const str = `
-*⎔ ⋅ ─━──❖「🎐」❖──━─ ⋅ ⎔*
+*⎔ ⋅ ─━──❖「🌊」❖──━─ ⋅ ⎔*
 
 *✻ اهـلاً 『${taguser}』*
 
 *✻ الـمـطـوريـن 🎐☁ ⤹
 شخص ما منه فايدة⇠「+966 50 543 3177」
 متجول (توميوكا غيو) ⇠「+966 53 640 9581」
-غيو الوهمي⇠「+44 7874 410486」
+ريـن⇠「+968 7748 6499」 
 
 *✻ الـوقـت 🧭『${wib}』*
 *✻ الـتـاريـخ 📆『${date}』*
 
 *✻ قـروب الـدعـم ⤹*
-*『https://chat.whatsapp.com/Jx3Bq0RT9e6K6NNDpdrqxn 』*
+*『https://chat.whatsapp.com/L7sT6phszyIIGinc7SsZAH 』*
 
-◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞
-*⎔ ⋅ ─━──❖「🎐」❖──━─ ⋅ ⎔*`
+◜◈ 𝑩𝑶𝑻 ╎𝑮𝑰𝒀𝑼𝑼 🌊◞
+*⎔ ⋅ ─━──❖「🌊」❖──━─ ⋅ ⎔*`
     const { result, key, timeout } = await conn.sendMessage(m.chat, { video: { url: videoUrl }, caption: str.trim(),  gifPlayback: true,
   gifAttribution: 0}, { quoted: fcontact })
     m.react(done)
@@ -63,7 +63,7 @@ global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remot
 }
 handler.help = ['main']
 handler.tags = ['group']
-handler.command = ['المطوررر', 'المطور','المطورة','المطورر'] 
+handler.command = ['الدعم', 'الدعم','الددعم','الدعم'] 
 
 export default handler
 function clockString(ms) {
