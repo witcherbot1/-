@@ -13,6 +13,8 @@ let handler = async (m, { conn, usedPrefix }) => {
     let tekateki = JSON.parse(fs.readFileSync(`./src/game/انمي.json`))
     let json = tekateki[Math.floor(Math.random() * tekateki.length)]
     let _clue = json.response
+     conn.sendFile(m.chat, 'https://telegra.ph/file/c06dce68aa5c883e358b1.jpg', 'image.jpg', message, m);
+};
     let clue = _clue.replace(/[A-Za-z]/g, '_')
     let caption = `
     *⎔ ━─ ─ ╎⊱ ‹🎐› ⊰ ╎─ ─━ ⎔*
