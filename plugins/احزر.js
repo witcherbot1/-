@@ -7,13 +7,13 @@ let handler = async (m, { conn, command, usedPrefix }) => {
         conn.reply(m.chat, '❐┃لم يتم الاجابة علي السؤال بعد┃❌ ❯', conn.tebakbendera[id][0])
         throw false
     }
-    let src = await (await fetch('https://raw.githubusercontent.com/mohamedkun15/TheMystic-Bot-MD/master/src/JSON/Manga.json')).json()
+    let src = await (await fetch('https://gist.githubusercontent.com/YosefZoro1/77daad498c94efe43eac3f744465e261/raw/dc21559eaf9b9e57e49e5273b099fbdf2fffe48d/game.json')).json()
   let json = src[Math.floor(Math.random() * src.length)]
-    let caption = `*╭━━━[ ${command.toUpperCase()} ]━━━━⬣*
-┃❐↞┇الـوقـت⏳↞ *${(timeout / 1000).toFixed(2)} ┇
-  *🦦لو مش عارف الاجابه قول استخدم.معرفش*
+    let caption = `*${command.toUpperCase()}*
+  ❐↞┇الـوقـت⏳↞ *${(timeout / 1000).toFixed(2)} ┇
+  *استخدم .انسحب للأنسحاب*
   ❐↞┇الـجـائـزة💰↞ ${poin} نقاط┇
-‌⎔ ━ • 𓆩♕𝙎𝙃𝙄𝙆𝘼🐥ᵇᵒᵗ♕𓆪• ━ ⎔
+『𝙕𝙊𝙍𝙊-𝘽𝙊𝙏』
      `.trim()
     conn.tebakbendera[id] = [
         await conn.sendFile(m.chat, json.img, '', caption, m),
@@ -24,7 +24,7 @@ let handler = async (m, { conn, command, usedPrefix }) => {
         }, timeout)
     ]
 }
-handler.help = ['احزر']
+handler.help = ['guessflag']
 handler.tags = ['game']
 handler.command = /^احزر/i
 
