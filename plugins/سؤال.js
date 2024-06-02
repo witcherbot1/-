@@ -7,30 +7,25 @@ let handler = async (m, { conn, usedPrefix }) => {
     conn.tekateki = conn.tekateki ? conn.tekateki : {}
     let id = m.chat
     if (id in conn.tekateki) {
-        conn.reply(m.chat, '*⧉┊↵ هناك سؤال لم يتم الاجابة عليه، ايها الفاشل ❌ 」*', conn.tekateki[id][0])
+        conn.reply(m.chat, '❐┃لم يتم الاجابة علي السؤال بعد┃❌ ❯', conn.tekateki[id][0])
         throw false
     }
     let tekateki = JSON.parse(fs.readFileSync(`./src/game/انمي.json`))
     let json = tekateki[Math.floor(Math.random() * tekateki.length)]
     let _clue = json.response
-     conn.sendFile(m.chat, 'https://telegra.ph/file/c06dce68aa5c883e358b1.jpg', 'image.jpg', message, m);
-};
     let clue = _clue.replace(/[A-Za-z]/g, '_')
     let caption = `
-    *⎔ ━─ ─ ╎⊱ ‹🎐› ⊰ ╎─ ─━ ⎔*
-    *〄┋الـسـؤال ⁉️ ⇇〘${json.question}〙*
+ⷮ *${json.question}*
 
-*↲الـوقـت 🧭 ⇇〘 ${(timeout / 1000).toFixed(2)}〙*
-*↲الـجـائـزة 🪙  ⇇〘 ${poin} نـقـاط〙*
-
-◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞
-*⎔ ━─ ─ ╎⊱ ‹🎐› ⊰ ╎─ ─━ ⎔*
+*❐↞┇الـوقـت⏳↞ ${(timeout / 1000).toFixed(2)}┇*
+*❐↞┇الـجـائـزة💰↞ ${poin} نقاط┇*
+*『☠️┇لوفي_بوت』*
 `.trim()
     conn.tekateki[id] = [
        await conn.reply(m.chat, caption, m),
         json, poin,
         setTimeout(async () => {
-            if (conn.tekateki[id]) await conn.reply(m.chat, `*⌛انتهي الوقت⌛*\n *الاجـابـة✅ ${json.response}*`, conn.tekateki[id][0])
+            if (conn.tekateki[id]) await conn.reply(m.chat, `*❮ ⌛┇انتهي الوقت┇⌛❯*\n *❐↞┇الاجـابـة✅↞ ${json.response}┇*`, conn.tekateki[id][0])
             delete conn.tekateki[id]
         }, timeout)
     ]
