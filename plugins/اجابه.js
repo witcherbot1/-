@@ -1,25 +1,33 @@
-import similarity from 'similarity'
+//كود اجابة 
+import similarity from 
+'similarity'
 const threshold = 0.72
-let handler = m => m
-handler.before = async function (m) {
+export async function before(m) {
     let id = m.chat
-    if (!m.quoted || !m.quoted.fromMe || !m.quoted.isBaileys || !/^ⷮ/i.test(m.quoted.text)) return !0
-    this.tekateki = this.tekateki ? this.tekateki : {}
-    if (!(id in this.tekateki)) return m.reply('Ese acertijo ya ha terminado!')
-    if (m.quoted.id == this.tekateki[id][0].id) {
-        let json = JSON.parse(JSON.stringify(this.tekateki[id][1]))
-        // m.reply(JSON.stringify(json, null, '\t'))
+    if (!m.quoted || !m.quoted.fromMe || !m.quoted.isBaileys || !m.text || !/استخدم.*انسحب/i.test(m.quoted.text) || /.*hhint/i.test(m.text))
+        return !0
+    this.tebakbendera = this.tebakbendera ? this.tebakbendera : {}
+    if (!(id in this.tebakbendera))
+        return this.reply(m.chat, '*لقد انتهي هذا السؤال اكتب علم لتظهر أسأله جديده*', m)
+    if (m.quoted.id == this.tebakbendera[id][0].id) {
+        let isSurrender = /^(انسحب|surr?ender)$/i.test(m.text)
+        if (isSurrender) {
+            clearTimeout(this.tebakbendera[id][3])
+            delete this.tebakbendera[id]
+            return this.reply(m.chat, '*طلع فاشل و استسلم :( !*', m)
+        }
+        let json = JSON.parse(JSON.stringify(this.tebakbendera[id][1]))
+        
         if (m.text.toLowerCase() == json.response.toLowerCase().trim()) {
-            global.db.data.users[m.sender].exp += this.tekateki[id][2]
-            m.reply(`*اجـابـة صـحـيـحـة✅ ❯*\n\n*الـجـائـزة💰↞ ${this.tekateki[id][2]} نقطة*`)
-            clearTimeout(this.tekateki[id][3])
-            delete this.tekateki[id]
-        } else if (similarity(m.text.toLowerCase(), json.response.toLowerCase().trim()) >= threshold) m.reply(`اقتربت من الاجابه!`)
-        else m.reply('اجـابـة خـاطـئـة❌ ❯')
+            global.db.data.users[m.sender].exp += this.tebakbendera[id][2]
+            this.reply(m.chat, `*❐┃اجـابـة صـحـيـحـة┃✅ ❯*\n\n*❐↞┇الـجـائـزة💰↞${this.tebakbendera[id][2]} نقطه*`, m)
+            clearTimeout(this.tebakbendera[id][3])
+            delete this.tebakbendera[id]
+        } else if (similarity(m.text.toLowerCase(), json.response.toLowerCase().trim()) >= threshold)
+            m.reply(`*لقد كنت علي وشك النجاح*!`)
+        else
+            this.reply(m.chat, `❐┃اجـابـة خـاطـئـة┃❌ ❯`, m)
     }
     return !0
 }
-
-handler.exp = 0
-
-export default handler
+export const exp = 0
