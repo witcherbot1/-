@@ -4,7 +4,7 @@ var handler = async (m, { text, usedPrefix, command }) => {
   if (!text) throw `قول اي حاجه!`;
 
   try {
-    m.react('⚡');
+    m.react('🔰');
     var apii = await fetch(`https://aemt.me/bard?text=${text}`);
     var res = await apii.json();
 
@@ -12,7 +12,7 @@ var handler = async (m, { text, usedPrefix, command }) => {
 
   } catch (error) {
     console.error(error);
-    throw '*احا ايرور*';
+    throw '*! أبك خطأ*';
   }
 };
 
