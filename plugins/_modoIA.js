@@ -14,7 +14,7 @@ handler.before = async (m) => {
         const namedem = `${name || 'Sin definir'}`
         const sytm = await fetch(`https://raw.githubusercontent.com/YosefZoro1/TheMystic-Bot-MD/master/src/JSON/chatgpt_indicciones.txt`).then(v => v.text());
         const sistema1 = sytm.replace('@name', namedem)
-        const sistema2 = 'ستكون The zoro - Bot - MD، بوت واتساب تم إنشاؤه بواسطة Yosef Zoro';
+        const sistema2 = 'ستكون The ROB - Bot - MD، بوت واتساب تم إنشاؤه بواسطة Abdullah , Haithem , ROB Witcher BOT';
         try {
         async function getOpenAIChatCompletion(texto) {
         const openaiAPIKey = global.openai_key;
