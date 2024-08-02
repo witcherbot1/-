@@ -6,7 +6,7 @@ import translate from '@vitalets/google-translate-api';
 
 let handler = async (m, { conn, text, args, usedPrefix, command }) => {
   try {
-    if (!text) throw `امم.. ماذا تريد أن تقول؟`
+    if (!text) throw `همم .. ماذا تريد أن تقول؟`
     m.react('🤖')
     //await displayLoadingScreen(conn, m.chat)
 
@@ -26,7 +26,7 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
        
   } catch (error) {
     console.error(error);
-    m.reply('أُووبس! هناك خطأ ما. ، ونحن نحاول إصلاحه في أسرع وقت ممكن');
+    m.reply('أبك أبك! هناك خطأ ما. ، ونحن نحاول إصلاحه في أسرع وقت ممكن');
   }
 }
 handler.help = ['gemini <text>']
