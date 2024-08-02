@@ -11,14 +11,14 @@ export async function before(m, {conn, isAdmin, isBotAdmin}) {
   const user = `@${m.sender.split`@`[0]}`;
   const isGroupLink = linkRegex.exec(m.text);
   const grupo = `https://chat.whatsapp.com`;
-  if (isAdmin && chat.antiLink && m.text.includes(grupo)) return m.reply('*مرحبًا! الرابط معطل هنا، يرجى التواصل مع الإدارة 🔰*');
+  if (isAdmin && chat.antiLink && m.text.includes(grupo)) return m.reply('*أرحب! الرابط معطل هنا، يرجى التواصل مع الإدارة 🔰*');
   if (chat.antiLink && isGroupLink && !isAdmin) {
     if (isBotAdmin) {
       const linkThisGroup = `https://chat.whatsapp.com/${await this.groupInviteCode(m.chat)}`;
       if (m.text.includes(linkThisGroup)) return !0;
     }
     await this.sendMessage(m.chat, {text: `*「 روابط محظورة 」*\n*مرحبًا ${user}، يُمنع وضع روابط المجموعات هنا، الرجاء عدم الإعلان...!!*`, mentions: [m.sender]}, {quoted: m});
-    if (!isBotAdmin) return m.reply('مرحبًا ${user}، يُمنع وضع روابط المجموعات هنا، الرجاء عدم الإعلان...!!*');
+    if (!isBotAdmin) return m.reply('أرحب ${user}، يُمنع وضع روابط المجموعات هنا، الرجاء عدم الإعلان...!!*');
     if (isBotAdmin && bot.restrict) {
       await conn.sendMessage(m.chat, {delete: {remoteJid: m.chat, fromMe: false, id: bang, participant: delet}});
       const responseb = await conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove');
