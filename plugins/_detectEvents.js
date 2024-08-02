@@ -19,18 +19,18 @@ export async function before(m, {conn, participants}) {
   const fkontak2 = {'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
 
    if (chat.detect2 && m.messageStubType == 29) {
-    let txt1 = `*تم ترقية عضو إلى مدير حديثًا.*\n\n`;
+    let txt1 = `*تم ترقية عضو إلى مشرف حديثًا.*\n\n`;
     txt1 += `*◦  المجموعة:* ${groupName}\n`;
-    txt1 += `*◦  المدير الجديد:* @${m.messageStubParameters[0].split`@`[0]}\n`;
-    txt1 += `*◦  تنفيذ بواسطة:* @${m.sender.split`@`[0]}`;
+    txt1 += `*◦  المشرف الجديد:* @${m.messageStubParameters[0].split`@`[0]}\n`;
+    txt1 += `*◦  تم تنفيذه بواسطة:* @${m.sender.split`@`[0]}`;
     await conn.sendMessage(m.chat, { image: img, caption: txt1, mentions: mentionsString }, { quoted: fkontak2 });
   }
 
   if (chat.detect2 && m.messageStubType == 30) {
-    let txt2 = `*تم تخفيض مدير إلى عضو حديثًا.*\n\n`;
+    let txt2 = `*تم تخفيض مشرف إلى عضو حديثًا.*\n\n`;
     txt2 += `*◦  المجموعة:* ${groupName}\n`;
     txt2 += `*◦  تمت إزالة:* @${m.messageStubParameters[0].split`@`[0]}\n`;
-    txt2 += `*◦  تنفيذ بواسطة:* @${m.sender.split`@`[0]}`;
+    txt2 += `*◦  تم تنفيذه بواسطة:* @${m.sender.split`@`[0]}`;
     await conn.sendMessage(m.chat, { image: img, caption: txt2, mentions: mentionsString }, { quoted: fkontak2 });
   }
 
@@ -39,7 +39,7 @@ export async function before(m, {conn, participants}) {
     txt3 += `*◦  المجموعة:* ${groupName}\n`;
     if (!m.sender.endsWith('@g.us')) {
       txt3 += `*◦  تمت الإضافة:* @${m.messageStubParameters[0].split`@`[0]}\n`;
-      txt3 += `*◦  تنفيذ بواسطة:* @${m.sender.split`@`[0]}`;
+      txt3 += `*◦  تم تنفيذه بواسطة:* @${m.sender.split`@`[0]}`;
     } else {
       txt3 += `*◦  تمت الإضافة:* @${m.messageStubParameters[0].split`@`[0]}\n`;
     }
@@ -51,7 +51,7 @@ export async function before(m, {conn, participants}) {
     txt4 += `*◦  المجموعة:* ${groupName}\n`;
     if (!m.sender.endsWith('@g.us')) {
       txt4 += `*◦  تمت الإزالة:* @${m.messageStubParameters[0].split`@`[0]}\n`;
-      txt4 += `*◦  تنفيذ بواسطة:* @${m.sender.split`@`[0]}`;
+      txt4 += `*◦  تم تنفيذه بواسطة:* @${m.sender.split`@`[0]}`;
     } else {
       txt4 += `*◦  تمت الإزالة:* @${m.messageStubParameters[0].split`@`[0]}\n`;
     }
@@ -69,7 +69,7 @@ export async function before(m, {conn, participants}) {
     txt5 += `*◦  المجموعة:* ${groupName}\n`;
     if (ax === 'تم الطرد') {
       txt5 += `*◦  تم الطرد:* @${m.messageStubParameters[0].split`@`[0]}\n`;
-      txt5 += `*◦  تنفيذ بواسطة:* @${m.sender.split`@`[0]}`;
+      txt5 += `*◦  تم تنفيذه بواسطة:* @${m.sender.split`@`[0]}`;
     } else {
       txt5 += `*◦  تم المغادرة:* @${m.messageStubParameters[0].split`@`[0]}\n`;
     }
