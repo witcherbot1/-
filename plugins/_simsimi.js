@@ -9,7 +9,7 @@ handler.before = async (m) => {
     try {
       const ressimi = await fetch(`https://api.simsimi.net/v2/?text=${encodeURIComponent(textodem)}&lc=ar`);
       const data = await ressimi.json();
-      if (data.success == 'أنا لا أعرف ما تقوله. ارجوك علمني.') return m.reply(`${lol}`); /* EL TEXTO "lol" NO ESTA DEFINIDO PARA DAR ERROR Y USAR LA OTRA API */
+      if (data.success == 'وش قاعد تقول ؟؟. تكلم زين.') return m.reply(`${lol}`); /* EL TEXTO "lol" NO ESTA DEFINIDO PARA DAR ERROR Y USAR LA OTRA API */
       await m.reply(data.success);
     } catch {
       /* SI DA ERROR USARA ESTA OTRA OPCION DE API DE IA QUE RECUERDA EL NOMBRE DE LA PERSONA */
