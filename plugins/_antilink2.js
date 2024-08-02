@@ -26,7 +26,7 @@ export async function before(m, { conn, isAdmin, isBotAdmin, text }) {
         }
 
         await this.sendMessage(m.chat, {
-            text: `*「 روابط محظورة 」*\n*مرحبًا ${user}، يُمنع وضع روابط المجموعات أو روابط الفيديوهات هنا، الرجاء عدم الإعلان...!!*`,
+            text: `*「 روابط محظورة 」*\n*أرحب ${user}، يُمنع وضع روابط المجموعات أو روابط الفيديوهات هنا، الرجاء عدم الإعلان...!!*`,
             mentions: [m.sender]
         }, { quoted: m });
 
