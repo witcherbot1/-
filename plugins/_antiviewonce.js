@@ -15,7 +15,7 @@ export async function before(m, { isAdmin, isBotAdmin }) {
       buffer = Buffer.concat([buffer, chunk]);
     }
 
-    const cap = '*- 😂⚡في هذه المجموعة، لا يُسمح بإخفاء أي شيء.*';
+    const cap = '*- 😂🔰في ويتشر، لا يُسمح بإخفاء أي شيء.*';
 
     if (/video/.test(type)) {
       return mconn.conn.sendFile(m.chat, buffer, 'error.mp4', `${msg[type].caption ? msg[type].caption + '\n\n' + cap : cap}`, m);
