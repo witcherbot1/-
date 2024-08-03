@@ -4,7 +4,7 @@ const handler = async (m, {conn, usedPrefix, command}) => {
  try {    
   let q = m.quoted ? m.quoted : m;
   let mime = (q.msg || q).mimetype || q.mediaType || "";
-  if (!mime) throw `*[⚡] يرجى الرد على صورة لتحسين جودتها باستخدام ${usedPrefix + command}**`;
+  if (!mime) throw `*[🔰] يرجى الرد على صورة لتحسين جودتها باستخدام ${usedPrefix + command}**`;
   if (!/image\/(jpe?g|png)/.test(mime)) throw `*[❗] تنسيق الصورة (${mime}) غير مدعوم، يرجى استخدام صورة بتنسيق JPEG أو PNG فقط*`;
   m.reply("*[⏳] جاري زياده جوده الصورة...*");
   let img = await q.download?.();
