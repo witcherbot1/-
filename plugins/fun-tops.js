@@ -16,7 +16,7 @@ function handler(m, { groupMetadata, command, conn, participants }) {
 
   if (command == 'topgays') {
     const vn = '';
-    const top = `*🌈أعلى 10 مثليين/مثليات في المجموعة🌈*
+    const top = `*🤔أعلى 10 محنكين في المجموعة🤔*
     
 *_1.- ${user(a)}_*
 *_2.- ${user(b)}_*
@@ -35,7 +35,7 @@ function handler(m, { groupMetadata, command, conn, participants }) {
 
   if (command == 'topotakus') {
     const vn = './media/otaku.mp3';
-    const top = `*🌸أعلى 10 أوتاكو في المجموعة🌸*
+    const top = `*🔝أعلى 10 عظماء في المجموعة🔝*
     
 *_1.- ${user(a)}_*
 *_2.- ${user(b)}_*
@@ -52,7 +52,7 @@ function handler(m, { groupMetadata, command, conn, participants }) {
     // conn.sendFile(m.chat, vn, 'otaku.mp3', null, m, true, { type: 'audioMessage', ptt: true })
   }
 }
-handler.help = handler.command = ['توب-شواذ', 'توب-اوتاكو'];
+handler.help = handler.command = ['توب-محنكين', 'توب-عظماء'];
 handler.tags = ['games'];
 handler.group = true;
 export default handler;
