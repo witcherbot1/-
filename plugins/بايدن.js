@@ -1,5 +1,5 @@
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
-  let too = `[❗] افصل النص يحب بـ *+*\n\n *مـثــال* :\n*${usedPrefix + command}* زورو معانا+زورو ضايع`
+  let too = `[❗] افصل النص يحب بـ *+*\n\n *مـثــال* :\n*${usedPrefix + command}* روب معانا+روب ضايع`
 
   if (!text) throw too
   let lr = (`https://api.popcat.xyz/biden?text=${encodeURIComponent(text)}`)
