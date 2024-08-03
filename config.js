@@ -11,14 +11,13 @@ import { en, es, id, ar, pt } from './lib/idiomas/total-idiomas.js'
 global.botnumber = ""
 
 global.owner = [
-  ['966553211410', 'غيو الوهمي', true],
-  ['966553211410', 'متجولة', true],
-  ['966553211410', 'انسيابي', true],
+  ['966553211410', 'ليفاي', true],
+  ['966583621949', 'عبدالله', true],
   
 ];
 
 global.suittag = ['966553211410'];
-global.prems = ['966553211410'];
+global.prems = ['966583621949'];
 
 global.lenguajeGB = ar  //Idioma de The-LoliBot-MD, Ejemplo: es | en | pt...
 // Sticker WM
