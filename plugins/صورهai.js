@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw `*يقوم هذا الامر بصناعه صوره ب الذكاء الاصطناعي *\n\n*مثال للأستخدام (لضمان صوره دقيقه اكتب ب الانجليزيه)*\n*◉ ${usedPrefix + command} بنت انمي جميله*\n*◉ ${usedPrefix + command} رجل يقود بيتزا*`;
+  if (!text) throw `*يقوم هذا الامر بصناعه صوره ب الذكاء الاصطناعي *\n\n*مثال للأستخدام (لضمان صوره دقيقه اكتب ب الانجليزيه)*\n*◉ ${usedPrefix + command} صور حلوين*\n*◉ ${usedPrefix + command} رجل يقود بيتزا*`;
 
   try {
     m.reply('*ثانيه الصوره بتجهز...*');
