@@ -41,8 +41,8 @@ let handler = async (m, { conn }) => {
     console.error(error);
   }}
 
-handler.help = ['zoro'];
-handler.tags = ['zoro'];
+handler.help = ['ROB'];
+handler.tags = ['ROB'];
 handler.command = ['rank|r'];
 
 export default handler;
