@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 const handler = async (m, {conn, args, text}) => {
-  if (!text) throw '*[❗] فين الرابط ؟*\n*ضيف رابط يحب*';
+  if (!text) throw '*[❗] فين الرابط ؟*\n* ضيف رابط يبن الحلال*';
   const shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text();
-  if (!shortUrl1) throw `*[❗] خطأ اتاكد انك حطيت رابط*`;
+  if (!shortUrl1) throw `*[❗] خطأ يبن الحلال تأكد انك حطيت رابط*`;
   const done = `*✅ تم تنفيذ المهمة بنجاح!!*\n\n*الرابط قبل التقصير:*\n${text}\n*الرابط بعد التقصير:*\n${shortUrl1}`.trim();
   m.reply(done);
 };
