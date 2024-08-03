@@ -131,7 +131,7 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
   }}
  }}
 };
-handler.command = /^(صوتai|الحجه|صوت-جوجل|robotvoz|openai2voz|chatgpt2voz|ia2voz|robot2voz|زوروفويس|ZoroBotvoz|gptvoz|ai_voz|ai_voce)$/i;
+handler.command = /^(صوتai|الحجه|صوت-جوجل|robotvoz|openai2voz|chatgpt2voz|ia2voz|robot2voz|روب|𝙍𝙊𝘽Botvoz|gptvoz|ai_voz|ai_voce)$/i;
 export default handler;
 
 async function tts(text = 'error', lang = 'ar') {
