@@ -12,7 +12,7 @@ ${groupMetadata.id}
 ${groupMetadata.subject}
 
 *الوصف :* 
-${groupMetadata.desc?.toString() || 'مفيش وصف 🐧'}
+${groupMetadata.desc?.toString() || 'مافي وصف 🐧'}
 
 *عدد الاعضاء :*
 ${participants.length} عضو
