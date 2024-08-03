@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 const handler = async (m, {conn, text, usedPrefix, command}) => {
-  if (!text) throw `*[❗] يرجى إدخال نص لإنشاء صورة منها باستخدام نموذج DALL-E*\n\n*—◉ أمثلة للإستخدام*\n*◉ ${usedPrefix + command} Arabic man*\n*◉ ${usedPrefix + command} Zoro*`;
+  if (!text) throw `*[❗] يرجى إدخال نص لإنشاء صورة منها باستخدام نموذج DALL-E*\n\n*—◉ أمثلة للإستخدام*\n*◉ ${usedPrefix + command} Arabic man*\n*◉ ${usedPrefix + command} ROB*`;
     await conn.sendMessage(m.chat, {text: '*[⏳] ثانيه يحب الصوره بتجهز.*'}, {quoted: m});
   try {
     const tiores1 = await fetch(`https://vihangayt.me/tools/imagine?q=${text}`);
