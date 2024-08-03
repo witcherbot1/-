@@ -6,7 +6,7 @@ const handler = async (m, {conn, args}) => {
       title: 'لينك الجروب',
       body: '𝚃𝚑𝚎Zoro - 𝙱𝚘𝚝',
       previewType: 0, thumbnail: fs.readFileSync('./Menu2.jpg'),
-      sourceUrl: `https://solo.to/yosef.zoro`}}});
+      sourceUrl: ``}}});
 };
 handler.help = ['linkgroup'];
 handler.tags = ['group'];
