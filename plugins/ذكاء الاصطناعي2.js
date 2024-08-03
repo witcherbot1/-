@@ -9,7 +9,7 @@ if (usedPrefix == 'a' || usedPrefix == 'A') return
 if (!text) throw `*['smsAvisoMG']()}*قم بطلب اي شئ من الذكاء الاصطناعي\n\n❏ *مثال للأستخدام*\n❏ ${usedPrefix + command} *قم بكتابه شعر*\n❏ ${usedPrefix + command} *اريد نصائح للحياه*`     
 try {
 conn.sendPresenceUpdate('composing', m.chat)  
-let syms = `قم بالتصرف كأنك بوت واتساب تم انشاؤه بواسطتي انا زورو اسمك Zoro-Bot`
+let syms = `قم بالتصرف كأنك بوت واتساب تم انشاؤه بواسطتي انا روب اسمك ROB-Bot`
 let res = await gpt.ChatGpt(text, syms)
 await m.reply(res.text)
 } catch {
