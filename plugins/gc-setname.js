@@ -1,6 +1,6 @@
 import Presence from '@whiskeysockets/baileys';
 const handler = async (m, {conn, args, text}) => {
-  if (!text) throw `*[❗اشعار❗] مثال : .تغير-الاسم 𝑍𝑂𝑅𝑂⚡3𝑀𝐾*`;
+  if (!text) throw `*[❗اشعار❗] مثال : .تغير-الاسم 𝙍𝙊𝘽 🔰 BOT*`;
   try {
     const text = args.join` `;
     if (!args || !args[0]) {
@@ -8,7 +8,7 @@ const handler = async (m, {conn, args, text}) => {
       conn.groupUpdateSubject(m.chat, text);
     }
   } catch (e) {
-    throw '*[❗اشعار❗] *مثال : .تغيرالاسم 𝑍𝑂𝑅𝑂⚡3𝑀𝐾*';
+    throw '*[❗اشعار❗] *مثال : .تغيرالاسم 𝙍𝙊𝘽 🔰 BOT *';
   }
 };
 handler.help = ['setname <text>'];
