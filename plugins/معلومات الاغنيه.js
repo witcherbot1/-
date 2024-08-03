@@ -31,8 +31,8 @@ let imdbHandler = async (m, { conn, text }) => {
   }
 };
 
-imdbHandler.help = ['Z O R O'];
-imdbHandler.tags = ['S O N G S'];
+imdbHandler.help = ['R O B'];
+imdbHandler.tags = ['R O B'];
 imdbHandler.command = /^(معلومات-الاغنيه)$/i;
 
 export default imdbHandler;
