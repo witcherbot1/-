@@ -13,7 +13,7 @@ ${api[args[0] - 1].ayahs[args[1] - 1].translation.en}
     conn.sendFile(m.chat, api[args[0] - 1].ayahs[args[1] - 1].audio.url, '', '', m)
 }
 
-handler.help = ['S H A D O W'].map(v => v + ' *surah no*')
-handler.tags = ['S H A D O W']
+handler.help = ['R O B'].map(v => v + ' *surah no*')
+handler.tags = ['R O B']
 handler.command = /^(سورة|سوره)$/i
 export default handler
