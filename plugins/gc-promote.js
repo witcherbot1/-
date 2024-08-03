@@ -24,7 +24,7 @@ if(number.length > 13 || (number.length < 11 && number.length > 0)) return conn.
     conn.reply(m.chat, `*[ ✅ ] مبروك مبروك صرت مشرف*`, m);
   }
 };
-handler.help = ['*201032389641xxx*', '*@اسم المستخدم*','*محادثة المستجيب*'].map((v) => 'promote ' + v);
+handler.help = ['*966553211410xxx*', '*@اسم المستخدم*','*محادثة المستجيب*'].map((v) => 'promote ' + v);
 handler.tags = ['group'];
 handler.command = /^(ترقية|ترقيه|رفع)$/i;
 handler.group = true;
