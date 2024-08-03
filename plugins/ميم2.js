@@ -6,7 +6,7 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
   let [a, b] = text.split`+`   
   let lr = (`https://api.popcat.xyz/pooh?text1=${a}&text2=${b}`)
   conn.sendFile(m.chat, lr, 'drake.png', `تم بواسطه ✅
-  𝙍𝙊𝘽 🔰⚡3𝑀𝐾`, m)
+  𝙍𝙊𝘽 🔰 BOT`, m)
 }
 handler.help = ['drake']
 handler.tags = ['maker']
