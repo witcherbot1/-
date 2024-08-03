@@ -11,35 +11,35 @@ import { en, es, id, ar, pt } from './lib/idiomas/total-idiomas.js'
 global.botnumber = ""
 
 global.owner = [
-  ['447874410486', 'غيو الوهمي', true],
-  ['966536409581', 'متجولة', true],
-  ['966505433177', 'انسيابي', true],
+  ['966553211410', 'غيو الوهمي', true],
+  ['966553211410', 'متجولة', true],
+  ['966553211410', 'انسيابي', true],
   
 ];
 
-global.suittag = ['447874410486'];
-global.prems = ['447874410486'];
+global.suittag = ['966553211410'];
+global.prems = ['966553211410'];
 
 global.lenguajeGB = ar  //Idioma de The-LoliBot-MD, Ejemplo: es | en | pt...
 // Sticker WM
-global.botname = '◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞'
+global.botname = '◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞'
 global.premium = 'true'
-global.menuvid = 'https://i.imgur.com/uiwALih.mp4'
-global.igfg = 'https://solo.to/yosef.zoro' 
-global.dygp = 'https://solo.to/yosef.zoro'
-global.fgsc = 'https://solo.to/yosef.zoro' 
-global.fgyt = 'https://youtube.com/@The-ZoroBot-MD?si=DncZQM6sKC0F6MhG'
-global.fgpyp = 'https://youtube.com/@The-ZoroBot-MD?si=DncZQM6sKC0F6MhG'
-global.fglog = 'https://solo.to/yosef.zoro' 
+global.menuvid = ''
+global.igfg = '' 
+global.dygp = ''
+global.fgsc = '' 
+global.fgyt = ''
+global.fgpyp = ''
+global.fglog = '' 
 global.thumb = fs.readFileSync('./Menu2.jpg')
 
 
-global.packname = '◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞';
-global.author = '◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞';
-global.wm = '◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞';
-global.titulowm = '◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞';
-global.titulowm2 = `◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞`
-global.igfg = '◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞';
+global.packname = '◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞';
+global.author = '◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞';
+global.wm = '◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞';
+global.titulowm = '◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞';
+global.titulowm2 = `◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞`
+global.igfg = '◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞';
 global.wait = '*[ ⏳ ] انتظر...*';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ رياكت
@@ -69,9 +69,9 @@ global.mes = d.toLocaleDateString('ar', {month: 'long'});
 global.año = d.toLocaleDateString('ar', {year: 'numeric'});
 global.tiempo = d.toLocaleString('ar-US', {hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true});
 //* ****************************
-global.wm2 = `▸ ${dia} ${fecha}\n▸ 𝐵𝑌:◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞`;
-global.gt = '𝐵𝑌:◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞';
-global.mysticbot = '𝐵𝑌:◜◈ 𝑩𝑶𝑻 ╎𝑺𝑯𝑰𝑵𝑶𝑩𝑼 🎻◞';
+global.wm2 = `▸ ${dia} ${fecha}\n▸ 𝐵𝑌:◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞`;
+global.gt = '𝐵𝑌:◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞';
+global.mysticbot = '𝐵𝑌:◜◈ 𝑩𝑶𝑻 ╎ 𝙍𝙊𝘽 🔰◞';
 global.md = 'https://solo.to/yosef.zoro';
 global.mysticbot = 'https://solo.to/yosef.zoro';
 global.waitt = '*⌛ _جاري التحميل..._ ▬▬▭▭▭*';
