@@ -37,7 +37,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     // إضافة التسمية التوضيحية إلى الصورة
     const caption = 'تم بواسطه✅
-      𝑍𝑂𝑅𝑂⚡3𝑀𝐾';
+      Abdullah⚡3𝑀𝐾';
     conn.sendFile(m.chat, './tmp/no-bg.png', '', caption, m);
  
   } catch (e) {
