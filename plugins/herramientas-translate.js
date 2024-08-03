@@ -31,8 +31,8 @@ https://cloud.google.com/translate/docs/languages
     } 
 
 }
-handler.help = ['Z O R O']
-handler.tags = ['Z O R O']
+handler.help = ['R O B']
+handler.tags = ['R O B']
 handler.command = ['ترجمة', 'ترجم', 'ترجمه']
 
 export default handler
