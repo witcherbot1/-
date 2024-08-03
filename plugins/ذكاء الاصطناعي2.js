@@ -24,5 +24,5 @@ let hasill = await tioress.json()
 m.reply(`${hasill.result}`.trim())   
 } catch {    
 }}}}
-handler.command = ['زوزو', 'زورو2', 'ia', 'robot']
+handler.command = ['روب', 'روب2', 'ia', 'robot']
 export default handler
