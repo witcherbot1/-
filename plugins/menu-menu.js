@@ -25,10 +25,8 @@ const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, is
 
  *👋 اهلا يحب, ${taguser}*
 
- *🧑‍💻 المالك.:* Yosef (Zoro)
- *📱 wa:* +201032389641
- *🏦 PayPal:* paypal.me/Yosef160
-
+ *🧑‍💻 المالك.:* Abdullah - Haitham
+ *📱 wa:* +966553211410
 
  *📆 التاريخ:* ${date}
  *⏳ وقت التشغيل:* ${uptime}
@@ -43,7 +41,7 @@ const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, is
  *🧰 الخبرة:* ${exp}
  *⚓ الرتبة:* ${role}
  *💎 الماس:* ${limit}
- *🪙 زورو كوينز:* ${money}
+ *🪙 ويتشر كوينز:* ${money}
  *🎟️ الرموز:* ${joincount}
  *🎫 مميز:* ${user.premiumTime > 0 ? '✅' : (isPrems ? '✅' : '❌') || ''}
 
