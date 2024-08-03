@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text }) => {
-  if (!text) throw '❗ يرجى تقديم كلمة للبحث عنها.\n مثال *احا*';
+  if (!text) throw '❗ يرجى تقديم كلمة للبحث عنها.\n مثال *اذلف*';
 
   const url = `https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(text)}`;
 
