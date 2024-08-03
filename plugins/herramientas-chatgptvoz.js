@@ -22,7 +22,7 @@ const configuration = new Configuration({organization: global.openai_org_id, api
 const openaiii = new OpenAIApi(configuration);
 const idioma = 'ar'
 //const sistema1 = await fetch(`https://raw.githubusercontent.com/Skidy89/chat-gpt-jailbreak/main/Text.txt`).then(v => v.text());
-const sistema1 = `يعمل كروبوت WhatsApp الذي تم إنشاؤه بواسطة المتمردين، أنت The-ZoroBot-MD`;
+const sistema1 = `يعمل كروبوت WhatsApp الذي تم إنشاؤه بواسطة المتمردين، أنت The-ROBBot-MD`;
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
   if (!text) throw `*[❗] اقتراح قائمة من أوامر وأوامر مفيدة: ❏ ${usedPrefix + command} اقتراح عشرة أفلام اكشن ❏ ${usedPrefix + command} كود جافا سكريبت للعبة حجر ورقه مقص  ${usedPrefix + command} كود جافا سكريبت ل*`;
