@@ -9,8 +9,8 @@ let handler = async (m, { conn, text }) => {
   for (let id of chats) await conn.copyNForward(id, conn.cMod(m.chat, cc, /bc|broadcast|tx/i.test(teks) ? teks : `${teks}` ), true).catch(_ => _)
   m.reply('تم التحويل')
 }
-handler.help = ['ZORO BOT']
-handler.tags = ['ZORO BOT']
+handler.help = ['ROB BOT']
+handler.tags = ['ROB BOT']
 handler.command = /^(نشر|خبر)$/i
 handler.owner = true
 
