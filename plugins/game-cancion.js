@@ -21,7 +21,7 @@ let caption = `
 ❐↞┇✍اكتب ${usedPrefix}تلميح* للحصول على تلميح*
 ❐↞┇الـجـائـزة💰↞ ${poin} نقاط┇
 ❐↞┇أجب على هذه الرسالة بالإجابات!┇
-『𝙕𝙊𝙍𝙊-𝘽𝙊𝙏』`.trim()
+『𝙍𝙊𝘽 - 𝘽𝙊𝙏』`.trim()
 conn.tebaklagu[id] = [
 await m.reply(caption),
 json, poin,
