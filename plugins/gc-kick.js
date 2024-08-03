@@ -7,8 +7,8 @@ const handler = async (m, {conn, participants, command, usedPrefix}) => {
     const mentioned = m.message.extendedTextMessage.contextInfo.mentionedJid[0] ? m.message.extendedTextMessage.contextInfo.mentionedJid[0] : m.message.extendedTextMessage.contextInfo.participant;
     if (conn.user.jid.includes(mentioned)) return m.reply('*[❗] لا يمكنني طرد مالك الرقم الخاص بي أو الحساب الرئيسي للمجموعة*');
     const responseb = await conn.groupParticipantsUpdate(m.chat, [mentioned], 'remove');
-    const exitoso1 = `*@${mentioned.split('@')[0]} ✨🐧وديته الجحيم سيدي زورو*`;
-    const error1 = `*@${mentioned.split('@')[0]} 😂هو مؤسس المجموعة ولا يمكنني طرده اصلا*`;
+    const exitoso1 = `*@${mentioned.split('@')[0]} ✨🐧بنعالي اوت*`;
+    const error1 = `*@${mentioned.split('@')[0]} هو المؤسس يحمار*`;
     const error2 = `*@${mentioned.split('@')[0]} قد تم بالفعل طرده أو ترك المجموعة*`;
     if (responseb[0].status === '200') m.reply(exitoso1, m.chat, {mentions: conn.parseMention(exitoso1)});
     else if (responseb[0].status === '406') m.reply(error1, m.chat, {mentions: conn.parseMention(error1)});
