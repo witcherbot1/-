@@ -18,7 +18,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 اكتب .لمح للحصول على تلميح
 ❐↞┇الـجـائـزة💰↞ ${poin} نقاط┇
 تذكرة العملات: ${tiketcoin}
-『𝙕𝙊𝙍𝙊-𝘽𝙊𝙏』
+『𝙍𝙊𝘽-𝘽𝙊𝙏』
     `.trim()
   conn.tebakgame[id] = [
     await conn.sendFile(m.chat, json.img, 'tebakgame.jpg', caption, m, false, { thumbnail: Buffer.alloc(0) }),
