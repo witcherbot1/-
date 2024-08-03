@@ -19,10 +19,10 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   let sn = createHash('md5').update(who).digest('hex');
 
   let happyEmoji = '🐉'; // يمكنك تغيير الإيموجي إلى ما تفضله
-  let happyMessage = 'اتفضل يحب كل بياناتك⚡';
+  let happyMessage = 'تفضل يحب كل بياناتك 🔰';
   // يمكنك تغيير هذه الجملة إلى ما تفضله
 
-  let str = `*${happyEmoji} الاسم:* ${username}${about ? '\n\n ✨ *الوصف:* ' + about : ''}\n\n*📊 المستوى:* ${level}\n*نقاطك💲*: ${exp}\n*التقدم* (${user.exp - min} / ${xp})\n${math <= 0 ? `جاهز للارتقاء بمستواك باستخدام *${usedPrefix}levelup* ${happyEmoji}` : `*انت تحتاج* ${math} *نقطة لرفع مستواك* ${happyEmoji}`}\n*📈 رتبتك:* ${role}\n*💎 الماسك*: ${user.limit}\n*👑 شخص مميز*: ${prem ? 'نعم' : 'لا'}\n*_رمز التحقق✔️_* ${sn}\n«𝙕𝙊𝙍𝙊-𝘽𝙊𝙏»\n\n${happyMessage}`;
+  let str = `*${happyEmoji} الاسم:* ${username}${about ? '\n\n ✨ *الوصف:* ' + about : ''}\n\n*📊 المستوى:* ${level}\n*نقاطك💲*: ${exp}\n*التقدم* (${user.exp - min} / ${xp})\n${math <= 0 ? `جاهز للارتقاء بمستواك باستخدام *${usedPrefix}levelup* ${happyEmoji}` : `*انت تحتاج* ${math} *نقطة لرفع مستواك* ${happyEmoji}`}\n*📈 رتبتك:* ${role}\n*💎 الماسك*: ${user.limit}\n*👑 شخص مميز*: ${prem ? 'نعم' : 'لا'}\n*_رمز التحقق✔️_* ${sn}\n«ROB-𝘽𝙊𝙏»\n\n${happyMessage}`;
 
   conn.sendFile(m.chat, pp, 'profil.jpg', str, m, false, { mentions: [who] });
 };
