@@ -21,7 +21,7 @@ if(number.length > 13 || (number.length < 11 && number.length > 0)) return conn.
   } catch (e) {
   } finally {
     conn.groupParticipantsUpdate(m.chat, [user], 'promote');
-    conn.reply(m.chat, `*[ ✅ ] تم ترقيتك مشرف يحب*`, m);
+    conn.reply(m.chat, `*[ ✅ ] مبروك مبروك صرت مشرف*`, m);
   }
 };
 handler.help = ['*201032389641xxx*', '*@اسم المستخدم*','*محادثة المستجيب*'].map((v) => 'promote ' + v);
