@@ -11,8 +11,8 @@ const handler = async function(m, {conn, text, usedPrefix, command}) {
   if (!age) throw '*[❗] ضــيــف عـــمـــرك*';
   if (name.length >= 30) throw '[❗] الـاســم طــويــل';
   age = parseInt(age);
-  if (age > 100) throw '*[❗] يااااااااه انت لسا عايش 👴🏻*';
-  if (age < 5) throw '*[❗] كوتي كوتي يا حلوه انتي 😲*';
+  if (age > 100) throw '*[❗] يالطيف يا امقحم 👴🏻*';
+  if (age < 5) throw '*[❗] يزينك يا الفطفوط 😲*';
   user.name = name.trim();
   user.age = age;
   user.regTime = + new Date;
