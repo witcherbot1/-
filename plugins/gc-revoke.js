@@ -2,7 +2,7 @@
 
 const handler = async (m, {conn}) => {
   const revoke = await conn.groupRevokeInvite(m.chat);
-  await conn.reply(m.chat, `*✅ تم تعير لينك الجروب*\n*⚡ اللينك الجديد : ${'https://chat.whatsapp.com/' + revoke}`, m);
+  await conn.reply(m.chat, `*✅ تم تعير رابط الجروب*\n*⚡ الرابط الجديد : ${'https://chat.whatsapp.com/' + revoke}`, m);
 };
 handler.command = ['رستر', 'ريسيت'];
 handler.botAdmin = true;
