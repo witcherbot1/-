@@ -20,7 +20,7 @@ let handler = async (m, { conn, text }) => {
   const definition = firstEntry.definition;
   const example = firstEntry.example ? `*مثلا:* ${firstEntry.example}` : '';
 
-  const message = `*كلمة:* ${text}\n*تعريف:* ${definition}\n${example} تم بواسطة ✅\n𝑍𝑂𝑅𝑂⚡3𝑀𝐾`;
+  const message = `*كلمة:* ${text}\n*تعريف:* ${definition}\n${example} تم بواسطة ✅\n𝙍𝙊𝘽 🔰 BOT`;
   conn.sendMessage(m.chat, { text: message }, 'extendedTextMessage', { quoted: m });
 };
 
